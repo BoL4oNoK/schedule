@@ -1,9 +1,13 @@
-import React from 'react';
-import './App.css';
-
+import React from "react";
+import "./App.css";
+import ModalWindow from "./../ModalWindow/ModalWindow";
 
 const App = () => {
-  return <h1>Schedule</h1>;
+  return (
+    <>
+      <ModalWindow />
+    </>
+  );
 };
 
 export default App;
