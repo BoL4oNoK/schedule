@@ -7,7 +7,6 @@ import {
 } from 'antd';
 
 export default function TableForSchedule() {
-
   return (
     <>
       <Table columns={columns} dataSource={[]} />

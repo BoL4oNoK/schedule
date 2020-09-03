@@ -1,7 +1,14 @@
 import React from 'react';
+import './table.css';
 import {
   Tag,
 } from 'antd';
+
+import {
+  GithubOutlined
+} from '@ant-design/icons';
+
+import GIT_LINK from '../../constants/constants';
 
 const columns = [
   {
@@ -21,7 +28,18 @@ const columns = [
     render: (type) => (
       <>
         {type.map((el) => {
-          let color = el === 'deadline' ? 'volcano' : 'green';
+          let color;
+          switch(el) {
+            case 'deadline':
+              color = 'volcano';
+            break;
+            case 'codewars':
+              color = 'blue';
+            break;
+            default:
+              color = 'green';
+            break;
+          }
           return (
             <Tag color={color} key={el}>
               {el}
@@ -37,7 +55,7 @@ const columns = [
     dataIndex: 'name',
   },
   {
-    title: 'place',
+    title: 'Place',
     key: 'place',
     dataIndex: 'place',
   },
@@ -50,6 +68,14 @@ const columns = [
     title: 'Organizer',
     key: 'organizer',
     dataIndex: 'organizer',
+    render: (organizer) => (
+      <div className='schdule-table__organizer'>
+        <a className='schdule-table__organizer-link' href={`${GIT_LINK}${organizer}`}>
+          <GithubOutlined />
+          {organizer}
+        </a>
+      </div>
+    ),
   },
   {
     title: 'Details URL',
