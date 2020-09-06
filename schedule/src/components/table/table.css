@@ -8,3 +8,7 @@
 .schdule-table__organizer-link .anticon-github {
   margin-right: 3px;
 }
+
+.column-visability {
+  display: none;
+}
