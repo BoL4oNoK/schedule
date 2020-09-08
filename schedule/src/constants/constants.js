@@ -9,4 +9,9 @@ const urls = {
   USE_ORGANIZER_BY_ID: `${MAIN_URL}organizer/`,
 };
 
-export default urls;
+const GIT_LINK = 'https://github.com/';
+
+export {
+  GIT_LINK,
+  urls,
+};
