@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import ModalWindow from "./../ModalWindow/ModalWindow";
+import ModalWindowEdit from "./../ModalWindowEdit/ModalWindowEdit";
 
 const App = () => {
   return (
     <>
-      <ModalWindow />
+      <ModalWindowEdit />
     </>
   );
 };

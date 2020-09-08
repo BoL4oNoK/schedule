@@ -1,0 +1,12 @@
+.wrapper-modal-edit {
+  width: 60%;
+  margin: 2rem auto 0;
+  border: 1px solid grey;
+
+  padding: 1rem;
+
+  &__header {
+    text-align: center;
+    font-size: 3rem;
+  }
+}
