@@ -7,7 +7,7 @@ import dateFormat from '../../utils/dateformat';
 
 const data = [
     {
-        key: '1',
+        id: '1',
         date: '2020-07-27',
         time: '09:08',
         type: 'deadline',
@@ -19,7 +19,7 @@ const data = [
         comment: '',
     },
     {
-        key: '2',
+        id: '2',
         date: '2020-09-18',
         time: '09:08',
         type: 'js task',
@@ -31,7 +31,7 @@ const data = [
         comment: '',
     },
     {
-        key: '3',
+        id: '3',
         date: '2021-01-01',
         time: '00:00',
         type: 'codewars',
@@ -43,7 +43,7 @@ const data = [
         comment: '',
     },
     {
-        key: '4',
+        id: '4',
         date: '2020-09-27',
         time: '09:08',
         type: 'deadline',
@@ -55,7 +55,7 @@ const data = [
         comment: '',
     },
     {
-        key: '5',
+        id: '5',
         date: '2020-09-05',
         time: '09:08',
         type: 'interview',
@@ -67,7 +67,7 @@ const data = [
         comment: '',
     },
     {
-        key: '6',
+        id: '6',
         date: '2021-01-01',
         time: '00:00',
         type: 'test',
@@ -79,7 +79,7 @@ const data = [
         comment: '',
     },
     {
-        key: '7',
+        id: '7',
         date: '2020-07-27',
         time: '09:08',
         type: 'deadline',
@@ -91,7 +91,7 @@ const data = [
         comment: '',
     },
     {
-        key: '8',
+        id: '8',
         date: '2020-09-29',
         time: '09:08',
         type: 'js task',
@@ -103,7 +103,7 @@ const data = [
         comment: '',
     },
     {
-        key: '9',
+        id: '9',
         date: '2021-01-01',
         time: '00:00',
         type: 'gitkolmen',
@@ -115,7 +115,7 @@ const data = [
         comment: '',
     },
     {
-        key: '10',
+        id: '10',
         date: '2020-07-27',
         time: '09:08',
         type: 'html task',
@@ -127,7 +127,7 @@ const data = [
         comment: '',
     },
     {
-        key: '11',
+        id: '11',
         date: '2020-09-29',
         time: '09:08',
         type: 'js task',

@@ -38,7 +38,7 @@ export default function calendarElement (event) {
     const badgeText = event.name;
     const badgeTitle = `${event.type}: ${event.time} > ${event.name}`;
     return (
-        <li key={event.key} title={badgeTitle}>
+        <li key={event.id} title={badgeTitle}>
           <Badge color={badgeColor} text={badgeText} />
         </li>
     );
