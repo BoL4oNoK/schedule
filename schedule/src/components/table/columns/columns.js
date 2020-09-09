@@ -9,7 +9,7 @@ import {
 } from '@ant-design/icons';
 
 import { filtersForType } from './filters'; 
-import GIT_LINK from '../../../constants/constants';
+import { GIT_LINK } from '../../../constants/constants';
 
 const selectColor = (type) => {
   let color;
