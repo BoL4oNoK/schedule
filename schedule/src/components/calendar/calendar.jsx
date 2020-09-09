@@ -1,7 +1,9 @@
 import React from 'react';
 import './calendar.css';
 import 'antd/dist/antd.css';
-import { Calendar, Badge } from 'antd';
+import { Calendar } from 'antd';
+import calendarElement from './calendarElement';
+import dateFormat from '../../utils/dateformat';
 
 const data = [
     {
@@ -18,7 +20,7 @@ const data = [
     },
     {
         key: '2',
-        date: '2020-03-29',
+        date: '2020-09-18',
         time: '09:08',
         type: 'js task',
         name: 'lodash methods',
@@ -42,7 +44,7 @@ const data = [
     },
     {
         key: '4',
-        date: '2020-07-27',
+        date: '2020-09-27',
         time: '09:08',
         type: 'deadline',
         name: 'Some code practice',
@@ -54,7 +56,7 @@ const data = [
     },
     {
         key: '5',
-        date: '2020-03-29',
+        date: '2020-09-05',
         time: '09:08',
         type: 'interview',
         name: 'lodash methods',
@@ -90,7 +92,7 @@ const data = [
     },
     {
         key: '8',
-        date: '2020-03-29',
+        date: '2020-09-29',
         time: '09:08',
         type: 'js task',
         name: 'lodash methods',
@@ -126,7 +128,7 @@ const data = [
     },
     {
         key: '11',
-        date: '2020-03-29',
+        date: '2020-09-29',
         time: '09:08',
         type: 'js task',
         name: 'lodash methods',
@@ -138,6 +140,25 @@ const data = [
     },
 ];
 
+function getListData(value) {
+    const textDate = dateFormat(value.year(), value.month() + 1, value.date());
+    console.log(textDate);
+    return data.filter((item) => item.date === textDate );
+}
+
+function dateCellRender(value) {
+    const listData = getListData(value);
+    return (
+      <ul className="events">
+        {listData.map(item => (
+          calendarElement(item)
+        ))}
+      </ul>
+    );
+  }
+
 export default function CalendarForSchedule() {
-    return <Calendar />;
+    return <Calendar 
+        dateCellRender={dateCellRender}
+    />;
 }
