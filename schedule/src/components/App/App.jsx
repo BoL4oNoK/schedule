@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
+import UserWindow from '../UserWindow/UserWindow';
 
 
 const App = () => {
-  return <h1>Schedule</h1>;
+  return <UserWindow />;
 };
 
 export default App;

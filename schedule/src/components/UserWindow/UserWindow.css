@@ -1,0 +1,7 @@
+.task {
+  display: flex;
+  justify-content: space-between;
+}
+.ant-modal {
+  width: 70% !important;
+}
