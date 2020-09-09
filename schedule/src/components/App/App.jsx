@@ -1,10 +1,15 @@
 import React from 'react';
 import './App.css';
-import UserWindow from '../UserWindow/UserWindow';
+import TableForSchedule from '../table/table';
 
 
 const App = () => {
-  return <UserWindow />;
+  return (
+    <div className="wrapper">
+      <h1>Schedule</h1>
+      <TableForSchedule />
+    </div>
+  );
 };
 
 export default App;

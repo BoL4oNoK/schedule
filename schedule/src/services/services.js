@@ -47,12 +47,14 @@ const getEventById = async (eventId) => {
   return data;
 };
 
-const updateEventById = async (eventId) => {
+const updateEventById = async (eventId, eventForUpdate) => {
   const response = await fetch(`${USE_EVENT_BY_ID}${eventId}`, {
     method: 'PUT',
     headers: {
       'Accept': 'application/json',
+      'Content-Type': 'application/json',
     },
+    body: JSON.stringify(eventForUpdate)
   });
 
   const data = await response.json();
@@ -109,12 +111,14 @@ const getOrganizerById = async (organizerId) => {
   return data;
 };
 
-const updateOrginizerById = async (organizerId) => {
+const updateOrginizerById = async (organizerId, organizerForUpdate) => {
   const response = await fetch(`${USE_ORGANIZER_BY_ID}${organizerId}`, {
     method: 'PUT',
     headers: {
       'Accept': 'application/json',
+      'Content-Type': 'application/json',
     },
+    body: JSON.stringify(organizerForUpdate)
   });
 
   const data = await response.json();
