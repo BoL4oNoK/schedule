@@ -8,7 +8,7 @@ import dateFormat from '../../utils/dateformat';
 const data = [
     {
         id: '1',
-        date: '2020-07-27',
+        date: '27.07.2020',
         time: '09:08',
         type: 'deadline',
         name: 'Some code practice',
@@ -20,7 +20,7 @@ const data = [
     },
     {
         id: '2',
-        date: '2020-09-18',
+        date: '18.09.2020',
         time: '09:08',
         type: 'js task',
         name: 'lodash methods',
@@ -32,7 +32,7 @@ const data = [
     },
     {
         id: '3',
-        date: '2021-01-01',
+        date: '01.01.2021',
         time: '00:00',
         type: 'codewars',
         name: 'more practice',
@@ -44,7 +44,7 @@ const data = [
     },
     {
         id: '4',
-        date: '2020-09-27',
+        date: '27.09.2020',
         time: '09:08',
         type: 'deadline',
         name: 'Some code practice',
@@ -56,7 +56,7 @@ const data = [
     },
     {
         id: '5',
-        date: '2020-09-05',
+        date: '05.09.2020',
         time: '09:08',
         type: 'interview',
         name: 'lodash methods',
@@ -68,7 +68,7 @@ const data = [
     },
     {
         id: '6',
-        date: '2021-01-01',
+        date: '01.01.2021',
         time: '00:00',
         type: 'test',
         name: 'more practice',
@@ -80,7 +80,7 @@ const data = [
     },
     {
         id: '7',
-        date: '2020-07-27',
+        date: '27.07.2020',
         time: '09:08',
         type: 'deadline',
         name: 'Some code practice',
@@ -92,7 +92,7 @@ const data = [
     },
     {
         id: '8',
-        date: '2020-09-29',
+        date: '29.09.2020',
         time: '09:08',
         type: 'js task',
         name: 'lodash methods',
@@ -104,7 +104,7 @@ const data = [
     },
     {
         id: '9',
-        date: '2021-01-01',
+        date: '01.01.2021',
         time: '00:00',
         type: 'gitkolmen',
         name: 'more practice',
@@ -116,7 +116,7 @@ const data = [
     },
     {
         id: '10',
-        date: '2020-07-27',
+        date: '27.07.2020',
         time: '09:08',
         type: 'html task',
         name: 'Some code practice',
@@ -128,7 +128,7 @@ const data = [
     },
     {
         id: '11',
-        date: '2020-09-29',
+        date: '29.09.2020',
         time: '09:08',
         type: 'js task',
         name: 'lodash methods',
