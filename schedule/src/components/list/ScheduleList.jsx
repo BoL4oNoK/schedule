@@ -12,7 +12,7 @@ import 'antd/dist/antd.css';
     name: 'Some code practice',
     place: 'your PC',
     broadcastUrl: '',
-    organizer: 'god',
+    organizer: 'kate-latushkina',
     detailsUrl: 'https://ya.ru/',
     comment: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
   },
@@ -162,42 +162,54 @@ const selectColor = (type) => {
   return color;
 }
 export default function ScheduleList() {
-    return (
-      <List
-    itemLayout="vertical"
-    size="large"
-    pagination={{
-      onChange: page => {
-        console.log(page);
-      },
-      pageSize: 5,
-    }}
-    dataSource={data}
-   
-    renderItem={item => (
-      <List.Item
-        key={item.key}
-        actions={[
-          <a className='schdule-table__organizer-link' href={`https://github.com/${item.organizer}`}>
-          <GithubOutlined />
-          {item.organizer}
-        </a>
-        ]}
-      
-      >
-        <List.Item.Meta
-          avatar={<Avatar src={`https://avatars.githubusercontent.com/${item.organizer}`} />}
-          title={<a href={item.detailsUrl}>{item.name}</a>}
-          description={`${item.comment }`}
-        />
+  
+  const list= <List
+  itemLayout="vertical"
+  size="large"
+  pagination={{
+    onChange: page => {
+      console.log(page);
+    },
+    pageSize: 5,
+  }}
+  dataSource={data}
+ 
+  renderItem={item => (
+
+    <List.Item
+      key={item.key}
+      actions={[
+        <a className='schdule-table__organizer-link' href={`https://github.com/${item.organizer}`}>
+        <GithubOutlined />
+        {item.organizer}
+      </a>
+      ]}
+    
+    >
+      <List.Item.Meta
+        avatar={<Avatar src={`https://avatars.githubusercontent.com/${item.organizer}`} />}
+        title={<a href={item.detailsUrl}>{item.name}</a>}
+        description={`${item.comment }`}
+      />
+      <div>
         <Tag  color={selectColor(item.type)}>{item.type}</Tag>
         <Tag>{item.date} {item.time}</Tag>
         <Tag>{item.place}</Tag>
         <Tag>{item.detailsUrl}</Tag>
         <Tag>{item.broadcastUrl}</Tag>
-      </List.Item>
-    )}
-  />
+      </div>
+      {(!item.type.includes('test')&&!item.type.includes('deadline'))
+        ?(<div>
+            <Tag  color={selectColor(item.type)}>{item.type}</Tag>
+        </div>)
+        :null
+      }
+      
+    </List.Item>
+  )}
+/>
+    return (list
+     
     )
     
 }
