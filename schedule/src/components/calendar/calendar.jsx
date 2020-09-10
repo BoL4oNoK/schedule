@@ -142,7 +142,6 @@ const data = [
 
 function getListData(value) {
     const textDate = dateFormat(value.year(), value.month() + 1, value.date());
-    console.log(textDate);
     return data.filter((item) => item.date === textDate );
 }
 
