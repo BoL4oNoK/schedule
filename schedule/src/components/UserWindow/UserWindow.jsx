@@ -5,12 +5,18 @@ import { DatePicker } from 'antd';
 import moment from 'moment';
 import 'antd/dist/antd.css';
 import './UserWindow.css';
+import {userModal} from '../../constants/constants';
+import createMap from '../Map/Map';
 
+const {
+  MODAL_TITLE,
+  ONLINE,
+  DATE_FORMAT,
+} = userModal;
 
 const UserWindow = () => {
   const [visible, setVisible] = useState(true);   //если использовать showModal и Button, то тут будет false по-умолчанию
   const [needMap, setNeedMap] = useState(true);   //если false значит online
-  const dateFormat = 'DD-MM-YYYY';
   const { RangePicker } = DatePicker;
   // function showModal() {
   //   setVisible(true);
@@ -28,16 +34,8 @@ const UserWindow = () => {
     center: ['55.750768', '37.583508'],
     zoom: 15,
   };
-
-  const key = '4a07d892-7c5e-4508-8c23-e8d6632ff3d9';
-  fetch(`https://geocode-maps.yandex.ru/1.x/?format=json&apikey=${key}&geocode=${town},+${isStreet}+${street},+дом+${house}`)
-  .then((resp) => resp.json())
-  .then((data) => {
-    const location = data.response.GeoObjectCollection.featureMember[0].GeoObject.Point.pos;
-    const position = location.split(' ').reverse();
-    mapData.center[0] = position[0];
-    mapData.center[1] = position[1];
-  });
+  
+  const location = createMap(town,isStreet,street,house).then(console.log);
 
   return (
     <>
@@ -45,7 +43,7 @@ const UserWindow = () => {
         Open Modal
       </Button> */}
       <Modal
-        title="Задание"
+        title={MODAL_TITLE}
         visible={visible}
         onCancel={handleCancel}
         footer={null}
@@ -54,9 +52,9 @@ const UserWindow = () => {
           <p>Название таска</p>
           <span>codewars</span>
           <RangePicker
-            defaultValue={[moment('05-07-2020', dateFormat), moment('15-07-2020', dateFormat)]}
+            defaultValue={[moment('05-07-2020 14-00', DATE_FORMAT), moment('15-07-2020 23-59', DATE_FORMAT)]}
             disabled
-            format={dateFormat}
+            format={DATE_FORMAT}
           />
         </div>
         <div className='task-description'>
@@ -72,7 +70,7 @@ const UserWindow = () => {
                 <Placemark geometry={mapData.center} properties={mapData.center} />
               </Map>
             </YMaps>
-            : <p>Online</p>}
+            : <p>{ONLINE}</p>}
 
         </div>
       </Modal>

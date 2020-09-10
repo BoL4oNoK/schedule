@@ -11,7 +11,14 @@ const urls = {
 
 const GIT_LINK = 'https://github.com/';
 
+const userModal = {
+  MODAL_TITLE: 'Задание',
+  ONLINE: 'Online',
+  DATE_FORMAT: 'DD-MM-YYYY HH:mm',
+};
+
 export {
   GIT_LINK,
   urls,
+  userModal,
 };
