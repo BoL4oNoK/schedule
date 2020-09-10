@@ -9,6 +9,7 @@ const App = () => {
   return (
     <div className="wrapper">
       <h1>Schedule</h1>
+      <Header />
       <TableForSchedule />
     </div>
   );
