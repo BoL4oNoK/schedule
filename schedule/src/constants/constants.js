@@ -10,8 +10,10 @@ const urls = {
 };
 
 const GIT_LINK = 'https://github.com/';
+const GIT_AVATAR = 'https://avatars.githubusercontent.com/';
 
 export {
   GIT_LINK,
   urls,
+  GIT_AVATAR,
 };

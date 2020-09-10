@@ -1,6 +1,8 @@
 import React from 'react';
 import { List, Avatar, Tag} from 'antd';
 import {GithubOutlined } from '@ant-design/icons';
+import {GIT_AVATAR,GIT_LINK} from '../../constants/constants'
+import './ScheduleList.css'
 import 'antd/dist/antd.css';
 
  const data = [
@@ -179,7 +181,7 @@ export default function ScheduleList() {
     <List.Item
       key={item.key}
       actions={[
-        <a className='schdule-table__organizer-link' href={`https://github.com/${item.organizer}`}>
+        <a className='schdule-table__organizer-link' href={`${GIT_LINK}${item.organizer}`}>
         <GithubOutlined />
         {item.organizer}
       </a>
@@ -187,7 +189,7 @@ export default function ScheduleList() {
     
     >
       <List.Item.Meta
-        avatar={<Avatar src={`https://avatars.githubusercontent.com/${item.organizer}`} />}
+        avatar={<Avatar src={`${GIT_AVATAR}${item.organizer}`} />}
         title={<a href={item.detailsUrl}>{item.name}</a>}
         description={`${item.comment }`}
       />
@@ -199,7 +201,7 @@ export default function ScheduleList() {
         <Tag>{item.broadcastUrl}</Tag>
       </div>
       {(!item.type.includes('test')&&!item.type.includes('deadline'))
-        ?(<div>
+        ?(<div className = "optionalBlock">
             <Tag  color={selectColor(item.type)}>{item.type}</Tag>
         </div>)
         :null
@@ -208,8 +210,6 @@ export default function ScheduleList() {
     </List.Item>
   )}
 />
-    return (list
-     
-    )
-    
+    return list 
+
 }
