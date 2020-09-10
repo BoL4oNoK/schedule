@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
 import { Modal, Button } from 'antd';
 import { DatePicker } from 'antd';
@@ -6,7 +6,7 @@ import moment from 'moment';
 import 'antd/dist/antd.css';
 import './UserWindow.css';
 import {userModal} from '../../constants/constants';
-import createMap from '../Map/Map';
+import createMap from '../map/map';
 
 const {
   MODAL_TITLE,
@@ -25,17 +25,21 @@ const UserWindow = () => {
   function handleCancel(e) {
     setVisible(false);
   };
-
+  
   const town = 'Минск';
   const isStreet = 'улица';
   const street = 'Якубова';
   const house = '66';
-  let mapData = {
-    center: ['55.750768', '37.583508'],
+
+  const [location , setLocation] = useState(null);
+   useEffect( () => {
+     createMap(town,isStreet,street,house).then(location => setLocation(location));
+   }, [] );
+
+  const mapData = {
+    center: (location !== null) ? [location.latitude, location.longitude] : ['55.750768', '37.583508'],
     zoom: 15,
   };
-  
-  const location = createMap(town,isStreet,street,house).then(console.log);
 
   return (
     <>
@@ -64,14 +68,13 @@ const UserWindow = () => {
         </div>
 
         <div>
-          {(needMap) ?
+          {(needMap && location !== null) ?
             <YMaps query={{ load: 'package.full' }}>
               <Map defaultState={mapData} >
                 <Placemark geometry={mapData.center} properties={mapData.center} />
               </Map>
             </YMaps>
             : <p>{ONLINE}</p>}
-
         </div>
       </Modal>
     </>
