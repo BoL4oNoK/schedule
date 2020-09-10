@@ -194,7 +194,7 @@ export default function ScheduleList() {
           <List.Item.Meta
             avatar={<Avatar src={`${GIT_AVATAR}${item.organizer}`} />}
             title={<a href={item.detailsUrl}>{item.name}</a>}
-            description={`${item.comment}`}
+            description={item.comment}
           />
           <div>
             <Tag color={selectColor(item.type)}>{item.type}</Tag>
