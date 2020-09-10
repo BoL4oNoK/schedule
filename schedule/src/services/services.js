@@ -1,4 +1,4 @@
-import urls from '../constants/constants';
+import { urls } from '../constants/constants';
 
 const {
   GET_EVENTS,
