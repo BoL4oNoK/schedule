@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { Row, Col, Select, Button, Input, Checkbox, DatePicker } from "antd";
 import "antd/dist/antd.css";
 import "./ModalWindow.scss";
@@ -7,9 +7,25 @@ const ModalWindowEdit = () => {
   const { Option, OptGroup } = Select;
   const { TextArea } = Input;
   const { RangePicker } = DatePicker;
+
+  const [isOfflineEvent, setIsOfflineEvent] = useState(false);
+  const feedbackRef = useRef();
+
+  const onEventLocationChange = (e) => {
+    if (e === "online") {
+      setIsOfflineEvent(false);
+    } else {
+      setIsOfflineEvent(true);
+    }
+  };
+
   return (
     <div className="wrapper-modal-edit">
       <h2 className="wrapper-modal-edit__header">Edit event mode</h2>
+      <Button shape="circle" className="button-close">
+        &times;
+      </Button>
+
       <Row gutter={16} style={{ marginTop: "1rem" }}>
         <Col span={6} style={{ marginLeft: "2rem" }}>
           <Input placeholder="Task Name" />
@@ -27,9 +43,6 @@ const ModalWindowEdit = () => {
               <Option value="qa">QA</Option>
             </OptGroup>
           </Select>
-        </Col>
-        <Col span={10} style={{ textAlign: "right" }}>
-          <Button shape="circle">&times;</Button>
         </Col>
       </Row>
 
@@ -68,24 +81,33 @@ const ModalWindowEdit = () => {
       </Col>
 
       <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
+        <Checkbox
+        // onchange={onchange}
+        >
+          Checkbox for feedback
+        </Checkbox>
+      </Col>
+
+      <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
         <Select
           defaultValue="Online/Offline"
           style={{ width: 200 }}
-          // onChange={handleChange}
+          onChange={onEventLocationChange}
         >
           <OptGroup label="Place">
             <Option value="online">Online</Option>
             <Option value="offline">Offline</Option>
           </OptGroup>
         </Select>
-      </Col>
 
-      <Checkbox
-        // onChange={onChange}
-        style={{ margin: "1rem 0 0 2rem" }}
-      >
-        Checkbox for feedback
-      </Checkbox>
+        {isOfflineEvent && (
+          <Col span={12} rer={feedbackRef} style={{ marginTop: "1rem" }}>
+            <Input placeholder="Town" />
+            <Input placeholder="Street" />
+            <Input placeholder="№ of house" />
+          </Col>
+        )}
+      </Col>
 
       <Row style={{ textAlign: "right" }}>
         <Col span={11}></Col>
