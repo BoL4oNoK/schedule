@@ -155,7 +155,7 @@ function dateCellRender(value) {
         ))}
       </ul>
     );
-  }
+}
 
 export default function CalendarForSchedule() {
     return <Calendar 
