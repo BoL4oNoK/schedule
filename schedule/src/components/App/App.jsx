@@ -1,17 +1,16 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import store from '../../store';
+import Container from '../Container';
 import './App.css';
-import Header from '../header/header';
-
-import TableForSchedule from '../table/table';
-
 
 const App = () => {
   return (
-    <div className="wrapper">
-      <h1>Schedule</h1>
-      <Header />
-      <TableForSchedule />
-    </div>
+    <Provider store={store}>
+      <div className="wrapper">
+        <Container />
+      </div>
+    </Provider>
   );
 };
 
