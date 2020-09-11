@@ -24,6 +24,11 @@ const map = {
 
 const TABLE_COLUMNS = ['Date', 'Time', 'Name', 'Place', 'Broadcast URL', 'Organizer', 'Details URL', 'Comment'];
 
+const USERS = {
+  student: 'Student', 
+  mentor: 'Mentor'
+};
+
 export {
   GIT_LINK,
   urls,
@@ -31,5 +36,6 @@ export {
   userModal,
   map,
   TABLE_COLUMNS,
+  USERS
 };
 
