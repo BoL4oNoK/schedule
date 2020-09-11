@@ -1,21 +1,18 @@
-
 import React, { useState } from 'react'
 import { Dropdown, Button, Checkbox, Divider } from 'antd';
 import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
 import './column-visible.css';
+import { TABLE_COLUMNS } from '../../../constants/constants';
 
+const CheckboxGroup = Checkbox.Group;
 
 export default function ColumnVisible() {
 	const [visible, setVisible] = useState('');
-
-
 	const handleVisibleChange = flag => {
 		setVisible(flag);
 	};
 
-
 	const icon = visible ? <CaretUpOutlined /> : <CaretDownOutlined />;
-
 
 	return (
 		<>
@@ -32,17 +29,12 @@ export default function ColumnVisible() {
 			</Dropdown>
 		</>
 	);
-
 }
 
-
-const CheckboxGroup = Checkbox.Group;
-
-const plainOptions = ['Date', 'Time', 'Name', 'Place', 'Broadcast URL', 'Organizer', 'Details URL', 'Comment'];
-const defaultCheckedList = ['Date', 'Time', 'Name', 'Place', 'Broadcast URL', 'Organizer', 'Details URL', 'Comment'];
+const plainOptions = TABLE_COLUMNS;
+const defaultCheckedList = TABLE_COLUMNS;
 
 function Columns() {
-
 	const [checked, setChecked] = useState(defaultCheckedList);
 	const [indeterminate, setIndeterminate] = useState(true);
 	const [checkAll, setCheckAll] = useState(true);
@@ -65,21 +57,17 @@ function Columns() {
 				<Checkbox
 					indeterminate={indeterminate}
 					onChange={onCheckAllChange}
-					checked={checkAll}
-				>
+					checked={checkAll}>
 					Check all
-          </Checkbox>
+        </Checkbox>
 			</div>
 			<Divider style={{ margin: '3px 0' }} />
 			<CheckboxGroup
 				className="columns-checkbox"
 				options={plainOptions}
 				value={checked}
-				onChange={onChange}
-			/>
+				onChange={onChange} />
 		</div>
 	);
 
 }
-
-
