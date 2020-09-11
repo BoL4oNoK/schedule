@@ -11,7 +11,19 @@ const urls = {
 
 const GIT_LINK = 'https://github.com/';
 
+const userModal = {
+  MODAL_TITLE: 'Задание',
+  ONLINE: 'Online',
+  DATE_FORMAT: 'DD-MM-YYYY HH:mm',
+};
+
+const map = {
+  KEY: '4a07d892-7c5e-4508-8c23-e8d6632ff3d9',
+};
+
 export {
   GIT_LINK,
   urls,
+  userModal,
+  map,
 };
