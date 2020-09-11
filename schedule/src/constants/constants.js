@@ -29,6 +29,12 @@ const USERS = {
   mentor: 'Mentor'
 };
 
+const VIEWS_FOR_SCHEDULE = {
+  table: 'table',
+  list: 'list',
+  calendar: 'calendar'
+}
+
 export {
   GIT_LINK,
   urls,
@@ -36,6 +42,7 @@ export {
   userModal,
   map,
   TABLE_COLUMNS,
-  USERS
+  USERS,
+  VIEWS_FOR_SCHEDULE
 };
 

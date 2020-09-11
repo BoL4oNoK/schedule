@@ -6,13 +6,13 @@ import calendarElement from './calendarElement';
 import dateFormat from '../../utils/dateformat';
 import { useSelector } from 'react-redux';
 
-function getListData(value) {
+function getListData(value, data) {
     const textDate = dateFormat(value.year(), value.month() + 1, value.date());
     return data.filter((item) => item.date === textDate );
 }
 
-function dateCellRender(value) {
-    const listData = getListData(value);
+function dateCellRender(value, data) {
+    const listData = getListData(value, data);
     return (
       <ul className="events">
         {listData.map(item => (
@@ -26,6 +26,6 @@ export default function CalendarForSchedule() {
     let events = useSelector(state => state.eventsReducer.events);
 
     return <Calendar 
-        dateCellRender={dateCellRender}
+        dateCellRender={(value) => dateCellRender(value, events)}
     />;
 }
