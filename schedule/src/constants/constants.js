@@ -10,6 +10,7 @@ const urls = {
 };
 
 const GIT_LINK = 'https://github.com/';
+const GIT_AVATAR = 'https://avatars.githubusercontent.com/';
 
 const userModal = {
   MODAL_TITLE: 'Задание',
@@ -24,6 +25,7 @@ const map = {
 export {
   GIT_LINK,
   urls,
+  GIT_AVATAR,
   userModal,
   map,
 };
