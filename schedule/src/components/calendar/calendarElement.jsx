@@ -6,7 +6,7 @@ import { selectColor } from '../../utils/selectColor';
 export default function calendarElement (event) {
     const badgeColor = selectColor(event.type);
     const badgeText = event.name;
-    const badgeTitle = `${event.type}: ${event.time} > ${event.name}`;
+    const badgeTitle = `${event.type.toUpperCase()}: ${event.currentTime} > ${event.name}`;
     return (
         <li key={event.id} title={badgeTitle}>
           <Badge color={badgeColor} text={badgeText} />
