@@ -1,7 +1,7 @@
 import { actionTypes } from '../actions';
 
 const initialState = {
-  events: null,
+  events: [],
 };
 
 export default function eventsReducer (state = initialState, action) {

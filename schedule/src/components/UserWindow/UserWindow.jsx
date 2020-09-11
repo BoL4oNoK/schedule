@@ -18,6 +18,7 @@ const UserWindow = () => {
   const [visible, setVisible] = useState(true);   //если использовать showModal и Button, то тут будет false по-умолчанию
   const [needMap, setNeedMap] = useState(true);   //если false значит online
   const { RangePicker } = DatePicker;
+  
   // function showModal() {
   //   setVisible(true);
   // };
