@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import { Row, Col, Select, Button, Input, Checkbox, DatePicker } from "antd";
 import "antd/dist/antd.css";
 import "./ModalWindow.scss";
+import { mentorModal } from "./../../constants/constants";
 
 const ModalWindowEdit = () => {
   const { Option, OptGroup } = Select;
@@ -37,10 +38,10 @@ const ModalWindowEdit = () => {
             // onChange={handleChange}
           >
             <OptGroup label="TaskTitle">
-              <Option value="web">Web/JS</Option>
-              <Option value="andwoid">Android</Option>
-              <Option value="ios">IOS</Option>
-              <Option value="qa">QA</Option>
+              <Option value="web">{mentorModal.eventTypes.web}</Option>
+              <Option value="android">{mentorModal.eventTypes.android}</Option>
+              <Option value="ios">{mentorModal.eventTypes.ios}</Option>
+              <Option value="qa">{mentorModal.eventTypes.qa}</Option>
             </OptGroup>
           </Select>
         </Col>
@@ -58,9 +59,11 @@ const ModalWindowEdit = () => {
             // onChange={handleChange}
           >
             <OptGroup label="Timezones">
-              <Option value="minsk">Minsk (GMT +3)</Option>
-              <Option value="kyiv">Kyiv (GMT +3)</Option>
-              <Option value="moscow">Moscow (GMT +3)</Option>
+              <Option value="minsk">{mentorModal.timezone.minsk}</Option>
+              <Option value="warsaw">{mentorModal.timezone.warsaw}</Option>
+              <Option value="kaliningrad">
+                {mentorModal.timezone.kaliningrad}
+              </Option>
             </OptGroup>
           </Select>
         </Col>
@@ -70,7 +73,7 @@ const ModalWindowEdit = () => {
             showTime={{
               hideDisabledOptions: true,
             }}
-            format="YYYY-MM-DD HH:mm:ss"
+            format="YYYY-MM-DD HH:mm"
             // onChange={onChange}
           />
         </Col>
@@ -95,14 +98,21 @@ const ModalWindowEdit = () => {
           onChange={onEventLocationChange}
         >
           <OptGroup label="Place">
-            <Option value="online">Online</Option>
-            <Option value="offline">Offline</Option>
+            <Option value="online">{mentorModal.isOnline.online}</Option>
+            <Option value="offline">{mentorModal.isOnline.offline}</Option>
           </OptGroup>
         </Select>
 
         {isOfflineEvent && (
           <Col span={12} rer={feedbackRef} style={{ marginTop: "1rem" }}>
             <Input placeholder="Town" />
+            <Select defaultValue="Type of street" style={{ width: 200 }}>
+              <OptGroup label="Type">
+                <Option value="online">{mentorModal.streetType.avenue}</Option>
+                <Option value="offline">{mentorModal.streetType.street}</Option>
+                <Option value="offline">{mentorModal.streetType.lane}</Option>
+              </OptGroup>
+            </Select>
             <Input placeholder="Street" />
             <Input placeholder="№ of house" />
           </Col>
