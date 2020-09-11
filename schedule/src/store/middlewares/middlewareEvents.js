@@ -17,7 +17,7 @@ const middlewareEvents = (store) => (next) => async (action) => {
       break;
     case actionTypes.ADD_EVENT:
       try {
-        postEvent(action.data);
+        await postEvent(action.data);
         const { data: events } = await getEvents();
         store.dispatch({ type: actionTypes.GET_EVENTS_SUCCESS, data: addCurrentTimeToEvents(events, 
           store.getState().timeZoneReducer.timeZone) });
@@ -27,7 +27,7 @@ const middlewareEvents = (store) => (next) => async (action) => {
       break;
     case actionTypes.UPDATE_EVENT:
       try {
-        updateEventById(action.data);
+        await updateEventById(action.data);
         const { data: events } = await getEvents();
         store.dispatch({ type: actionTypes.GET_EVENTS_SUCCESS, data: addCurrentTimeToEvents(events, 
           store.getState().timeZoneReducer.timeZone) });
@@ -37,7 +37,7 @@ const middlewareEvents = (store) => (next) => async (action) => {
       break;
     case actionTypes.DELETE_EVENT:
       try {
-        deleteEventById(action.data);
+        await deleteEventById(action.data);
         const { data: events } = await getEvents();
         store.dispatch({ type: actionTypes.GET_EVENTS_SUCCESS, data: events });
       } catch (e) {
