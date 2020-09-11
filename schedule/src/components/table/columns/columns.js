@@ -9,32 +9,9 @@ import {
 } from '@ant-design/icons';
 
 import { filtersForType } from './filters'; 
-import GIT_LINK from '../../../constants/constants';
+import { GIT_LINK } from '../../../constants/constants';
 
-const selectColor = (type) => {
-  let color;
-  const complexTaskName = type.toString().split(' ');
-  if (complexTaskName[complexTaskName.length - 1] === 'task') {
-    color = 'green';
-  } else {
-    switch(complexTaskName[0]) {
-      case 'deadline':
-        color = 'volcano';
-        break;
-      case 'codewars':
-        color = 'blue';
-        break;
-      case 'test':
-      case 'interview':
-        color = 'darkgreen';
-        break;
-      default:
-        color = 'lightgray';
-        break;
-    }
-  }
-  return color;
-}
+import { selectColor } from '../../../utils/selectColor';
 
 const columns = [
   {
@@ -93,14 +70,20 @@ const columns = [
     key: 'organizer',
     dataIndex: 'organizer',
     className: 'column-organizer',
-    render: (organizer) => (
-      <div className='schdule-table__organizer'>
-        <a className='schdule-table__organizer-link' href={`${GIT_LINK}${organizer}`}>
-          <GithubOutlined />
-          {organizer}
-        </a>
-      </div>
-    ),
+    render: (organizer) => {
+      if (organizer.length) {
+        return (
+          <div className='schdule-table__organizer'>
+              <a className='schdule-table__organizer-link' href={`${GIT_LINK}${organizer}`}>
+                <GithubOutlined />
+                {organizer}
+              </a>
+          </div>
+        );
+      } else {
+        return null;
+      }
+    },
   },
   {
     title: 'Details URL',
