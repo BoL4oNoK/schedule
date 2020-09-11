@@ -16,16 +16,21 @@ import { selectColor } from '../../../utils/selectColor';
 const columns = [
   {
     title: 'Date',
-    dataIndex: 'date',
-    key: 'date',
+    dataIndex: 'currentDate',
+    key: 'currentDate',
     className: 'column-date',
     width: 120,
-    fixed: 'left'
+    fixed: 'left',
+    render: (currentDate) => (
+      <>
+        {currentDate.split('.').reverse().join('-')}
+      </>
+    ),
   },
   {
     title: 'Time',
-    dataIndex: 'time',
-    key: 'time',
+    dataIndex: 'currentTime',
+    key: 'currentTime',
     className: 'column-time',
     width: 70,
   },
@@ -60,10 +65,21 @@ const columns = [
     className: 'column-place',
   },
   {
-    title: 'Broadcast URL',
-    key: 'broadcastUrl',
-    dataIndex: 'broadcastUrl',
-    className: 'column-broadcastUrl',
+    title: 'Description',
+    key: 'description',
+    dataIndex: 'description',
+    className: 'column-description',
+  },
+  {
+    title: 'Description URL',
+    key: 'descriptionUrl',
+    dataIndex: 'descriptionUrl',
+    className: 'column-descriptionUrl',
+    render: (descriptionUrl) => (
+      <>
+        <a href={descriptionUrl}>Description Link</a>
+      </>
+    )
   },
   {
     title: 'Organizer',
@@ -84,12 +100,6 @@ const columns = [
         return null;
       }
     },
-  },
-  {
-    title: 'Details URL',
-    key: 'detailsUrl',
-    dataIndex: 'detailsUrl',
-    className: 'column-detailsUrl',
   },
   {
     title: 'Comment',

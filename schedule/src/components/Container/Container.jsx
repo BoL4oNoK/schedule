@@ -12,10 +12,10 @@ const Container = () => {
   });
 
   return (
-  <>
-    <h1>Schedule</h1>
-    <TableForSchedule />
-  </>
+    <>
+      <h1>Schedule</h1>
+      <TableForSchedule />
+    </>
   )};
 
 export default Container;
