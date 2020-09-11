@@ -25,7 +25,7 @@ export default function ColumnVisible() {
 				onVisibleChange={handleVisibleChange}
 				visible={visible}
 			>
-				<Button type="primary" >
+				<Button style={{ float: 'right' }}>
 					{icon} Columns
 				</Button>
 
@@ -45,7 +45,7 @@ function Columns() {
 
 	const [checked, setChecked] = useState(defaultCheckedList);
 	const [indeterminate, setIndeterminate] = useState(true);
-	const [checkAll, setCheckAll] = useState(false);
+	const [checkAll, setCheckAll] = useState(true);
 
 	const onChange = checkedList => {
 		setChecked(checkedList);

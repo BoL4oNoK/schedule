@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react'
-import { Modal, Button } from 'antd';
+import { Modal, Button, Switch, Space } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
-
+import TaskColorCustomizer from '../task-color-customizer/task-color-customizer';
 export default function SettingsModal() {
 	const [visible, setVisible] = useState('');
 
@@ -22,18 +22,23 @@ export default function SettingsModal() {
 
 	return (
 		<>
-			<Button type="primary" onClick={showModal}>
-				<SettingFilled />
-			</Button>
+			<Space style={{ float: 'right' }} >
+				<Button
+					onClick={showModal}
+					className="settings-btn"
+				>
+					<SettingFilled />
+				</Button>
+			</Space>
+
 			<Modal
-				title="Basic Modal"
 				visible={visible}
 				onOk={handleOk}
 				onCancel={handleCancel}
 			>
-				<p>Some contents...</p>
-				<p>Some contents...</p>
-				<p>Some contents...</p>
+				<TaskColorCustomizer />
+
+
 			</Modal>
 		</>
 	);
