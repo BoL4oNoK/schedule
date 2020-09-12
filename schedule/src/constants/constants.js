@@ -41,6 +41,10 @@ const VIEWS_FOR_SCHEDULE = {
   calendar: 'calendar'
 }
 
+const ADD_NEW_EVENT_BUTTON_NAME = 'Add new event';
+
+const TASKS_TYPES = ['codewars', 'test', 'deadline', 'jsTask', 'htmlTask', 'codeJam', 'interview'];
+
 export {
   GIT_LINK,
   urls,
@@ -51,5 +55,7 @@ export {
   USERS,
   VIEWS_FOR_SCHEDULE,
   COLUMNS_TEXT,
+  ADD_NEW_EVENT_BUTTON_NAME,
+  TASKS_TYPES,
 };
 

@@ -1,5 +1,5 @@
 import React, { createFactory } from 'react'
-import { Row, Col } from "antd";
+import { Row, Col, Button } from "antd";
 import "antd/dist/antd.css";
 import { useSelector } from 'react-redux';
 import SettingsModal from './settings-modal/settings-modal';
@@ -10,11 +10,14 @@ import TimezoneSelect from './timezone-select/timezone-select';
 import ViewTypeSelect from './view-type-select/view-type-select';
 
 import {
+	USERS,
 	VIEWS_FOR_SCHEDULE,
+	ADD_NEW_EVENT_BUTTON_NAME
 } from '../../constants/constants';
 
 export default function Header() {
 	const view = useSelector(state => state.viewReducer.viewStatus);
+	const user = useSelector(state => state.userReducer.user);
 
 	return (
 		<>
@@ -32,11 +35,10 @@ export default function Header() {
 					<ViewTypeSelect />
 					<TimezoneSelect />
 				</Col>
-				{
-					view === VIEWS_FOR_SCHEDULE.table ? <Col span={8}>
-					<ColumnVisible />
-				</Col> : null
-				}
+				<Col span={8}>
+					{ view === VIEWS_FOR_SCHEDULE.table ? <ColumnVisible /> : null }
+					{ user === USERS.mentor ?  <Button type="primary" ghost> { ADD_NEW_EVENT_BUTTON_NAME } </Button> : null }
+				</Col>
 			</Row>
 		</>
 	)
