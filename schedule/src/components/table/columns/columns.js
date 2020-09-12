@@ -112,7 +112,7 @@ export const columns = [
     key: 'comment',
     dataIndex: 'comment',
     className: 'column-comment',
-    width: 80
+    width: 100
   },
 ];
 
