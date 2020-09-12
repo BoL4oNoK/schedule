@@ -12,6 +12,7 @@ export const actionTypes = {
   SET_TIME_ZONE: 'SET_TIME_ZONE',
   CHANGE_USER: 'CHANGE_USER',
   CHANGE_VIEW: 'CHANGE_VIEW',
+  CHANGE_TABLE_COLUMN_VISIBLE: 'CHANGE_ONE_TABLE_COLUMN',
 }
 
 export const actionCreator = {
@@ -23,5 +24,6 @@ export const actionCreator = {
   initOptions: () => ({ type: actionTypes.INIT_OPTIONS }),
   setOptions: (data) => ({ type: actionTypes.SET_OPTIONS, data }),//data - объект options
   changeUser: (data) => ({ type: actionTypes.CHANGE_USER, data }),
-  changeView: (data) => ({ type: actionTypes.CHANGE_VIEW, data })
+  changeView: (data) => ({ type: actionTypes.CHANGE_VIEW, data }),
+  changeColumnsVisible: (data) => ({ type: actionTypes.CHANGE_TABLE_COLUMN_VISIBLE, data }),
 }

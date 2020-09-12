@@ -22,7 +22,13 @@ const map = {
   KEY: '4a07d892-7c5e-4508-8c23-e8d6632ff3d9',
 };
 
-const TABLE_COLUMNS = ['Date', 'Time', 'Name', 'Place', 'Broadcast URL', 'Organizer', 'Details URL', 'Comment'];
+const TABLE_COLUMNS = ['date', 'time', 'type', 'name', 'place', 'description', 'descriptionUrl', 'organizer', 'comment'];
+
+const COLUMNS_TEXT = {
+  descriptionLink: 'Description Link',
+  editButtonName: 'Edit',
+  onlineStatus: 'Online',
+}
 
 const USERS = {
   student: 'Student', 
@@ -43,6 +49,7 @@ export {
   map,
   TABLE_COLUMNS,
   USERS,
-  VIEWS_FOR_SCHEDULE
+  VIEWS_FOR_SCHEDULE,
+  COLUMNS_TEXT,
 };
 

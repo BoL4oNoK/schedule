@@ -6,13 +6,15 @@ import optionsReducer from './optionsReducer';
 import timeZoneReducer from './timeZoneReducer';
 import userReducer from './userReducer';
 import viewReducer from './viewReducer';
+import columnVisibleReducer from './columnVisibleReducer';
 
 const rootReducer = combineReducers({
   eventsReducer,
   optionsReducer,
   timeZoneReducer,
   userReducer,
-  viewReducer
+  viewReducer,
+  columnVisibleReducer
 });
 
 export default rootReducer;
