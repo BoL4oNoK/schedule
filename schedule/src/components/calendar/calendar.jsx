@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 function getListData(value, data) {
     const textDate = dateFormat(value.year(), value.month() + 1, value.date());
-    return data.filter((item) => item.date === textDate );
+    return data.filter((item) => item.currentDate === textDate );
 }
 
 function dateCellRender(value, data) {
