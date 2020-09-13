@@ -4,17 +4,20 @@ import {
   columns,
   mentorColumn
 } from './columns/columns';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { USERS } from '../../constants/constants';
+import { actionCreator } from '../../store/actions';
 
 import {
   Table,
 } from 'antd';
 
 export default function TableForSchedule() {
+  const dispatch = useDispatch();
   const events = useSelector(state => state.eventsReducer.events);
   const selectedColumns = useSelector(state => state.columnVisibleReducer.tableColumnsVisible);
   const userView = useSelector(state => state.userReducer.user);
+  const userModalWindowVisible = useSelector(state => state.userModalWindowReducer.userModalWindowVisability);
 
   let rightColumns = selectedColumns.map((type) => {
     return columns.map(el => {
@@ -30,9 +33,19 @@ export default function TableForSchedule() {
     rightColumns.push(mentorColumn) 
   }
 
+  function tableOnRow(record, rowIndex) {
+    return {
+      onClick: (event) => {
+        console.log(events[rowIndex]);
+        return dispatch(actionCreator.changeUserModalWindowVisible(!userModalWindowVisible));
+      },
+    }
+  } 
+
   return (
     <>
       <Table
+        onRow={tableOnRow}
         rowKey='id'
         columns={ rightColumns }
         dataSource={events}

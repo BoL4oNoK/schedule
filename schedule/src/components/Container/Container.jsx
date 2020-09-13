@@ -44,6 +44,7 @@ const Container = () => {
       <div className='view-container'>
         {changeViewForm()}
       </div>
+      <UserWindow />
     </>
   )};
 
