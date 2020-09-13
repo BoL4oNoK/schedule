@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { actionCreator } from '../../store/actions';
-import TableForSchedule from '../table/table';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { actionCreator } from "../../store/actions";
+import TableForSchedule from "../table/table";
+import ScheduleList from "../list/ScheduleList";
 
 const Container = () => {
   const dispatch = useDispatch();
@@ -12,10 +13,12 @@ const Container = () => {
   });
 
   return (
-  <>
-    <h1>Schedule</h1>
-    <TableForSchedule />
-  </>
-  )};
+    <>
+      <h1>Schedule</h1>
+      <TableForSchedule />
+      <ScheduleList />
+    </>
+  );
+};
 
 export default Container;
