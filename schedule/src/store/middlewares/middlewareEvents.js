@@ -1,6 +1,6 @@
 import { actionTypes } from '../actions';
 import { getEvents, postEvent, updateEventById, deleteEventById } from '../../services/services';
-import addCurrentTimeToEvents from '../addCurrenttimeToEvents';
+import addCurrentTimeToEvents from '../addCurrentTimeToEvents';
 
 const middlewareEvents = (store) => (next) => async (action) => {
   switch (action.type) {
@@ -9,7 +9,6 @@ const middlewareEvents = (store) => (next) => async (action) => {
         const { data: events } = await getEvents();
         store.dispatch({ type: actionTypes.GET_EVENTS_SUCCESS, data: addCurrentTimeToEvents(events, 
           store.getState().timeZoneReducer.timeZone) });
-        console.log(addCurrentTimeToEvents(events))
       } catch (e) {
         console.log(e);
         store.dispatch({ type: actionTypes.GET_EVENTS_FAIL });
