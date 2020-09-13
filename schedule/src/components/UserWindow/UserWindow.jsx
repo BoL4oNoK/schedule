@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
-import { Modal, Button } from 'antd';
+import { Modal } from 'antd';
 import { DatePicker } from 'antd';
 import moment from 'moment';
 import 'antd/dist/antd.css';
 import './UserWindow.css';
 import {userModal} from '../../constants/constants';
 import createMap from '../map/map';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreator } from '../../store/actions';
 
 const {
   MODAL_TITLE,
@@ -15,16 +17,14 @@ const {
 } = userModal;
 
 const UserWindow = () => {
-  const [visible, setVisible] = useState(true);   //если использовать showModal и Button, то тут будет false по-умолчанию
+  const dispatch = useDispatch();
+  const visible = useSelector(state => state.userModalWindowReducer.userModalWindowVisability);
+
   const [needMap, setNeedMap] = useState(true);   //если false значит online
   const { RangePicker } = DatePicker;
   
-  // function showModal() {
-  //   setVisible(true);
-  // };
-
-  function handleCancel(e) {
-    setVisible(false);
+  function handleCancel() {
+    dispatch(actionCreator.changeUserModalWindowVisible(!visible));
   };
   
   const town = 'Минск';
@@ -44,9 +44,6 @@ const UserWindow = () => {
 
   return (
     <>
-      {/* <Button type="primary" onClick={showModal}>
-        Open Modal
-      </Button> */}
       <Modal
         title={MODAL_TITLE}
         visible={visible}

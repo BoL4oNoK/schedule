@@ -43,6 +43,7 @@ const Container = () => {
         <Preloader />
         {changeViewForm()}
       </div>
+      <UserWindow />
     </>
   );
 };

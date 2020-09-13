@@ -7,6 +7,7 @@ import timeZoneReducer from './timeZoneReducer';
 import userReducer from './userReducer';
 import viewReducer from './viewReducer';
 import columnVisibleReducer from './columnVisibleReducer';
+import userModalWindowReducer from './userModalWindowReducer';
 
 const rootReducer = combineReducers({
   eventsReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
   timeZoneReducer,
   userReducer,
   viewReducer,
-  columnVisibleReducer
+  columnVisibleReducer,
+  userModalWindowReducer
 });
 
 export default rootReducer;

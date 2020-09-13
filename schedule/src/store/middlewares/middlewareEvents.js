@@ -1,11 +1,7 @@
-import { actionTypes } from "../actions";
-import {
-  getEvents,
-  postEvent,
-  updateEventById,
-  deleteEventById,
-} from "../../services/services";
-import addCurrentTimeToEvents from "../addCurrenttimeToEvents";
+import { actionTypes } from '../actions';
+import { getEvents, postEvent, updateEventById, deleteEventById } from '../../services/services';
+import addCurrentTimeToEvents from '../addCurrenttimeToEvents';
+
 
 const middlewareEvents = (store) => (next) => async (action) => {
   switch (action.type) {
