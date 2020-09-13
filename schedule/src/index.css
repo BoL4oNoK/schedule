@@ -12,3 +12,6 @@ body {
   width: 97%;
 }
 
+.view-container {
+  position: relative;
+}
