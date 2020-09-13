@@ -6,7 +6,6 @@ import './color-picker.css';
 const { Text } = Typography;
 
 export default function ColorSelect(props) {
-
 	const [displayColorPicker, setDisplayColorPicker] = useState(false);
 	const [color, setColor] = useState({
 		r: '241',

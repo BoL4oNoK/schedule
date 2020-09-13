@@ -2,3 +2,16 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+#root {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper {
+  width: 97%;
+}
+
+.view-container {
+  position: relative;
+}

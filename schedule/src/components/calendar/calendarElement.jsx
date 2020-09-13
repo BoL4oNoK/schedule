@@ -5,10 +5,10 @@ import { selectColor } from '../../utils/selectColor';
 
 export default function calendarElement (event) {
     const badgeColor = selectColor(event.type);
-    const badgeText = event.name;
-    const badgeTitle = `${event.type}: ${event.time} > ${event.name}`;
+    const badgeText = `${event.currentTime} ${event.name}`;
+    const badgeTitle = `${event.type.toUpperCase()}: ${event.name}`;
     return (
-        <li key={event.id} title={badgeTitle}>
+        <li key={event.id} className="events__item" title={badgeTitle}>
           <Badge color={badgeColor} text={badgeText} />
         </li>
     );
