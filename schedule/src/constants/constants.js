@@ -35,10 +35,33 @@ const urls = {
 };
 
 const GIT_LINK = 'https://github.com/';
+const GIT_AVATAR = 'https://avatars.githubusercontent.com/';
+
+const userModal = {
+  MODAL_TITLE: 'Задание',
+  ONLINE: 'Online',
+  DATE_FORMAT: 'DD-MM-YYYY HH:mm',
+};
+
+const map = {
+  KEY: '4a07d892-7c5e-4508-8c23-e8d6632ff3d9',
+};
+
+const TABLE_COLUMNS = ['Date', 'Time', 'Name', 'Place', 'Broadcast URL', 'Organizer', 'Details URL', 'Comment'];
+
+const USERS = {
+  student: 'Student', 
+  mentor: 'Mentor'
+};
 
 export {
   GIT_LINK,
   urls,
-  mentorModal
+  mentorModal,
+  GIT_AVATAR,
+  userModal,
+  map,
+  TABLE_COLUMNS,
+  USERS
 };
 
