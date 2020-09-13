@@ -13,6 +13,7 @@ export const actionTypes = {
   CHANGE_USER: 'CHANGE_USER',
   CHANGE_VIEW: 'CHANGE_VIEW',
   CHANGE_TABLE_COLUMN_VISIBLE: 'CHANGE_ONE_TABLE_COLUMN',
+  CHANGE_USER_MODAL_WINDOW_VISIBLE: 'CHANGE_USER_MODAL_WINDOW_VISIBLE',
 }
 
 export const actionCreator = {
@@ -26,4 +27,5 @@ export const actionCreator = {
   changeUser: (data) => ({ type: actionTypes.CHANGE_USER, data }),
   changeView: (data) => ({ type: actionTypes.CHANGE_VIEW, data }),
   changeColumnsVisible: (data) => ({ type: actionTypes.CHANGE_TABLE_COLUMN_VISIBLE, data }),
+  changeUserModalWindowVisible: (data) => ({ type: actionTypes.CHANGE_USER_MODAL_WINDOW_VISIBLE, data })
 }
