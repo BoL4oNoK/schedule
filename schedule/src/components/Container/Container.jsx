@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreator } from '../../store/actions';
 import TableForSchedule from '../table/table';
+import Preloader from '../preloader/preloader';
 import Header from '../header/header';
 import ScheduleList from '../list/ScheduleList';
 import UserWindow from '../UserWindow/UserWindow';
@@ -42,6 +43,7 @@ const Container = () => {
       <h1>Schedule</h1>
       <Header />
       <div className='view-container'>
+        <Preloader />
         {changeViewForm()}
       </div>
       <UserWindow />
