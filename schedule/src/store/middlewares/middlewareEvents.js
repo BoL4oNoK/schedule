@@ -19,7 +19,6 @@ const middlewareEvents = (store) => (next) => async (action) => {
             store.getState().timeZoneReducer.timeZone
           ),
         });
-        console.log(addCurrentTimeToEvents(events));
       } catch (e) {
         console.log(e);
         store.dispatch({ type: actionTypes.GET_EVENTS_FAIL });

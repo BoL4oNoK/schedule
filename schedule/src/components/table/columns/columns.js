@@ -2,30 +2,33 @@ import React from 'react';
 import '../table.css';
 import {
   Tag,
+  Button
 } from 'antd';
-
 import {
   GithubOutlined
 } from '@ant-design/icons';
-
 import { filtersForType } from './filters'; 
-import { GIT_LINK } from '../../../constants/constants';
-
+import { GIT_LINK, COLUMNS_TEXT } from '../../../constants/constants';
 import { selectColor } from '../../../utils/selectColor';
 
-const columns = [
+export const columns = [
   {
     title: 'Date',
-    dataIndex: 'date',
-    key: 'date',
+    dataIndex: 'currentDate',
+    key: 'currentDate',
     className: 'column-date',
     width: 120,
-    fixed: 'left'
+    fixed: 'left',
+    render: (currentDate) => (
+      <>
+        {currentDate.split('.').reverse().join('-')}
+      </>
+    ),
   },
   {
     title: 'Time',
-    dataIndex: 'time',
-    key: 'time',
+    dataIndex: 'currentTime',
+    key: 'currentTime',
     className: 'column-time',
     width: 70,
   },
@@ -58,12 +61,31 @@ const columns = [
     key: 'place',
     dataIndex: 'place',
     className: 'column-place',
+    width: 80,
+    render: (place) => (
+      <>
+        {
+          !place.length ? COLUMNS_TEXT.onlineStatus : <span>Offline</span>
+        }
+      </>
+    )
   },
   {
-    title: 'Broadcast URL',
-    key: 'broadcastUrl',
-    dataIndex: 'broadcastUrl',
-    className: 'column-broadcastUrl',
+    title: 'Description',
+    key: 'description',
+    dataIndex: 'description',
+    className: 'column-description',
+  },
+  {
+    title: 'Description URL',
+    key: 'descriptionUrl',
+    dataIndex: 'descriptionUrl',
+    className: 'column-descriptionUrl',
+    render: (descriptionUrl) => (
+      <>
+        <a href={descriptionUrl}>{COLUMNS_TEXT.descriptionLink}</a>
+      </>
+    )
   },
   {
     title: 'Organizer',
@@ -86,17 +108,20 @@ const columns = [
     },
   },
   {
-    title: 'Details URL',
-    key: 'detailsUrl',
-    dataIndex: 'detailsUrl',
-    className: 'column-detailsUrl',
-  },
-  {
     title: 'Comment',
     key: 'comment',
     dataIndex: 'comment',
     className: 'column-comment',
+    width: 100
   },
 ];
 
-export default columns;
+export const mentorColumn = {
+  title: 'Action',
+  key: '',
+  dataIndex: 'x',
+  className: 'column-action',
+  width: 100,
+  fixed: 'right',
+  render: () =>  <Button type="dashed">{COLUMNS_TEXT.editButtonName}</Button>
+}

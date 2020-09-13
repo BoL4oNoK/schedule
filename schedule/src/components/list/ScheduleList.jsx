@@ -40,7 +40,7 @@ export default function ScheduleList() {
       dataSource={data || []}
       renderItem={(item) => (
         <List.Item
-          key={item.key}
+          key={item.id}
           actions={[
             <a
               className="schdule-table__organizer-link"
@@ -69,7 +69,7 @@ export default function ScheduleList() {
               })),
               arr.map((element, idx) =>
                 element.includes("http") ? (
-                  <Tag color={selectColor(element)} key={idx}>
+                  <Tag key={idx}>
                     <a href={element}>{element}</a>
                   </Tag>
                 ) : (
@@ -79,6 +79,10 @@ export default function ScheduleList() {
                 )
               ))
             }
+            <Tag>
+              {item.currentDate} {item.currentTime}
+            </Tag>
+            <Tag>{item.place.length ? item.place : "online"}</Tag>
           </div>
           {!item.type.includes("test") && !item.type.includes("deadline") ? (
             <div className="optionalBlock">
