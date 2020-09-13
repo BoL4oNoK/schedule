@@ -8,7 +8,7 @@ export default function Preloader() {
 
   return (
     <>
-      { !events.length ? <Spin size="large" /> : null }
+      { events ? null : <Spin size="large" /> }
     </>
   );
 }
