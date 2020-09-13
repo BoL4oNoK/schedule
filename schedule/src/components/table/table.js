@@ -36,8 +36,10 @@ export default function TableForSchedule() {
   function tableOnRow(record, rowIndex) {
     return {
       onClick: (event) => {
-        dispatch(actionCreator.changePermanentEvent(events[rowIndex]));
-        dispatch(actionCreator.changeUserModalWindowVisible(!userModalWindowVisible));
+        if (event.target.classList.contains('table-event-name') || event.target.parentNode.classList.contains('table-event-name')) {
+          dispatch(actionCreator.changePermanentEvent(events[rowIndex]));
+          dispatch(actionCreator.changeUserModalWindowVisible(!userModalWindowVisible));
+        }
       },
     }
   } 

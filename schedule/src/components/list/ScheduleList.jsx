@@ -1,5 +1,5 @@
 import React from "react";
-import { List, Avatar, Tag } from "antd";
+import { List, Avatar, Tag, Button } from "antd";
 import { GithubOutlined } from "@ant-design/icons";
 import { GIT_AVATAR, GIT_LINK } from "../../constants/constants";
 import { selectColor } from "../../utils/selectColor";
@@ -54,14 +54,15 @@ export default function ScheduleList() {
           <List.Item.Meta
             avatar={<Avatar src={`${GIT_AVATAR}${item.organizer}`} />}
             title={
-              <a
+              <Button
+                type='text'
                 onClick={() => {
                   dispatch(actionCreator.changePermanentEvent(item));
                   dispatch(actionCreator.changeUserModalWindowVisible(!modalWindowVisible));
                 }}
               >
                 {item.name}
-              </a>
+              </Button>
             }
             description={item.comment}
           />
