@@ -3,7 +3,8 @@ import { List, Avatar, Tag } from "antd";
 import { GithubOutlined } from "@ant-design/icons";
 import { GIT_AVATAR, GIT_LINK } from "../../constants/constants";
 import { selectColor } from "../../utils/selectColor";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { actionCreator } from '../../store/actions';
 import "./ScheduleList.css";
 import "antd/dist/antd.css";
 function dateFormatReadable(dateTime) {
@@ -22,11 +23,10 @@ function dateFormatReadable(dateTime) {
   return `${t} ${d}.${m}.${dateTime.getFullYear()}`;
 }
 export default function ScheduleList() {
+  const dispatch = useDispatch();
+  const modalWindowVisible = useSelector((state) => state.modalWindowReducer.userModalWindowVisability);
   const data = useSelector((state) => state.eventsReducer.events) || [];
   let arr;
-  data.sort(function (a, b) {
-    return new Date(a.dateTime) - new Date(b.dateTime);
-  });
   const list = (
     <List
       itemLayout="vertical"
@@ -53,7 +53,16 @@ export default function ScheduleList() {
         >
           <List.Item.Meta
             avatar={<Avatar src={`${GIT_AVATAR}${item.organizer}`} />}
-            title={<a href={item.descriptionUrl}>{item.name}</a>}
+            title={
+              <a
+                onClick={() => {
+                  dispatch(actionCreator.changePermanentEvent(item));
+                  dispatch(actionCreator.changeUserModalWindowVisible(!modalWindowVisible));
+                }}
+              >
+                {item.name}
+              </a>
+            }
             description={item.comment}
           />
 

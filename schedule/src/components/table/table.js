@@ -17,7 +17,7 @@ export default function TableForSchedule() {
   const events = useSelector(state => state.eventsReducer.events);
   const selectedColumns = useSelector(state => state.columnVisibleReducer.tableColumnsVisible);
   const userView = useSelector(state => state.userReducer.user);
-  const userModalWindowVisible = useSelector(state => state.userModalWindowReducer.userModalWindowVisability);
+  const userModalWindowVisible = useSelector(state => state.modalWindowReducer.userModalWindowVisability);
 
   let rightColumns = selectedColumns.map((type) => {
     return columns.map(el => {
@@ -36,8 +36,8 @@ export default function TableForSchedule() {
   function tableOnRow(record, rowIndex) {
     return {
       onClick: (event) => {
-        console.log(events[rowIndex]);
-        return dispatch(actionCreator.changeUserModalWindowVisible(!userModalWindowVisible));
+        dispatch(actionCreator.changePermanentEvent(events[rowIndex]));
+        dispatch(actionCreator.changeUserModalWindowVisible(!userModalWindowVisible));
       },
     }
   } 
