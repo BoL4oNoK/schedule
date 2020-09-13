@@ -1,34 +1,41 @@
 import React, { useEffect } from 'react';
 import 'antd/dist/antd.css';
-import columns from './columns/columns';
+import {
+  columns,
+  mentorColumn
+} from './columns/columns';
 import { useSelector } from 'react-redux';
+import { USERS } from '../../constants/constants';
 
 import {
   Table,
 } from 'antd';
 
 export default function TableForSchedule() {
-  let events = useSelector(state => state.eventsReducer.events);
+  const events = useSelector(state => state.eventsReducer.events);
+  const selectedColumns = useSelector(state => state.columnVisibleReducer.tableColumnsVisible);
+  const userView = useSelector(state => state.userReducer.user);
 
-  /* if (events) {
-    events.sort((a, b) => {
-      const dateA = new Date(...a.currentDate.split('.').reverse());
-      const dateB = new Date(...b.currentDate.split('.').reverse());
-      return dateA - dateB;
-    });
-  }*/
+  let rightColumns = selectedColumns.map((type) => {
+    return columns.map(el => {
+      if (el.key.toLowerCase().includes(type.toLowerCase())) {
+        return el;
+      } else {
+        return null;
+      }
+    }).find(el => el);
+  });
 
-  /*function onChange(pagination, filters, sorter, extra) {
-    console.log('params', pagination, filters, sorter, extra);
-  }*/
+  if ( userView === USERS.mentor ) {
+    rightColumns.push(mentorColumn) 
+  }
 
   return (
     <>
       <Table
         rowKey='id'
-        columns={columns}
+        columns={ rightColumns }
         dataSource={events}
-        //onChange={onChange}
         size='small'
         scroll={{ x: 1400 }}
         pagination={{ pageSize: 10 }}

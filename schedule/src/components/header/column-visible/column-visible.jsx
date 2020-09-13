@@ -3,6 +3,8 @@ import { Dropdown, Button, Checkbox, Divider } from 'antd';
 import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
 import './column-visible.css';
 import { TABLE_COLUMNS } from '../../../constants/constants';
+import { useSelector, useDispatch } from 'react-redux';
+import { actionCreator } from '../../../store/actions';
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -32,21 +34,21 @@ export default function ColumnVisible() {
 }
 
 const plainOptions = TABLE_COLUMNS;
-const defaultCheckedList = TABLE_COLUMNS;
 
 function Columns() {
-	const [checked, setChecked] = useState(defaultCheckedList);
+	const checkList = useSelector(state => state.columnVisibleReducer.tableColumnsVisible);
+	const dispatch = useDispatch();
 	const [indeterminate, setIndeterminate] = useState(true);
 	const [checkAll, setCheckAll] = useState(true);
 
 	const onChange = checkedList => {
-		setChecked(checkedList);
+		dispatch(actionCreator.changeColumnsVisible(checkedList))
 		setIndeterminate(!!checkedList.length && checkedList.length < plainOptions.length);
 		setCheckAll(checkedList.length === plainOptions.length);
 	};
 
 	const onCheckAllChange = e => {
-		setChecked(e.target.checked ? plainOptions : []);
+		dispatch(actionCreator.changeColumnsVisible(e.target.checked ? plainOptions : []))
 		setIndeterminate(false);
 		setCheckAll(e.target.checked);
 	};
@@ -65,7 +67,7 @@ function Columns() {
 			<CheckboxGroup
 				className="columns-checkbox"
 				options={plainOptions}
-				value={checked}
+				value={checkList}
 				onChange={onChange} />
 		</div>
 	);
