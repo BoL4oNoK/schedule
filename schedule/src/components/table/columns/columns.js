@@ -2,18 +2,16 @@ import React from 'react';
 import '../table.css';
 import {
   Tag,
+  Button
 } from 'antd';
-
 import {
   GithubOutlined
 } from '@ant-design/icons';
-
 import { filtersForType } from './filters'; 
-import { GIT_LINK } from '../../../constants/constants';
-
+import { GIT_LINK, COLUMNS_TEXT } from '../../../constants/constants';
 import { selectColor } from '../../../utils/selectColor';
 
-const columns = [
+export const columns = [
   {
     title: 'Date',
     dataIndex: 'currentDate',
@@ -63,6 +61,14 @@ const columns = [
     key: 'place',
     dataIndex: 'place',
     className: 'column-place',
+    width: 80,
+    render: (place) => (
+      <>
+        {
+          !place.length ? COLUMNS_TEXT.onlineStatus : <span>Offline</span>
+        }
+      </>
+    )
   },
   {
     title: 'Description',
@@ -77,7 +83,7 @@ const columns = [
     className: 'column-descriptionUrl',
     render: (descriptionUrl) => (
       <>
-        <a href={descriptionUrl}>Description Link</a>
+        <a href={descriptionUrl}>{COLUMNS_TEXT.descriptionLink}</a>
       </>
     )
   },
@@ -106,7 +112,16 @@ const columns = [
     key: 'comment',
     dataIndex: 'comment',
     className: 'column-comment',
+    width: 100
   },
 ];
 
-export default columns;
+export const mentorColumn = {
+  title: 'Action',
+  key: '',
+  dataIndex: 'x',
+  className: 'column-action',
+  width: 100,
+  fixed: 'right',
+  render: () =>  <Button type="dashed">{COLUMNS_TEXT.editButtonName}</Button>
+}
