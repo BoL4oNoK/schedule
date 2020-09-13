@@ -42,7 +42,6 @@ const Container = () => {
     <>
       <h1>Schedule</h1>
       <Header />
-      <TableForSchedule />
       <div className='view-container'>
         <Preloader />
         {changeViewForm()}
