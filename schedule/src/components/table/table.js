@@ -18,7 +18,7 @@ export default function TableForSchedule() {
   const events = useSelector(state => state.eventsReducer.events);
   const selectedColumns = useSelector(state => state.columnVisibleReducer.tableColumnsVisible);
   const userView = useSelector(state => state.userReducer.user);
-  const userModalWindowVisible = useSelector(state => state.userModalWindowReducer.userModalWindowVisability);
+  const userModalWindowVisible = useSelector(state => state.modalWindowReducer.userModalWindowVisability);
   const hightlitedRowStatus = useSelector(state => state.hightlitedRowReducer.hightlitedRowStatus);
   const hightlitedRows = useSelector(state => state.hightlitedRowReducer.hightlitedRows);
 
@@ -50,6 +50,10 @@ export default function TableForSchedule() {
         }
         console.log(permanentHightlitedRows, hightlitedRowStatus);
         //dispatch(actionCreator.changeUserModalWindowVisible(!userModalWindowVisible));
+        if (event.target.classList.contains('table-event-name') || event.target.parentNode.classList.contains('table-event-name')) {
+          dispatch(actionCreator.changePermanentEvent(events[rowIndex]));
+          dispatch(actionCreator.changeUserModalWindowVisible(!userModalWindowVisible));
+        }
       },
     }
   }
