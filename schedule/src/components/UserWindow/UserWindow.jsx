@@ -18,7 +18,8 @@ const {
 
 const UserWindow = () => {
   const dispatch = useDispatch();
-  const visible = useSelector(state => state.userModalWindowReducer.userModalWindowVisability);
+  const visible = useSelector(state => state.modalWindowReducer.userModalWindowVisability);
+  const event = useSelector(state => state.permanentEventReducer.permanentEvent);
 
   const [needMap, setNeedMap] = useState(true);   //если false значит online
   const { RangePicker } = DatePicker;
