@@ -16,7 +16,7 @@ export const columns = [
     title: 'Date',
     dataIndex: 'currentDate',
     key: 'currentDate',
-    className: 'column-date',
+    className: 'column-date column-header',
     width: 120,
     fixed: 'left',
     render: (currentDate) => (
@@ -29,14 +29,14 @@ export const columns = [
     title: 'Time',
     dataIndex: 'currentTime',
     key: 'currentTime',
-    className: 'column-time',
+    className: 'column-time column-header',
     width: 70,
   },
   {
     title: 'Type',
     dataIndex: 'type',
     key: 'type',
-    className: 'column-type',
+    className: 'column-type column-header',
     filters: filtersForType,
     onFilter: (value, record) => {
       return record.type.indexOf(value) === 0;
@@ -54,13 +54,13 @@ export const columns = [
     title: 'Name',
     key: 'name',
     dataIndex: 'name',
-    className: 'column-name',
+    className: 'column-name column-header',
   },
   {
     title: 'Place',
     key: 'place',
     dataIndex: 'place',
-    className: 'column-place',
+    className: 'column-place column-header',
     width: 80,
     render: (place) => (
       <>
@@ -74,13 +74,13 @@ export const columns = [
     title: 'Description',
     key: 'description',
     dataIndex: 'description',
-    className: 'column-description',
+    className: 'column-description column-header',
   },
   {
     title: 'Description URL',
     key: 'descriptionUrl',
     dataIndex: 'descriptionUrl',
-    className: 'column-descriptionUrl',
+    className: 'column-descriptionUrl column-header',
     render: (descriptionUrl) => (
       <>
         <a href={descriptionUrl}>{COLUMNS_TEXT.descriptionLink}</a>
@@ -91,7 +91,7 @@ export const columns = [
     title: 'Organizer',
     key: 'organizer',
     dataIndex: 'organizer',
-    className: 'column-organizer',
+    className: 'column-organizer column-header',
     render: (organizer) => {
       if (organizer.length) {
         return (
@@ -111,7 +111,7 @@ export const columns = [
     title: 'Comment',
     key: 'comment',
     dataIndex: 'comment',
-    className: 'column-comment',
+    className: 'column-comment column-header',
     width: 100
   },
 ];
@@ -120,7 +120,7 @@ export const mentorColumn = {
   title: 'Action',
   key: '',
   dataIndex: 'x',
-  className: 'column-action',
+  className: 'column-action column-header',
   width: 100,
   fixed: 'right',
   render: () =>  <Button type="dashed">{COLUMNS_TEXT.editButtonName}</Button>

@@ -8,6 +8,7 @@ import userReducer from './userReducer';
 import viewReducer from './viewReducer';
 import columnVisibleReducer from './columnVisibleReducer';
 import userModalWindowReducer from './userModalWindowReducer';
+import hightlitedRowReducer from './rowsVisibleReducer';
 
 const rootReducer = combineReducers({
   eventsReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   userReducer,
   viewReducer,
   columnVisibleReducer,
-  userModalWindowReducer
+  userModalWindowReducer,
+  hightlitedRowReducer,
 });
 
 export default rootReducer;

@@ -14,6 +14,8 @@ export const actionTypes = {
   CHANGE_VIEW: 'CHANGE_VIEW',
   CHANGE_TABLE_COLUMN_VISIBLE: 'CHANGE_ONE_TABLE_COLUMN',
   CHANGE_USER_MODAL_WINDOW_VISIBLE: 'CHANGE_USER_MODAL_WINDOW_VISIBLE',
+  CHANGE_ROWS_HIGTHLITED_STATUS: 'CHANGE_ROWS_HIGTHLITED_STATUS',
+  CHANGE_HIGHTLITED_ROWS: 'CHANGE_HIGHTLITED_ROWS'
 }
 
 export const actionCreator = {
@@ -27,5 +29,7 @@ export const actionCreator = {
   changeUser: (data) => ({ type: actionTypes.CHANGE_USER, data }),
   changeView: (data) => ({ type: actionTypes.CHANGE_VIEW, data }),
   changeColumnsVisible: (data) => ({ type: actionTypes.CHANGE_TABLE_COLUMN_VISIBLE, data }),
-  changeUserModalWindowVisible: (data) => ({ type: actionTypes.CHANGE_USER_MODAL_WINDOW_VISIBLE, data })
+  changeUserModalWindowVisible: (data) => ({ type: actionTypes.CHANGE_USER_MODAL_WINDOW_VISIBLE, data }),
+  changeHightlitedRowStatus: (data) => ({ type: actionTypes.CHANGE_ROWS_HIGTHLITED_STATUS, data }),
+  changeHightlitedRows: (data) => ({ type: actionTypes.CHANGE_HIGHTLITED_ROWS, data }),
 }
