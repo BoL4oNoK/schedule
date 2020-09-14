@@ -17,7 +17,8 @@ export const actionTypes = {
   CHANGE_EDIT_MODAL_WINDOW_VISIBLE: 'CHANGE_EDIT_MODAL_WINDOW_VISIBLE',
   CHANGE_PERMANENT_EVENT: 'CHANGE_PERMANENT_EVENT',
   CHANGE_ROWS_HIGTHLITED_STATUS: 'CHANGE_ROWS_HIGTHLITED_STATUS',
-  CHANGE_HIGHTLITED_ROWS: 'CHANGE_HIGHTLITED_ROWS'
+  CHANGE_HIGHTLITED_ROWS: 'CHANGE_HIGHTLITED_ROWS',
+  CHANGE_VISIBLE_ROWS: 'CHANGE_VISIBLE_ROWS'
 }
 
 export const actionCreator = {
@@ -36,4 +37,5 @@ export const actionCreator = {
   changePermanentEvent: (data) => ({ type: actionTypes.CHANGE_PERMANENT_EVENT, data }),
   changeHightlitedRowStatus: (data) => ({ type: actionTypes.CHANGE_ROWS_HIGTHLITED_STATUS, data }),
   changeHightlitedRows: (data) => ({ type: actionTypes.CHANGE_HIGHTLITED_ROWS, data }),
+  changeVisibleRow: (data) => ({ type: actionTypes.CHANGE_VISIBLE_ROWS, data }),
 }
