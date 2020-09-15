@@ -38,7 +38,10 @@ const GIT_LINK = 'https://github.com/';
 const GIT_AVATAR = 'https://avatars.githubusercontent.com/';
 
 const userModal = {
-  MODAL_TITLE: 'Задание',
+  MODAL_TITLE: 'Task',
+  TASK_DESCTIPTION: 'Description task',
+  URL_DESCTIPTION: 'Description URL',
+  LOCATION: 'Location',
   ONLINE: 'Online',
   DATE_FORMAT: 'DD-MM-YYYY HH:mm',
 };
