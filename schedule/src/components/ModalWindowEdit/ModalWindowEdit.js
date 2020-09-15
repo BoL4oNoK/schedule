@@ -127,8 +127,11 @@ const ModalWindowEdit = () => {
 
         {isOfflineEvent && (
           <Col span={12} style={{ marginTop: "1rem" }}>
-            <Input placeholder="Town" />
-            <Select defaultValue="Type of street" style={{ width: 200 }}>
+            <Input placeholder="Town" style={{ marginBottom: "5px" }} />
+            <Select
+              defaultValue="Type of street"
+              style={{ width: 200, marginBottom: "5px" }}
+            >
               <OptGroup label="Type">
                 <Option value="online">{MENTOR_MODAL.streetType.avenue}</Option>
                 <Option value="offline">
@@ -137,7 +140,7 @@ const ModalWindowEdit = () => {
                 <Option value="offline">{MENTOR_MODAL.streetType.lane}</Option>
               </OptGroup>
             </Select>
-            <Input placeholder="Street" />
+            <Input placeholder="Street" style={{ marginBottom: "5px" }} />
             <Input placeholder="№ of house" />
           </Col>
         )}
