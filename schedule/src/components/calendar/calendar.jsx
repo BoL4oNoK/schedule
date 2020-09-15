@@ -16,7 +16,7 @@ function dateCellRender(value, data) {
     return (
       <ul className="events">
         {listData.map(item => (
-          CalendarElement(item)
+          <CalendarElement key={item.eventId} event={item} data={data} />
         ))}
       </ul>
     );
