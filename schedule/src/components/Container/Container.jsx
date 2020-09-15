@@ -14,13 +14,13 @@ import { VIEWS_FOR_SCHEDULE } from "../../constants/constants";
 const { calendar, list } = VIEWS_FOR_SCHEDULE;
 
 const Container = () => {
-  const view = useSelector((state) => state.viewReducer.viewStatus);
+  const view = useSelector((state) => state.optionsReducer.viewStatus);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(actionCreator.initEvents());
     dispatch(actionCreator.initOptions());
-  });
+  }, []);
 
   function changeViewForm() {
     switch (view) {

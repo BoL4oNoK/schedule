@@ -23,7 +23,7 @@ function dateCellRender(value, data) {
 }
 
 export default function CalendarForSchedule() {
-    let events = useSelector(state => state.eventsReducer.events);
+    let events = useSelector(state => state.eventsReducer.events) || [];
 
     return <Calendar 
         dateCellRender={(value) => dateCellRender(value, events)}

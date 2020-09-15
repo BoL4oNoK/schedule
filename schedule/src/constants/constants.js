@@ -96,6 +96,11 @@ const TIME_ZONES = [
   { name: "Asia/Tbilisi", value: "+04" },
 ];
 
+const HIDE_BUTTON_NAME = {
+  hideRowsButtonName: 'Hide Rows',
+  showRowsButtonName: 'Show All Rows',
+};
+
 export {
   GIT_LINK,
   urls,
@@ -110,4 +115,5 @@ export {
   ADD_NEW_EVENT_BUTTON_NAME,
   TASKS_TYPES,
   TIME_ZONES,
+  HIDE_BUTTON_NAME
 };

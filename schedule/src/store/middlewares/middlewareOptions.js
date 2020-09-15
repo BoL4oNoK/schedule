@@ -12,9 +12,8 @@ const middlewareOptions = (store) => (next) => async (action) => {
         store.dispatch({ type: actionTypes.GET_OPTIONS_FAIL });
       }
       break;
-    case actionTypes.SET_OPTIONS:
-      localStorage.setItem(localName, JSON.stringify(action.data));
-      store.dispatch({ type: actionTypes.GET_OPTIONS_SUCCESS, data: action.data});
+    case actionTypes.SAVE_OPTIONS:
+      localStorage.setItem(localName, JSON.stringify(store.getState().optionsReducer));
       break;
     default:
       next(action);
