@@ -24,7 +24,7 @@ export default function ViewTypeSelect() {
 
 	return (
 		<Select
-			 defaultValue={view}
+			 value={view}
 			 style={{ width: 120, margin: '0 10px 0 0' }}
 			 onChange={changeView}
 		>
