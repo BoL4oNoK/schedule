@@ -25,13 +25,10 @@ const Container = () => {
     switch (view) {
       case list:
         return <ScheduleList />;
-        break;
       case calendar:
         return <CalendarForSchedule />;
-        break;
       default:
         return <TableForSchedule />;
-        break;
     }
   }
 

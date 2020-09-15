@@ -55,6 +55,7 @@ export const columns = [
     key: 'name',
     dataIndex: 'name',
     className: 'column-name',
+    render: (name) => <Button type='text' className='table-event-name'>{ name }</Button>
   },
   {
     title: 'Place',
@@ -83,7 +84,13 @@ export const columns = [
     className: 'column-descriptionUrl',
     render: (descriptionUrl) => (
       <>
-        <a href={descriptionUrl}>{COLUMNS_TEXT.descriptionLink}</a>
+        <a
+          href={descriptionUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          { COLUMNS_TEXT.descriptionLink }
+        </a>
       </>
     )
   },
@@ -96,7 +103,12 @@ export const columns = [
       if (organizer.length) {
         return (
           <div className='schdule-table__organizer'>
-              <a className='schdule-table__organizer-link' href={`${GIT_LINK}${organizer}`}>
+              <a
+                className='schdule-table__organizer-link'
+                href={`${GIT_LINK}${organizer}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <GithubOutlined />
                 {organizer}
               </a>

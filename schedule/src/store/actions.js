@@ -16,6 +16,11 @@ export const actionTypes = {
   CHANGE_USER_MODAL_WINDOW_VISIBLE: 'CHANGE_USER_MODAL_WINDOW_VISIBLE',
   CHANGE_VERSION: 'CHANGE_VERSION', 
   CHANGE_COLOR: 'CHANGE_COLOR'
+  CHANGE_EDIT_MODAL_WINDOW_VISIBLE: 'CHANGE_EDIT_MODAL_WINDOW_VISIBLE',
+  CHANGE_PERMANENT_EVENT: 'CHANGE_PERMANENT_EVENT',
+  CHANGE_ROWS_HIGTHLITED_STATUS: 'CHANGE_ROWS_HIGTHLITED_STATUS',
+  CHANGE_HIGHTLITED_ROWS: 'CHANGE_HIGHTLITED_ROWS',
+  CHANGE_VISIBLE_ROWS: 'CHANGE_VISIBLE_ROWS'
 }
 
 export const actionCreator = {
@@ -32,4 +37,9 @@ export const actionCreator = {
   changeUserModalWindowVisible: (data) => ({ type: actionTypes.CHANGE_USER_MODAL_WINDOW_VISIBLE, data }),
   changeVersion: () => ({ type: actionTypes.CHANGE_VERSION }),
   changeColor: (data) => ({ type: actionTypes.CHANGE_COLOR, data })//data - объект с данными по цветам
+  changeEditModalWindowVisible: (data) => ({ type: actionTypes.CHANGE_EDIT_MODAL_WINDOW_VISIBLE, data }),
+  changePermanentEvent: (data) => ({ type: actionTypes.CHANGE_PERMANENT_EVENT, data }),
+  changeHightlitedRowStatus: (data) => ({ type: actionTypes.CHANGE_ROWS_HIGTHLITED_STATUS, data }),
+  changeHightlitedRows: (data) => ({ type: actionTypes.CHANGE_HIGHTLITED_ROWS, data }),
+  changeVisibleRows: (data) => ({ type: actionTypes.CHANGE_VISIBLE_ROWS, data }),
 }

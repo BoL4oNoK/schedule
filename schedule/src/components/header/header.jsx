@@ -1,4 +1,4 @@
-import React, { createFactory } from 'react'
+import React from 'react'
 import { Row, Col, Button } from "antd";
 import "antd/dist/antd.css";
 import { useSelector } from 'react-redux';
@@ -8,6 +8,7 @@ import StudentMentorSwitch from './student-mentor/student-mentor';
 import ImpairedVersion from './impaired-version/impaired-version';
 import TimezoneSelect from './timezone-select/timezone-select';
 import ViewTypeSelect from './view-type-select/view-type-select';
+import HideRowsButton from './hide-and-show-rows-button/HideRowsButton';
 
 import {
 	USERS,
@@ -34,6 +35,7 @@ export default function Header() {
 				<Col span={16}>
 					<ViewTypeSelect />
 					<TimezoneSelect />
+					<HideRowsButton />
 				</Col>
 				<Col span={8}>
 					{ view === VIEWS_FOR_SCHEDULE.table ? <ColumnVisible /> : null }

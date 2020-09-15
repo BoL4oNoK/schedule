@@ -2,7 +2,7 @@ import React from 'react';
 import './calendar.css';
 import 'antd/dist/antd.css';
 import { Calendar } from 'antd';
-import calendarElement from './calendarElement';
+import CalendarElement from './calendarElement';
 import dateFormat from '../../utils/dateformat';
 import { useSelector } from 'react-redux';
 
@@ -16,7 +16,7 @@ function dateCellRender(value, data) {
     return (
       <ul className="events">
         {listData.map(item => (
-          calendarElement(item)
+          CalendarElement(item)
         ))}
       </ul>
     );

@@ -3,12 +3,18 @@ import { combineReducers } from 'redux';
 
 import eventsReducer from './eventsReducer';
 import optionsReducer from './optionsReducer';
-import userModalWindowReducer from './userModalWindowReducer';
+import modalWindowReducer from './modalWindowReducer';
+import permanentEventReducer from './permanentEventReducer'
+import hightlitedRowReducer from './hightlitedRowsReducer';
+import visibleRowsReducer from './visibleRowsReducer';
 
 const rootReducer = combineReducers({
   eventsReducer,
   optionsReducer,
-  userModalWindowReducer
+  modalWindowReducer,
+  permanentEventReducer,
+  hightlitedRowReducer,
+  visibleRowsReducer
 });
 
 export default rootReducer;
