@@ -1,16 +1,42 @@
 import React, { useState, useRef } from "react";
-import { Row, Col, Select, Button, Input, Checkbox, DatePicker } from "antd";
+import {
+  Row,
+  Col,
+  Select,
+  Button,
+  Input,
+  Checkbox,
+  DatePicker,
+  Modal,
+} from "antd";
 import "antd/dist/antd.css";
 import "./ModalWindow.scss";
-import { mentorModal } from "./../../constants/constants";
+import { MENTOR_MODAL, TASKS_TYPES } from "./../../constants/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreator } from "../../store/actions";
+
+function getTasks(TASKS_TYPES) {
+  return TASKS_TYPES.map((el) => {
+    return (
+      <Option value={el} key={el}>
+        {el}
+      </Option>
+    );
+  });
+}
+
+const { Option, OptGroup } = Select;
+const { TextArea } = Input;
+const { RangePicker } = DatePicker;
+
+// Edit modal window component
 
 const ModalWindowEdit = () => {
-  const { Option, OptGroup } = Select;
-  const { TextArea } = Input;
-  const { RangePicker } = DatePicker;
-
+  const dispatch = useDispatch();
   const [isOfflineEvent, setIsOfflineEvent] = useState(false);
-  const feedbackRef = useRef();
+  const visible = useSelector(
+    (state) => state.modalWindowReducer.editModalWindowVisability
+  );
 
   const onEventLocationChange = (e) => {
     if (e === "online") {
@@ -20,12 +46,13 @@ const ModalWindowEdit = () => {
     }
   };
 
+  const handleCancel = () => {
+    dispatch(actionCreator.changeEditModalWindowVisible(!visible));
+  };
+
   return (
-    <div className="wrapper-modal-edit">
+    <Modal visible={visible} onCancel={handleCancel}>
       <h2 className="wrapper-modal-edit__header">Edit event mode</h2>
-      <Button shape="circle" className="button-close">
-        &times;
-      </Button>
 
       <Row gutter={16} style={{ marginTop: "1rem" }}>
         <Col span={6} style={{ marginLeft: "2rem" }}>
@@ -37,12 +64,7 @@ const ModalWindowEdit = () => {
             style={{ width: 200 }}
             // onChange={handleChange}
           >
-            <OptGroup label="TaskTitle">
-              <Option value="web">{mentorModal.eventTypes.web}</Option>
-              <Option value="android">{mentorModal.eventTypes.android}</Option>
-              <Option value="ios">{mentorModal.eventTypes.ios}</Option>
-              <Option value="qa">{mentorModal.eventTypes.qa}</Option>
-            </OptGroup>
+            <OptGroup label="TaskTitle">{getTasks(TASKS_TYPES)}</OptGroup>
           </Select>
         </Col>
       </Row>
@@ -59,10 +81,10 @@ const ModalWindowEdit = () => {
             // onChange={handleChange}
           >
             <OptGroup label="Timezones">
-              <Option value="minsk">{mentorModal.timezone.minsk}</Option>
-              <Option value="warsaw">{mentorModal.timezone.warsaw}</Option>
+              <Option value="minsk">{MENTOR_MODAL.timezone.minsk}</Option>
+              <Option value="warsaw">{MENTOR_MODAL.timezone.warsaw}</Option>
               <Option value="kaliningrad">
-                {mentorModal.timezone.kaliningrad}
+                {MENTOR_MODAL.timezone.kaliningrad}
               </Option>
             </OptGroup>
           </Select>
@@ -98,19 +120,21 @@ const ModalWindowEdit = () => {
           onChange={onEventLocationChange}
         >
           <OptGroup label="Place">
-            <Option value="online">{mentorModal.isOnline.online}</Option>
-            <Option value="offline">{mentorModal.isOnline.offline}</Option>
+            <Option value="online">{MENTOR_MODAL.isOnline.online}</Option>
+            <Option value="offline">{MENTOR_MODAL.isOnline.offline}</Option>
           </OptGroup>
         </Select>
 
         {isOfflineEvent && (
-          <Col span={12} rer={feedbackRef} style={{ marginTop: "1rem" }}>
+          <Col span={12} style={{ marginTop: "1rem" }}>
             <Input placeholder="Town" />
             <Select defaultValue="Type of street" style={{ width: 200 }}>
               <OptGroup label="Type">
-                <Option value="online">{mentorModal.streetType.avenue}</Option>
-                <Option value="offline">{mentorModal.streetType.street}</Option>
-                <Option value="offline">{mentorModal.streetType.lane}</Option>
+                <Option value="online">{MENTOR_MODAL.streetType.avenue}</Option>
+                <Option value="offline">
+                  {MENTOR_MODAL.streetType.street}
+                </Option>
+                <Option value="offline">{MENTOR_MODAL.streetType.lane}</Option>
               </OptGroup>
             </Select>
             <Input placeholder="Street" />
@@ -118,15 +142,7 @@ const ModalWindowEdit = () => {
           </Col>
         )}
       </Col>
-
-      <Row style={{ textAlign: "right" }}>
-        <Col span={11}></Col>
-        <Col span={12}>
-          <Button style={{ marginRight: "1rem" }}>Save</Button>
-          <Button>Cancel</Button>
-        </Col>
-      </Row>
-    </div>
+    </Modal>
   );
 };
 
