@@ -59,7 +59,7 @@ export default function TableForSchedule() {
     <>
       <Table
         onRow={tableOnRow}
-        rowKey='id'
+        rowKey='eventId'
         columns={ rightColumns }
         dataSource={ visibleRows ? visibleRows : events }
         size='small'

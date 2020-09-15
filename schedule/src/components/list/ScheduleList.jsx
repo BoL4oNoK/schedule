@@ -53,7 +53,7 @@ export default function ScheduleList() {
               dispatch(actionCreator.changeHightlitedRows(hightlitedRows.filter((el) => el.id !== item.id)));
             }
           }}
-          key={item.id}
+          key={item.eventId}
           actions={[
             <a
               className="schdule-table__organizer-link"

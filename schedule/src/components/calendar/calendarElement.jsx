@@ -13,7 +13,7 @@ export default function CalendarElement (event) {
   const badgeTitle = `${event.type.toUpperCase()}: ${event.name}`;
   return (
     <li
-      key={event.id}
+      key={event.eventId}
       className="events__item"
       title={badgeTitle}
       onClick={() => {
