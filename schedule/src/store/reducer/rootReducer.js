@@ -9,7 +9,7 @@ import viewReducer from './viewReducer';
 import columnVisibleReducer from './columnVisibleReducer';
 import modalWindowReducer from './modalWindowReducer';
 import permanentEventReducer from './permanentEventReducer'
-import hightlitedRowReducer from './rowsVisibleReducer';
+import hightlitedRowReducer from './hightlitedRowsReducer';
 import visibleRowsReducer from './visibleRowsReducer';
 
 const rootReducer = combineReducers({
