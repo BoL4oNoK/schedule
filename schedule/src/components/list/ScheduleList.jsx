@@ -26,6 +26,8 @@ export default function ScheduleList() {
   const dispatch = useDispatch();
   const modalWindowVisible = useSelector((state) => state.modalWindowReducer.userModalWindowVisability);
   const data = useSelector((state) => state.eventsReducer.events) || [];
+  const hightlitedRows = useSelector(state => state.hightlitedRowReducer.hightlitedRows);
+  const visibleRows = useSelector(state => state.visibleRowsReducer.visibleRows);
   let arr;
   const list = (
     <List
@@ -37,9 +39,20 @@ export default function ScheduleList() {
         },
         pageSize: 5,
       }}
-      dataSource={data || []}
+      dataSource={ visibleRows ? visibleRows : data }
       renderItem={(item) => (
         <List.Item
+          onClick={(event) => {
+            if (event.target.parentNode.classList.contains('ant-list-item') && !event.target.parentNode.classList.contains('row-hightlight')) {
+              event.target.parentNode.classList.add('row-hightlight');
+              dispatch(actionCreator.changeHightlitedRowStatus(true));
+              dispatch(actionCreator.changeHightlitedRows( hightlitedRows ? [...hightlitedRows, item] : [ item ]));
+            } else if (event.target.parentNode.classList.contains('row-hightlight')) {
+              event.target.parentNode.classList.remove('row-hightlight');
+              dispatch(actionCreator.changeHightlitedRowStatus(false));
+              dispatch(actionCreator.changeHightlitedRows(hightlitedRows.filter((el) => el.id !== item.id)));
+            }
+          }}
           key={item.id}
           actions={[
             <a

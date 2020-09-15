@@ -12,3 +12,29 @@
 .column-visability {
   display: none;
 }
+
+.ant-table-body::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.ant-table-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.ant-table-body::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 15px;
+}
+
+.ant-table-body::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.row-hightlight {
+  background-color: lightgray;
+}
+
+.ant-table-cell-fix-left, .ant-table-cell-fix-right {
+  background: inherit;
+}

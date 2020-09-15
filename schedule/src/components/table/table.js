@@ -18,7 +18,9 @@ export default function TableForSchedule() {
   const selectedColumns = useSelector(state => state.columnVisibleReducer.tableColumnsVisible);
   const userView = useSelector(state => state.userReducer.user);
   const userModalWindowVisible = useSelector(state => state.modalWindowReducer.userModalWindowVisability);
-
+  const hightlitedRows = useSelector(state => state.hightlitedRowReducer.hightlitedRows);
+  const visibleRows = useSelector(state => state.visibleRowsReducer.visibleRows);
+  
   let rightColumns = selectedColumns.map((type) => {
     return columns.map(el => {
       if (el.key.toLowerCase().includes(type.toLowerCase())) {
@@ -36,13 +38,22 @@ export default function TableForSchedule() {
   function tableOnRow(record, rowIndex) {
     return {
       onClick: (event) => {
+        if (event.target.parentNode.classList.contains('ant-table-row') && !event.target.parentNode.classList.contains('row-hightlight')) {
+          event.target.parentNode.classList.add('row-hightlight');
+          dispatch(actionCreator.changeHightlitedRowStatus(true));
+          dispatch(actionCreator.changeHightlitedRows( hightlitedRows ? [...hightlitedRows, record] : [ record ]));
+        } else if (event.target.parentNode.classList.contains('row-hightlight')) {
+          event.target.parentNode.classList.remove('row-hightlight');
+          dispatch(actionCreator.changeHightlitedRowStatus(false));
+          dispatch(actionCreator.changeHightlitedRows(hightlitedRows.filter((el) => el.id !== record.id)));
+        }
         if (event.target.classList.contains('table-event-name') || event.target.parentNode.classList.contains('table-event-name')) {
           dispatch(actionCreator.changePermanentEvent(events[rowIndex]));
           dispatch(actionCreator.changeUserModalWindowVisible(!userModalWindowVisible));
         }
       },
     }
-  } 
+  }
 
   return (
     <>
@@ -50,7 +61,7 @@ export default function TableForSchedule() {
         onRow={tableOnRow}
         rowKey='id'
         columns={ rightColumns }
-        dataSource={events}
+        dataSource={ visibleRows ? visibleRows : events }
         size='small'
         scroll={{ x: 1400 }}
         pagination={{ pageSize: 10 }}
