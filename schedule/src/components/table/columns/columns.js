@@ -29,14 +29,14 @@ export const columns = [
     title: 'Time',
     dataIndex: 'currentTime',
     key: 'currentTime',
-    className: 'column-time column-header',
+    className: 'column-time',
     width: 70,
   },
   {
     title: 'Type',
     dataIndex: 'type',
     key: 'type',
-    className: 'column-type column-header',
+    className: 'column-type',
     filters: filtersForType,
     onFilter: (value, record) => {
       return record.type.indexOf(value) === 0;
@@ -61,7 +61,7 @@ export const columns = [
     title: 'Place',
     key: 'place',
     dataIndex: 'place',
-    className: 'column-place column-header',
+    className: 'column-place',
     width: 80,
     render: (place) => (
       <>
@@ -75,13 +75,13 @@ export const columns = [
     title: 'Description',
     key: 'description',
     dataIndex: 'description',
-    className: 'column-description column-header',
+    className: 'column-description',
   },
   {
     title: 'Description URL',
     key: 'descriptionUrl',
     dataIndex: 'descriptionUrl',
-    className: 'column-descriptionUrl column-header',
+    className: 'column-descriptionUrl',
     render: (descriptionUrl) => (
       <>
         <a
@@ -98,7 +98,7 @@ export const columns = [
     title: 'Organizer',
     key: 'organizer',
     dataIndex: 'organizer',
-    className: 'column-organizer column-header',
+    className: 'column-organizer',
     render: (organizer) => {
       if (organizer.length) {
         return (
@@ -123,7 +123,7 @@ export const columns = [
     title: 'Comment',
     key: 'comment',
     dataIndex: 'comment',
-    className: 'column-comment column-header',
+    className: 'column-comment',
     width: 100
   },
 ];
@@ -132,7 +132,7 @@ export const mentorColumn = {
   title: 'Action',
   key: '',
   dataIndex: 'x',
-  className: 'column-action column-header',
+  className: 'column-action',
   width: 100,
   fixed: 'right',
   render: () =>  <Button type="dashed">{COLUMNS_TEXT.editButtonName}</Button>
