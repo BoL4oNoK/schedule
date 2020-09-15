@@ -12,7 +12,7 @@ const middlewareEvents = (store) => (next) => async (action) => {
           type: actionTypes.GET_EVENTS_SUCCESS,
           data: addCurrentTimeToEvents(
             events,
-            store.getState().timeZoneReducer.timeZone
+            store.getState().optionsReducer.timeZone
           ),
         });
       } catch (e) {
@@ -28,7 +28,7 @@ const middlewareEvents = (store) => (next) => async (action) => {
           type: actionTypes.GET_EVENTS_SUCCESS,
           data: addCurrentTimeToEvents(
             events,
-            store.getState().timeZoneReducer.timeZone
+            store.getState().optionsReducer.timeZone
           ),
         });
       } catch (e) {
@@ -43,7 +43,7 @@ const middlewareEvents = (store) => (next) => async (action) => {
           type: actionTypes.GET_EVENTS_SUCCESS,
           data: addCurrentTimeToEvents(
             events,
-            store.getState().timeZoneReducer.timeZone
+            store.getState().optionsReducer.timeZone
           ),
         });
       } catch (e) {

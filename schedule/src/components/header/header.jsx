@@ -16,8 +16,8 @@ import {
 } from '../../constants/constants';
 
 export default function Header() {
-	const view = useSelector(state => state.viewReducer.viewStatus);
-	const user = useSelector(state => state.userReducer.user);
+	const view = useSelector(state => state.optionsReducer.viewStatus);
+	const user = useSelector(state => state.optionsReducer.user);
 
 	return (
 		<>

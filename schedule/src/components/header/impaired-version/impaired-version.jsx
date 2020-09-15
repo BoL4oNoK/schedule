@@ -7,7 +7,7 @@ export default function ImpairedVersion() {
 		<div>
 			<Switch
 				checkedChildren={<EyeOutlined />}
-				unCheckedChildren={<EyeInvisibleOutlined />}
+        unCheckedChildren={<EyeInvisibleOutlined />}
 			/> 	<Typography.Text>Version for the visually impaired</Typography.Text>
 		</div>
 	)

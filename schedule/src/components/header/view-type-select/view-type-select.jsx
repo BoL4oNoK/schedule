@@ -15,10 +15,11 @@ const { Option } = Select;
 
 export default function ViewTypeSelect() {
 	const dispatch = useDispatch();
-	const view = useSelector(state => state.viewReducer.viewStatus);
+	const view = useSelector(state => state.optionsReducer.viewStatus);
 
 	const changeView = (value) => {
-		dispatch(actionCreator.changeView(value));
+    dispatch(actionCreator.changeView(value));
+    dispatch(actionCreator.seveOptions());
 	}
 
 	return (
