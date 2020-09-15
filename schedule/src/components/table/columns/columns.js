@@ -16,7 +16,7 @@ export const columns = [
     title: 'Date',
     dataIndex: 'currentDate',
     key: 'currentDate',
-    className: 'column-date column-header',
+    className: 'column-date',
     width: 120,
     fixed: 'left',
     render: (currentDate) => (
