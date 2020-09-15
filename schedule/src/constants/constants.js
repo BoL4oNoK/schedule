@@ -70,6 +70,18 @@ const ADD_NEW_EVENT_BUTTON_NAME = 'Add new event';
 
 const TASKS_TYPES = ['codewars', 'test', 'deadline', 'jsTask', 'htmlTask', 'codeJam', 'interview'];
 
+const HEADERS_FOR_TABLE_CSV = [
+  { label: 'Date', key: 'currentDate' },
+  { label: 'Time', key: 'currentTime' },
+  { label: 'Type', key: 'type' },
+  { label: 'Name', key: 'name' },
+  { label: 'Place', key: 'place' },
+  { label: 'Description', key: 'description' },
+  { label: 'Description URL', key: 'descriptionUrl' },
+  { label: 'Organizer', key: 'organizer' },
+  { label: 'Comment', key: 'comment' },
+];
+
 export {
   GIT_LINK,
   urls,
@@ -83,5 +95,6 @@ export {
   COLUMNS_TEXT,
   ADD_NEW_EVENT_BUTTON_NAME,
   TASKS_TYPES,
+  HEADERS_FOR_TABLE_CSV,
 };
 

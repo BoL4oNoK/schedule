@@ -7,6 +7,7 @@ import Header from "../header/header";
 import ScheduleList from "../list/ScheduleList";
 import UserWindow from "../UserWindow/UserWindow";
 import CalendarForSchedule from "../../components/calendar/calendar";
+import CsvLink from '../csv-link/CsvLink';
 
 import { VIEWS_FOR_SCHEDULE } from "../../constants/constants";
 
@@ -44,6 +45,7 @@ const Container = () => {
         {changeViewForm()}
       </div>
       <UserWindow />
+      <CsvLink />
     </>
   );
 };
