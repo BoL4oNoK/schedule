@@ -70,7 +70,8 @@ export default function ScheduleList() {
               <Button
                 type='text'
                 onClick={() => {
-                  dispatch(actionCreator.changePermanentEvent(item));
+                  const selectedEvent = (item.eventIndex) ? data.find(el => el.id === item.id) : item;
+                  dispatch(actionCreator.changePermanentEvent(selectedEvent));
                   dispatch(actionCreator.changeUserModalWindowVisible(!modalWindowVisible));
                 }}
               >
@@ -107,9 +108,12 @@ export default function ScheduleList() {
             </Tag>
             <Tag>{item.place.length ? item.place : "online"}</Tag>
           </div>
-          {!item.type.includes("test") && !item.type.includes("deadline") ? (
+          {item.currentDeadlineDate ? (
             <div className="optionalBlock">
-              <Tag color={selectColor(item.type)}>{item.type}</Tag>
+              <Tag color={selectColor("deadline")}>deadline</Tag>
+              <Tag>
+              {item.currentDeadlineDate} {item.currentDeadlineTime}
+            </Tag>
             </div>
           ) : null}
         </List.Item>
