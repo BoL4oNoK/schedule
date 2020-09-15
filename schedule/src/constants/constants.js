@@ -81,6 +81,19 @@ const TASKS_TYPES = [
   "htmlTask",
   "codeJam",
   "interview",
+  "selfeducation",
+];
+
+const TIME_ZONES = [
+  { name: "Europe/London", value: "+01" },
+  { name: "Europe/Warsaw", value: "+02" },
+  { name: "Europe/Kiev", value: "+03" },
+  { name: "Europe/Minsk", value: "+03" },
+  { name: "Europe/Moscow", value: "+03" },
+  { name: "Europe/Volgograd", value: "+04" },
+  { name: "Asia/Yekaterinburg", value: "+05" },
+  { name: "Asia/Tashkent", value: "+05" },
+  { name: "Asia/Tbilisi", value: "+04" },
 ];
 
 export {
@@ -96,4 +109,5 @@ export {
   COLUMNS_TEXT,
   ADD_NEW_EVENT_BUTTON_NAME,
   TASKS_TYPES,
+  TIME_ZONES,
 };

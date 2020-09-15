@@ -50,6 +50,7 @@ export default function TableForSchedule() {
             actionCreator.changeUserModalWindowVisible(!userModalWindowVisible)
           );
         } else if (event.target.textContent === "Edit") {
+          dispatch(actionCreator.changePermanentEvent(events[rowIndex]));
           dispatch(
             actionCreator.changeEditModalWindowVisible(!editModalWindowVisible)
           );
