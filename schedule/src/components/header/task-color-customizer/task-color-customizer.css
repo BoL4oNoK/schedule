@@ -1,3 +1,9 @@
-.task-color-selector {
+/* .task-color-selector {
 	display: flex;
+} */
+
+.color-select-container {
+	display: flex;
+	justify-content: space-between;
+	margin: 10px 0;
 }

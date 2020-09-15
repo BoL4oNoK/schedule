@@ -44,6 +44,7 @@ export default function ColorSelect(props) {
 		popover: {
 			position: 'absolute',
 			zIndex: '2',
+			right: '25px'
 		},
 		cover: {
 			position: 'fixed',

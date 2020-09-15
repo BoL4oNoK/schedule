@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Select } from "antd";
+import { Divider, Select } from "antd";
 import ColorSelect from "../color-picker/color-picker";
 import './task-color-customizer.css'
 import { TASKS_TYPES } from '../../../constants/constants';
@@ -14,13 +14,20 @@ function generateTaskOptions() {
 
 export default function TaskColorCustomizer() {
 	return (
-		<Card title="Customize tasks colors" bordered={false} style={{ width: 300 }}>
+		<>
+			<Divider
+				dashed={true}
+				orientation="left">Task color</Divider>
 			<div className="task-color-selector">
-				<Select defaultValue={TASKS_TYPES[0]} style={{ width: 120 }} >
-					{generateTaskOptions()}
-				</Select>
-				<ColorSelect taskType='background' /> <ColorSelect taskType='text' />
+				<div className="color-select-container"><span>Task type: </span>
+					<Select defaultValue={TASKS_TYPES[0]} style={{ width: 143 }} >
+						{generateTaskOptions()}
+					</Select>
+				</div>
+				<div className="color-select-container"><span>Background color: </span><ColorSelect /></div>
+				<div className="color-select-container"><span>Text color: </span><ColorSelect /></div>
+
 			</div>
-		</Card>
+		</>
 	)
 }
