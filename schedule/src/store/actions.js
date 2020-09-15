@@ -8,12 +8,14 @@ export const actionTypes = {
   INIT_OPTIONS: 'INIT_OPTIONS',
   GET_OPTIONS_SUCCESS: 'GET_OPTIONS_SUCCESS',
   GET_OPTIONS_FAIL: 'GET_OPTIONS_FAIL',
-  SET_OPTIONS: 'SET_OPTIONS',
+  SAVE_OPTIONS: 'SAVE_OPTIONS',
   SET_TIME_ZONE: 'SET_TIME_ZONE',
   CHANGE_USER: 'CHANGE_USER',
   CHANGE_VIEW: 'CHANGE_VIEW',
   CHANGE_TABLE_COLUMN_VISIBLE: 'CHANGE_ONE_TABLE_COLUMN',
   CHANGE_USER_MODAL_WINDOW_VISIBLE: 'CHANGE_USER_MODAL_WINDOW_VISIBLE',
+  CHANGE_VERSION: 'CHANGE_VERSION', 
+  CHANGE_COLOR: 'CHANGE_COLOR'
   CHANGE_EDIT_MODAL_WINDOW_VISIBLE: 'CHANGE_EDIT_MODAL_WINDOW_VISIBLE',
   CHANGE_PERMANENT_EVENT: 'CHANGE_PERMANENT_EVENT',
   CHANGE_ROWS_HIGTHLITED_STATUS: 'CHANGE_ROWS_HIGTHLITED_STATUS',
@@ -28,11 +30,13 @@ export const actionCreator = {
   deleteEvent: (data) => ({ type: actionTypes.DELETE_EVENT, data }),//data - event id
   setTimeZone: (data) => ({ type: actionTypes.SET_TIME_ZONE, data }),//data - таймзона в часах со знаком (например для рб +3)
   initOptions: () => ({ type: actionTypes.INIT_OPTIONS }),
-  setOptions: (data) => ({ type: actionTypes.SET_OPTIONS, data }),//data - объект options
+  seveOptions: (data) => ({ type: actionTypes.SAVE_OPTIONS }),
   changeUser: (data) => ({ type: actionTypes.CHANGE_USER, data }),
   changeView: (data) => ({ type: actionTypes.CHANGE_VIEW, data }),
   changeColumnsVisible: (data) => ({ type: actionTypes.CHANGE_TABLE_COLUMN_VISIBLE, data }),
   changeUserModalWindowVisible: (data) => ({ type: actionTypes.CHANGE_USER_MODAL_WINDOW_VISIBLE, data }),
+  changeVersion: () => ({ type: actionTypes.CHANGE_VERSION }),
+  changeColor: (data) => ({ type: actionTypes.CHANGE_COLOR, data })//data - объект с данными по цветам
   changeEditModalWindowVisible: (data) => ({ type: actionTypes.CHANGE_EDIT_MODAL_WINDOW_VISIBLE, data }),
   changePermanentEvent: (data) => ({ type: actionTypes.CHANGE_PERMANENT_EVENT, data }),
   changeHightlitedRowStatus: (data) => ({ type: actionTypes.CHANGE_ROWS_HIGTHLITED_STATUS, data }),
