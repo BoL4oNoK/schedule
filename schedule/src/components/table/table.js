@@ -15,8 +15,8 @@ import {
 export default function TableForSchedule() {
   const dispatch = useDispatch();
   const events = useSelector(state => state.eventsReducer.events);
-  const selectedColumns = useSelector(state => state.columnVisibleReducer.tableColumnsVisible);
-  const userView = useSelector(state => state.userReducer.user);
+  const selectedColumns = useSelector(state => state.optionsReducer.tableColumnsVisible);
+  const userView = useSelector(state => state.optionsReducer.user);
   const userModalWindowVisible = useSelector(state => state.modalWindowReducer.userModalWindowVisability);
   const hightlitedRows = useSelector(state => state.hightlitedRowReducer.hightlitedRows);
   const visibleRows = useSelector(state => state.visibleRowsReducer.visibleRows);
