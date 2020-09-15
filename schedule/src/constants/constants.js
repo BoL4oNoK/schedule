@@ -70,7 +70,10 @@ const ADD_NEW_EVENT_BUTTON_NAME = 'Add new event';
 
 const TASKS_TYPES = ['codewars', 'test', 'deadline', 'jsTask', 'htmlTask', 'codeJam', 'interview'];
 
-const HIDE_BUTTON_NAME = 'Hide Rows';
+const HIDE_BUTTON_NAME = {
+  hideRowsButtonName: 'Hide Rows',
+  showRowsButtonName: 'Show All Rows',
+};
 
 export {
   GIT_LINK,

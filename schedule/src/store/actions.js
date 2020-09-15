@@ -37,5 +37,5 @@ export const actionCreator = {
   changePermanentEvent: (data) => ({ type: actionTypes.CHANGE_PERMANENT_EVENT, data }),
   changeHightlitedRowStatus: (data) => ({ type: actionTypes.CHANGE_ROWS_HIGTHLITED_STATUS, data }),
   changeHightlitedRows: (data) => ({ type: actionTypes.CHANGE_HIGHTLITED_ROWS, data }),
-  changeVisibleRow: (data) => ({ type: actionTypes.CHANGE_VISIBLE_ROWS, data }),
+  changeVisibleRows: (data) => ({ type: actionTypes.CHANGE_VISIBLE_ROWS, data }),
 }

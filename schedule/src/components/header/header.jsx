@@ -8,7 +8,7 @@ import StudentMentorSwitch from './student-mentor/student-mentor';
 import ImpairedVersion from './impaired-version/impaired-version';
 import TimezoneSelect from './timezone-select/timezone-select';
 import ViewTypeSelect from './view-type-select/view-type-select';
-import HideButton from './button-for-hide-rows/HideButton';
+import HideRowsButton from './hide-and-show-rows-button/HideRowsButton';
 
 import {
 	USERS,
@@ -35,7 +35,7 @@ export default function Header() {
 				<Col span={16}>
 					<ViewTypeSelect />
 					<TimezoneSelect />
-					<HideButton />
+					<HideRowsButton />
 				</Col>
 				<Col span={8}>
 					{ view === VIEWS_FOR_SCHEDULE.table ? <ColumnVisible /> : null }

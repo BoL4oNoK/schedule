@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { HIDE_BUTTON_NAME } from '../../../constants/constants';
 import { actionCreator } from '../../../store/actions';
 
-export default function HideButton() {
+export default function HideRowsButton() {
   const dispatch = useDispatch();
   const hightlitedRowStatus = useSelector(state => state.hightlitedRowReducer.hightlitedRowStatus);
   const hightlitedRows = useSelector(state => state.hightlitedRowReducer.hightlitedRows);
@@ -15,7 +15,7 @@ export default function HideButton() {
     hightlitedRows.forEach(element => {
       eventsCopy = eventsCopy.filter(el => el.id !== element.id);
     });
-    dispatch(actionCreator.changeVisibleRow(eventsCopy));
+    dispatch(actionCreator.changeVisibleRows(eventsCopy));
     dispatch(actionCreator.changeHightlitedRowStatus(false));
   } 
 
@@ -27,7 +27,7 @@ export default function HideButton() {
             type="dashed"
             onClick={onHideButtonClick}
           >
-            { HIDE_BUTTON_NAME }
+            { HIDE_BUTTON_NAME.hideRowsButtonName }
           </Button>
         : null
       }
