@@ -3,5 +3,14 @@
   justify-content: space-between;
 }
 .ant-modal {
-  width: 70% !important;
+  width: 60% !important;
+}
+.task h2 {
+  margin: 0;
+}
+.map-box {
+  margin-top: 20px;
+}
+.ant-divider-horizontal.ant-divider-with-text {
+  font-size: 17px;
 }

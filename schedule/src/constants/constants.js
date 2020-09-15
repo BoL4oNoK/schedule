@@ -38,7 +38,10 @@ const GIT_LINK = 'https://github.com/';
 const GIT_AVATAR = 'https://avatars.githubusercontent.com/';
 
 const userModal = {
-  MODAL_TITLE: 'Задание',
+  MODAL_TITLE: 'Task',
+  TASK_DESCTIPTION: 'Description task',
+  URL_DESCTIPTION: 'Description URL',
+  LOCATION: 'Location',
   ONLINE: 'Online',
   DATE_FORMAT: 'DD-MM-YYYY HH:mm',
 };
@@ -82,6 +85,11 @@ const HEADERS_FOR_TABLE_CSV = [
   { label: 'Comment', key: 'comment' },
 ];
 
+const HIDE_BUTTON_NAME = {
+  hideRowsButtonName: 'Hide Rows',
+  showRowsButtonName: 'Show All Rows',
+};
+
 export {
   GIT_LINK,
   urls,
@@ -96,5 +104,6 @@ export {
   ADD_NEW_EVENT_BUTTON_NAME,
   TASKS_TYPES,
   HEADERS_FOR_TABLE_CSV,
+  HIDE_BUTTON_NAME
 };
 
