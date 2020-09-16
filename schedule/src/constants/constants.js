@@ -78,6 +78,18 @@ const HIDE_BUTTON_NAME = {
   showRowsButtonName: 'Show All Rows',
 };
 
+const TIME_ZONES = [
+  { name: "Europe/London", value: "+01" },
+  { name: "Europe/Warsaw", value: "+02" },
+  { name: "Europe/Kiev", value: "+03" },
+  { name: "Europe/Minsk", value: "+03" },
+  { name: "Europe/Moscow", value: "+03" },
+  { name: "Europe/Volgograd", value: "+04" },
+  { name: "Asia/Yekaterinburg", value: "+05" },
+  { name: "Asia/Tashkent", value: "+05" },
+  { name: "Asia/Tbilisi", value: "+04" }
+]
+
 export {
   GIT_LINK,
   urls,
@@ -91,6 +103,7 @@ export {
   COLUMNS_TEXT,
   ADD_NEW_EVENT_BUTTON_NAME,
   TASKS_TYPES,
-  HIDE_BUTTON_NAME
+  HIDE_BUTTON_NAME, 
+  TIME_ZONES
 };
 
