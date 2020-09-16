@@ -31,9 +31,22 @@ export default function TaskColorCustomizer() {
 		}
 	})
 
+	const [colorData, setColorData] = useState({});
+
 	function generateTaskOptions() {
+		let background = '';
+		let text = '';
 		return TASKS_TYPES.map((task, i) => {
-			return <Option style={{ background: 'black' }} key={i} className={`task-type-${task}`} value={task} >{task}</Option>
+			if (colorData[task]) {
+				background = colorData[task][1].hex
+				text = colorData[task][0].hex
+				// background = '#fff'
+				// text = '#000'
+			} else {
+				background = '#fff'
+				text = '#000'
+			}
+			return <Option style={{ background: background, color: text }} key={i} className={`task-type-${task}`} value={task} >{task}</Option>
 		})
 	}
 
@@ -78,13 +91,43 @@ export default function TaskColorCustomizer() {
 	}
 
 	const handleChangeText = (color) => {
-		console.log(color);
 		setColorOnChange({
 			...colorOnChange,
 			text: color
 		})
 	}
 
+	const handleChangeCompleteText = (color) => {
+
+		if (!colorData[current] || !colorData[current].bg) {
+			setColorData({
+				...colorData,
+				[current]: [color, colorOnChange.bg]
+			})
+		} else {
+			setColorData({
+				...colorData,
+				[current]: [color, colorData[current].bg]
+			})
+		}
+		console.log(colorData);
+	}
+
+
+
+	const handleChangeCompleteBg = (color) => {
+		if (!colorData[current] || !colorData[current].text) {
+			setColorData({
+				...colorData,
+				[current]: [colorOnChange.text, color]
+			})
+		} else {
+			setColorData({
+				...colorData,
+				[current]: [colorData[current].text, color]
+			})
+		}
+	}
 
 	return (
 		<>
@@ -121,6 +164,7 @@ export default function TaskColorCustomizer() {
 								presetColors={[]}
 								color={colorOnChange.bg.rgb}
 								onChange={handleChangeBg}
+								onChangeComplete={handleChangeCompleteBg}
 							/>
 						</div> : null}
 				</div>
@@ -144,6 +188,7 @@ export default function TaskColorCustomizer() {
 								presetColors={[]}
 								color={colorOnChange.text.rgb}
 								onChange={handleChangeText}
+								onChangeComplete={handleChangeCompleteText}
 							/>
 						</div> : null}
 				</div>
