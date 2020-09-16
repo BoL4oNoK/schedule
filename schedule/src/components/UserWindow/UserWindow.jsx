@@ -69,7 +69,10 @@ const UserWindow = () => {
                   format={DATE_FORMAT}
                 />
               : <RangePicker
-                  value={[moment(event.currentDate + ' ' + event.currentTime, DATE_FORMAT), (!event.currentDeadlineDate) ? '' : moment(event.currentDeadlineDate + ' ' + event.currentDeadlineTime, DATE_FORMAT)]}
+                  value={[
+                    moment(event.currentDate + ' ' + event.currentTime, DATE_FORMAT),
+                    moment(event.currentDeadlineDate + ' ' + event.currentDeadlineTime, DATE_FORMAT)
+                  ]}
                   disabled
                   format={DATE_FORMAT}
                 />
