@@ -1,13 +1,6 @@
+const MAIN_URL = "https://rs-react-schedule.firebaseapp.com/api/team/7/";
 
-const MAIN_URL = 'https://rs-react-schedule.firebaseapp.com/api/team/7/';
-
-const mentorModal = {
-  eventTypes: {
-    web: "Web/JS",
-    android: "Android",
-    ios: "IOS",
-    qa: "QA",
-  },
+const MENTOR_MODAL = {
   timezone: {
     kaliningrad: "Kaliningrad (GMT +2)",
     warsaw: "Warsaw (GMT +3)",
@@ -24,7 +17,6 @@ const mentorModal = {
   },
 };
 
-
 const urls = {
   GET_EVENTS: `${MAIN_URL}events`,
   POST_EVENT: `${MAIN_URL}event`,
@@ -34,44 +26,75 @@ const urls = {
   USE_ORGANIZER_BY_ID: `${MAIN_URL}organizer/`,
 };
 
-const GIT_LINK = 'https://github.com/';
-const GIT_AVATAR = 'https://avatars.githubusercontent.com/';
+const GIT_LINK = "https://github.com/";
+const GIT_AVATAR = "https://avatars.githubusercontent.com/";
 
 const userModal = {
-  MODAL_TITLE: 'Task',
-  TASK_DESCTIPTION: 'Description task',
-  URL_DESCTIPTION: 'Description URL',
-  LOCATION: 'Location',
-  ONLINE: 'Online',
-  DATE_FORMAT: 'DD-MM-YYYY HH:mm',
+  MODAL_TITLE: "Task",
+  TASK_DESCTIPTION: "Description task",
+  URL_DESCTIPTION: "Description URL",
+  LOCATION: "Location",
+  ONLINE: "Online",
+  DATE_FORMAT: "DD-MM-YYYY HH:mm",
 };
 
 const map = {
-  KEY: '4a07d892-7c5e-4508-8c23-e8d6632ff3d9',
+  KEY: "4a07d892-7c5e-4508-8c23-e8d6632ff3d9",
 };
 
-const TABLE_COLUMNS = ['date', 'time', 'type', 'name', 'place', 'description', 'descriptionUrl', 'organizer', 'comment'];
+const TABLE_COLUMNS = [
+  "date",
+  "time",
+  "type",
+  "name",
+  "place",
+  "description",
+  "descriptionUrl",
+  "organizer",
+  "comment",
+];
 
 const COLUMNS_TEXT = {
-  descriptionLink: 'Description Link',
-  editButtonName: 'Edit',
-  onlineStatus: 'Online',
-}
+  descriptionLink: "Description Link",
+  editButtonName: "Edit",
+  onlineStatus: "Online",
+};
 
 const USERS = {
-  student: 'Student', 
-  mentor: 'Mentor'
+  student: "Student",
+  mentor: "Mentor",
 };
 
 const VIEWS_FOR_SCHEDULE = {
-  table: 'table',
-  list: 'list',
-  calendar: 'calendar'
-}
+  table: "table",
+  list: "list",
+  calendar: "calendar",
+};
 
-const ADD_NEW_EVENT_BUTTON_NAME = 'Add new event';
+const ADD_NEW_EVENT_BUTTON_NAME = "Add new event";
 
-const TASKS_TYPES = ['codewars', 'test', 'deadline', 'jsTask', 'htmlTask', 'codeJam', 'interview'];
+const TASKS_TYPES = [
+  "codewars",
+  "test",
+  "deadline",
+  "jsTask",
+  "htmlTask",
+  "codeJam",
+  "interview",
+  "selfeducation",
+];
+
+const TIME_ZONES = [
+  { name: "Europe/London", value: "+01" },
+  { name: "Europe/Warsaw", value: "+02" },
+  { name: "Europe/Kiev", value: "+03" },
+  { name: "Europe/Minsk", value: "+03" },
+  { name: "Europe/Moscow", value: "+03" },
+  { name: "Europe/Volgograd", value: "+04" },
+  { name: "Asia/Yekaterinburg", value: "+05" },
+  { name: "Asia/Tashkent", value: "+05" },
+  { name: "Asia/Tbilisi", value: "+04" },
+];
 
 const HIDE_BUTTON_NAME = {
   hideRowsButtonName: 'Hide Rows',
@@ -81,7 +104,7 @@ const HIDE_BUTTON_NAME = {
 export {
   GIT_LINK,
   urls,
-  mentorModal,
+  MENTOR_MODAL,
   GIT_AVATAR,
   userModal,
   map,
@@ -91,6 +114,6 @@ export {
   COLUMNS_TEXT,
   ADD_NEW_EVENT_BUTTON_NAME,
   TASKS_TYPES,
+  TIME_ZONES,
   HIDE_BUTTON_NAME
 };
-
