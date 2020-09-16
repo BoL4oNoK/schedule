@@ -90,6 +90,11 @@ const HIDE_BUTTON_NAME = {
   showRowsButtonName: 'Show All Rows',
 };
 
+const DOWNLOAD_BUTTONS_NAME = {
+  downloadCsvButtonName: 'Download CSV',
+  downloadPdfButtonName: 'Download PDF', 
+}
+
 export {
   GIT_LINK,
   urls,
@@ -104,6 +109,7 @@ export {
   ADD_NEW_EVENT_BUTTON_NAME,
   TASKS_TYPES,
   HEADERS_FOR_TABLE_CSV,
-  HIDE_BUTTON_NAME
+  HIDE_BUTTON_NAME,
+  DOWNLOAD_BUTTONS_NAME
 };
 

@@ -2,9 +2,12 @@ import React from 'react'
 import { CSVLink } from "react-csv";
 import { useSelector } from 'react-redux';
 import { Button } from 'antd';
-import { HEADERS_FOR_TABLE_CSV } from '../../constants/constants';
+import {
+  HEADERS_FOR_TABLE_CSV,
+  DOWNLOAD_BUTTONS_NAME
+} from '../../../constants/constants';
 
-export default function CsvLink() {
+export default function DownloadCsvTableButton() {
   const events = useSelector(state => state.eventsReducer.events);
 
   return (
@@ -15,7 +18,7 @@ export default function CsvLink() {
         target='_blank'
         headers={HEADERS_FOR_TABLE_CSV}
       >
-        Download Table
+        { DOWNLOAD_BUTTONS_NAME.downloadCsvButtonName }
       </CSVLink>
     </Button>
   );

@@ -7,7 +7,7 @@ import Header from "../header/header";
 import ScheduleList from "../list/ScheduleList";
 import UserWindow from "../UserWindow/UserWindow";
 import CalendarForSchedule from "../../components/calendar/calendar";
-import CsvLink from '../csv-link/CsvLink';
+import DonwloadButtonsContainer from '../download-buttons/DownloadButtons';
 
 import { VIEWS_FOR_SCHEDULE } from "../../constants/constants";
 
@@ -37,12 +37,12 @@ const Container = () => {
     <>
       <h1>Schedule</h1>
       <Header />
-      <div className="view-container">
+      <div className="view-container" id="schedule-view">
         <Preloader />
         {changeViewForm()}
       </div>
       <UserWindow />
-      <CsvLink />
+      <DonwloadButtonsContainer />
     </>
   );
 };
