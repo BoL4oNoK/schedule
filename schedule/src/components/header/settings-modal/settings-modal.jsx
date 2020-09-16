@@ -37,7 +37,9 @@ export default function SettingsModal() {
 				headerStyle={{ textTransform: "uppercase" }}
 			>
 				<TaskColorCustomizer />
+				<ShowRowsButton />
 			</Drawer>
+
 		</>
 	);
 

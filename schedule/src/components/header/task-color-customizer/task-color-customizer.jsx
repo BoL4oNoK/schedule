@@ -166,7 +166,6 @@ export default function TaskColorCustomizer() {
 
 	let currentBgColor = getCurrentColor().bg;
 	let currentTextColor = getCurrentColor().text;
-	console.log(currentBgColor, currentTextColor);
 
 	return (
 		<>
