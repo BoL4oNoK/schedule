@@ -61,11 +61,22 @@ const UserWindow = () => {
       >
         <Space align='center' className='task'>
           <h2>{event.name}</h2>
-          <RangePicker
-            value={[moment(event.currentDate + ' ' + event.currentTime, DATE_FORMAT), (!event.deadline) ? '' : moment(`${event.deadline} ${event.currentTime}`, DATE_FORMAT)]}
-            disabled
-            format={DATE_FORMAT}
-          />
+          {
+            !event.currentDeadlineDate
+              ? <DatePicker 
+                  value={moment(event.currentDate + ' ' + event.currentTime, DATE_FORMAT)}
+                  disabled
+                  format={DATE_FORMAT}
+                />
+              : <RangePicker
+                  value={[
+                    moment(event.currentDate + ' ' + event.currentTime, DATE_FORMAT),
+                    moment(event.currentDeadlineDate + ' ' + event.currentDeadlineTime, DATE_FORMAT)
+                  ]}
+                  disabled
+                  format={DATE_FORMAT}
+                />
+          }
         </Space>
         <Tag color={selectColor(event.type)} key={event.type}>
             {event.type}

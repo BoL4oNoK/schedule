@@ -7,6 +7,7 @@ import Header from "../header/header";
 import ScheduleList from "../list/ScheduleList";
 import UserWindow from "../UserWindow/UserWindow";
 import CalendarForSchedule from "../../components/calendar/calendar";
+import ModalWindowEdit from "./../ModalWindowEdit/ModalWindowEdit";
 import DonwloadButtonsContainer from '../download-buttons/DownloadButtons';
 
 import { VIEWS_FOR_SCHEDULE } from "../../constants/constants";
@@ -42,6 +43,7 @@ const Container = () => {
         {changeViewForm()}
       </div>
       <UserWindow />
+      <ModalWindowEdit />
       <DonwloadButtonsContainer />
     </>
   );
