@@ -36,8 +36,8 @@ export default function Header() {
 					<TimezoneSelect />
 				</Col>
 				<Col span={8}>
-					{ view === VIEWS_FOR_SCHEDULE.table ? <ColumnVisible /> : null }
-					{ user === USERS.mentor ?  <Button type="primary" ghost> { ADD_NEW_EVENT_BUTTON_NAME } </Button> : null }
+					{view === VIEWS_FOR_SCHEDULE.table ? <ColumnVisible /> : null}
+					{user === USERS.mentor ? <Button style={{ float: 'right', margin: '0 10px' }} type="primary" ghost> {ADD_NEW_EVENT_BUTTON_NAME} </Button> : null}
 				</Col>
 			</Row>
 		</>

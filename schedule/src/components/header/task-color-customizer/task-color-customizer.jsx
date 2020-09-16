@@ -40,8 +40,6 @@ export default function TaskColorCustomizer() {
 			if (colorData[task]) {
 				background = colorData[task][1].hex
 				text = colorData[task][0].hex
-				// background = '#fff'
-				// text = '#000'
 			} else {
 				background = '#fff'
 				text = '#000'
@@ -129,6 +127,38 @@ export default function TaskColorCustomizer() {
 		}
 	}
 
+	const getCurrentColor = () => {
+		let background = '';
+		let text = '';
+		if (colorData[current]) {
+
+			background = colorData[current][1].rgb
+			text = colorData[current][0].rgb
+		} else {
+			background = {
+				r: 255,
+				g: 255,
+				b: 255,
+				a: 1
+			}
+			text = {
+				r: 0,
+				g: 0,
+				b: 0,
+				a: 1
+			}
+		}
+
+		const backgroundColor = `rgba(${background.r}, ${background.g}, ${background.b}, ${background.a})`;
+		const textColor = `rgba(${text.r}, ${text.g}, ${text.b}, ${text.a})`;
+
+		return { bg: backgroundColor, text: textColor }
+	}
+
+	let currentBgColor = getCurrentColor().bg;
+	let currentTextColor = getCurrentColor().text;
+	console.log(currentBgColor, currentTextColor);
+
 	return (
 		<>
 			<Divider
@@ -151,8 +181,7 @@ export default function TaskColorCustomizer() {
 						<div
 							className="task-type-color color"
 							style={{
-								background: colorOnChange.bg.hex,
-								opacity: colorOnChange.bg.rgb.a
+								background: currentBgColor
 							}}
 						></div>
 					</div>
@@ -175,8 +204,7 @@ export default function TaskColorCustomizer() {
 						<div
 							className="task-type-color color"
 							style={{
-								background: colorOnChange.text.hex,
-								opacity: colorOnChange.text.rgb.a
+								background: currentTextColor
 							}}
 						></div>
 					</div>
@@ -194,6 +222,11 @@ export default function TaskColorCustomizer() {
 				</div>
 
 			</div>
+			<div className="taskExample" style={{
+				background: `${currentBgColor}`,
+				color: `${currentTextColor}`
+			}}>Task example</div>
+			<Divider dashed />
 		</>
 	)
 }

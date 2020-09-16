@@ -1,7 +1,3 @@
-/* .task-color-selector {
-	display: flex;
-} */
-
 .color-select-container {
 	display: flex;
 	justify-content: space-between;
@@ -39,4 +35,13 @@
 	height: 26px;
 	margin: 2px;
 	border-radius: 2px;
+}
+
+.taskExample {
+	height: 35px;
+	line-height: 30px;
+	text-align: center;
+	border: 1px solid #d9d9d9;
+	border-radius: 2px;
+	font-size: 16px;
 }
