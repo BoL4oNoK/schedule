@@ -3,10 +3,18 @@ import { Divider, Select } from "antd";
 import './task-color-customizer.css'
 import { TASKS_TYPES } from '../../../constants/constants';
 import { SketchPicker } from 'react-color';
+import { useDispatch, useSelector } from 'react-redux';
+import { actionCreator } from '../../../store/actions';
 
 const { Option } = Select;
 
 export default function TaskColorCustomizer() {
+	const dispatch = useDispatch();
+	const color = useSelector(state => state.optionsReducer.color);
+	const changeColor = (colorsObj) => {
+		dispatch(actionCreator.changeColor(colorsObj));
+		dispatch(actionCreator.seveOptions())
+	}
 
 	const [current, setCurrent] = useState(TASKS_TYPES[0]);
 	const [displayColorPicker, setDisplayColorPicker] = useState({ text: false, bg: false });
@@ -108,7 +116,7 @@ export default function TaskColorCustomizer() {
 				[current]: [color, colorData[current].bg]
 			})
 		}
-		console.log(colorData);
+		changeColor(colorData)
 	}
 
 
@@ -125,6 +133,7 @@ export default function TaskColorCustomizer() {
 				[current]: [colorData[current].text, color]
 			})
 		}
+		changeColor(colorData)
 	}
 
 	const getCurrentColor = () => {
