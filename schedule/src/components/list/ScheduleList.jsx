@@ -70,7 +70,7 @@ export default function ScheduleList() {
               <Button
                 type='text'
                 onClick={() => {
-                  const selectedEvent = (item.eventIndex) ? data.find(el => el.id === item.id) : item;
+                  const selectedEvent = (item.customEvent) ? data.find(el => el.id === item.id) : item;
                   dispatch(actionCreator.changePermanentEvent(selectedEvent));
                   dispatch(actionCreator.changeUserModalWindowVisible(!modalWindowVisible));
                 }}

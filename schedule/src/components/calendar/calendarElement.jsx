@@ -11,7 +11,7 @@ export default function CalendarElement ({ event, data }) {
   const badgeColor = selectColor(event.type);
   const badgeText = `${event.currentTime} ${event.name}`;
   const badgeTitle = `${event.type.toUpperCase()}: ${event.name}`;
-  const eventObj = (event.eventIndex) ? data.find(el => el.id === event.id) : event;
+  const eventObj = (event.customEvent) ? data.find(el => el.id === event.id) : event;
   return (
     <li
       key={event.eventId}

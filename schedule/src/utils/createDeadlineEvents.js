@@ -10,7 +10,7 @@ const createDeadlineEvents = (events) => {
             eventsDeadlines.push({
                 ...eventElement,
                 eventId: eventsLength + index,
-                eventIndex: index,
+                customEvent: true,
                 dateTime: eventElement.deadlineDateTime,
                 type: "deadline",
                 deadlineDateTime: null,
