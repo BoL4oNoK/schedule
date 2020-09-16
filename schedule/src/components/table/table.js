@@ -48,7 +48,8 @@ export default function TableForSchedule() {
           dispatch(actionCreator.changeHightlitedRows(hightlitedRows.filter((el) => el.id !== record.id)));
         }
         if (event.target.classList.contains('table-event-name') || event.target.parentNode.classList.contains('table-event-name')) {
-          dispatch(actionCreator.changePermanentEvent(events[rowIndex]));
+          const selectedEvent = (record.customEvent) ? events.find(el => el.id === record.id) : record;
+          dispatch(actionCreator.changePermanentEvent(selectedEvent));
           dispatch(actionCreator.changeUserModalWindowVisible(!userModalWindowVisible));
         }
       },
