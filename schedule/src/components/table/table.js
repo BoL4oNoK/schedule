@@ -1,4 +1,3 @@
-
 import React from "react";
 import "antd/dist/antd.css";
 import { columns, mentorColumn } from "./columns/columns";
@@ -11,94 +10,13 @@ import { Table } from "antd";
 export default function TableForSchedule() {
   const dispatch = useDispatch();
   const events = useSelector((state) => state.eventsReducer.events);
-  const selectedColumns = useSelector(
-    (state) => state.columnVisibleReducer.tableColumnsVisible
-  );
-  const userView = useSelector((state) => state.userReducer.user);
-  const userModalWindowVisible = useSelector(
-    (state) => state.modalWindowReducer.userModalWindowVisability
-  );
+  const selectedColumns = useSelector((state) => state.optionsReducer.tableColumnsVisible);
+  const userView = useSelector((state) => state.optionsReducer.user);
+  const userModalWindowVisible = useSelector((state) => state.modalWindowReducer.userModalWindowVisability);
+  const hightlitedRows = useSelector((state) => state.hightlitedRowReducer.hightlitedRows);
+  const visibleRows = useSelector((state) => state.visibleRowsReducer.visibleRows);
+  const editModalWindowVisible = useSelector((state) => state.modalWindowReducer.editModalWindowVisability);
 
-  const editModalWindowVisible = useSelector(
-    (state) => state.modalWindowReducer.editModalWindowVisability
-  );
-
-  let rightColumns = selectedColumns.map((type) => {
-    return columns
-      .map((el) => {
-        if (el.key.toLowerCase().includes(type.toLowerCase())) {
-          return el;
-        } else {
-          return null;
-        }
-      })
-      .find((el) => el);
-  });
-
-  if (userView === USERS.mentor) {
-    rightColumns.push(mentorColumn);
-  }
-
-  function tableOnRow(record, rowIndex) {
-    return {
-      onClick: (event) => {
-        if (
-          event.target.classList.contains("table-event-name") ||
-          event.target.parentNode.classList.contains("table-event-name")
-        ) {
-          dispatch(actionCreator.changePermanentEvent(events[rowIndex]));
-          dispatch(
-            actionCreator.changeUserModalWindowVisible(!userModalWindowVisible)
-          );
-        } else if (event.target.textContent === "Edit") {
-          dispatch(actionCreator.changePermanentEvent(events[rowIndex]));
-          dispatch(
-            actionCreator.changeEditModalWindowVisible(!editModalWindowVisible)
-          );
-        }
-      },
-    };
-  }
-
-  return (
-    <>
-      <Table
-        onRow={tableOnRow}
-        rowKey="id"
-        columns={rightColumns}
-        dataSource={events}
-        size="small"
-        scroll={{ x: 1400 }}
-        pagination={{ pageSize: 10 }}
-        sticky
-      />
-    </>
-  );
-}
-=======
-import React from 'react';
-import 'antd/dist/antd.css';
-import {
-  columns,
-  mentorColumn
-} from './columns/columns';
-import { useSelector, useDispatch } from 'react-redux';
-import { USERS } from '../../constants/constants';
-import { actionCreator } from '../../store/actions';
-
-import {
-  Table,
-} from 'antd';
-
-export default function TableForSchedule() {
-  const dispatch = useDispatch();
-  const events = useSelector(state => state.eventsReducer.events);
-  const selectedColumns = useSelector(state => state.optionsReducer.tableColumnsVisible);
-  const userView = useSelector(state => state.optionsReducer.user);
-  const userModalWindowVisible = useSelector(state => state.modalWindowReducer.userModalWindowVisability);
-  const hightlitedRows = useSelector(state => state.hightlitedRowReducer.hightlitedRows);
-  const visibleRows = useSelector(state => state.visibleRowsReducer.visibleRows);
-  
   let rightColumns = selectedColumns.map((type) => {
     return columns.map(el => {
       if (el.key.toLowerCase().includes(type.toLowerCase())) {
@@ -129,9 +47,13 @@ export default function TableForSchedule() {
           const selectedEvent = (record.customEvent) ? events.find(el => el.id === record.id) : record;
           dispatch(actionCreator.changePermanentEvent(selectedEvent));
           dispatch(actionCreator.changeUserModalWindowVisible(!userModalWindowVisible));
+        } else if (event.target.textContent === "Edit") {
+          const selectedEvent = (record.customEvent) ? events.find(el => el.id === record.id) : record;
+          dispatch(actionCreator.changePermanentEvent(selectedEvent));
+          dispatch(actionCreator.changeEditModalWindowVisible(!editModalWindowVisible));
         }
       },
-    }
+    };
   }
 
   return (
@@ -149,4 +71,3 @@ export default function TableForSchedule() {
     </>
   );
 }
-
