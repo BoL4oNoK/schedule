@@ -39,7 +39,7 @@ export default function TaskColorCustomizer() {
 		}
 	})
 
-	const [colorData, setColorData] = useState({});
+	const [colorData, setColorData] = useState(color || {});
 
 	function generateTaskOptions() {
 		let background = '';
