@@ -7,31 +7,29 @@ import Header from "../header/header";
 import ScheduleList from "../list/ScheduleList";
 import UserWindow from "../UserWindow/UserWindow";
 import CalendarForSchedule from "../../components/calendar/calendar";
+import ModalWindowEdit from "./../ModalWindowEdit/ModalWindowEdit";
 
 import { VIEWS_FOR_SCHEDULE } from "../../constants/constants";
 
 const { calendar, list } = VIEWS_FOR_SCHEDULE;
 
 const Container = () => {
-  const view = useSelector((state) => state.viewReducer.viewStatus);
+  const view = useSelector((state) => state.optionsReducer.viewStatus);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(actionCreator.initEvents());
     dispatch(actionCreator.initOptions());
-  });
+  }, []);
 
   function changeViewForm() {
     switch (view) {
       case list:
         return <ScheduleList />;
-        break;
       case calendar:
         return <CalendarForSchedule />;
-        break;
       default:
         return <TableForSchedule />;
-        break;
     }
   }
 
@@ -44,6 +42,7 @@ const Container = () => {
         {changeViewForm()}
       </div>
       <UserWindow />
+      <ModalWindowEdit />
     </>
   );
 };

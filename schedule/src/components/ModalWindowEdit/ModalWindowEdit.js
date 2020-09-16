@@ -1,16 +1,62 @@
 import React, { useState, useRef } from "react";
-import { Row, Col, Select, Button, Input, Checkbox, DatePicker } from "antd";
+import {
+  Row,
+  Col,
+  Select,
+  Button,
+  Input,
+  Checkbox,
+  DatePicker,
+  Modal,
+} from "antd";
 import "antd/dist/antd.css";
 import "./ModalWindow.scss";
-import { mentorModal } from "./../../constants/constants";
+import {
+  MENTOR_MODAL,
+  TASKS_TYPES,
+  TIME_ZONES,
+  userModal,
+} from "./../../constants/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { actionCreator } from "../../store/actions";
+import moment from "moment";
+
+function getTasks(TASKS_TYPES) {
+  return TASKS_TYPES.map((el) => {
+    return (
+      <Option value={el} key={el}>
+        {el}
+      </Option>
+    );
+  });
+}
+
+function getTimeZones(TIME_ZONES) {
+  return TIME_ZONES.map((el) => {
+    return (
+      <Option value={el.name} key={el.name}>
+        {el.name}({el.value})
+      </Option>
+    );
+  });
+}
+
+const { Option, OptGroup } = Select;
+const { TextArea } = Input;
+const { RangePicker } = DatePicker;
+
+// Edit modal window component
 
 const ModalWindowEdit = () => {
-  const { Option, OptGroup } = Select;
-  const { TextArea } = Input;
-  const { RangePicker } = DatePicker;
-
+  const { DATE_FORMAT } = userModal;
+  const dispatch = useDispatch();
   const [isOfflineEvent, setIsOfflineEvent] = useState(false);
-  const feedbackRef = useRef();
+  const visible = useSelector(
+    (state) => state.modalWindowReducer.editModalWindowVisability
+  );
+  const permanentEvent = useSelector((state) => {
+    return state.permanentEventReducer.permanentEvent;
+  });
 
   const onEventLocationChange = (e) => {
     if (e === "online") {
@@ -20,114 +66,127 @@ const ModalWindowEdit = () => {
     }
   };
 
-  return (
-    <div className="wrapper-modal-edit">
-      <h2 className="wrapper-modal-edit__header">Edit event mode</h2>
-      <Button shape="circle" className="button-close">
-        &times;
-      </Button>
+  const handleCancel = () => {
+    dispatch(actionCreator.changeEditModalWindowVisible(!visible));
+  };
 
-      <Row gutter={16} style={{ marginTop: "1rem" }}>
-        <Col span={6} style={{ marginLeft: "2rem" }}>
-          <Input placeholder="Task Name" />
-        </Col>
-        <Col span={6}>
-          <Select
-            defaultValue="Task"
-            style={{ width: 200 }}
-            // onChange={handleChange}
-          >
-            <OptGroup label="TaskTitle">
-              <Option value="web">{mentorModal.eventTypes.web}</Option>
-              <Option value="android">{mentorModal.eventTypes.android}</Option>
-              <Option value="ios">{mentorModal.eventTypes.ios}</Option>
-              <Option value="qa">{mentorModal.eventTypes.qa}</Option>
-            </OptGroup>
-          </Select>
-        </Col>
-      </Row>
+  if (permanentEvent) {
+    console.log(permanentEvent);
+    return (
+      <Modal visible={visible} onCancel={handleCancel}>
+        <h2 className="wrapper-modal-edit__header">Edit event mode</h2>
 
-      <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
-        <TextArea rows={5} placeholder="Task Description" />
-      </Col>
+        <Row gutter={16} style={{ marginTop: "1rem" }}>
+          <Col span={6} style={{ marginLeft: "2rem" }}>
+            <Input placeholder="Task Name" value={permanentEvent.name} />
+          </Col>
+          <Col span={6}>
+            <Select
+              value={permanentEvent.type}
+              style={{ width: 200 }}
+              // onChange={handleChange}
+            >
+              <OptGroup label="TaskTitle">{getTasks(TASKS_TYPES)}</OptGroup>
+            </Select>
+          </Col>
+        </Row>
 
-      <Row style={{ marginTop: "1rem" }}>
-        <Col span={8} style={{ marginLeft: "2rem" }}>
-          <Select
-            defaultValue="Minsk +3"
-            style={{ width: 200 }}
-            // onChange={handleChange}
-          >
-            <OptGroup label="Timezones">
-              <Option value="minsk">{mentorModal.timezone.minsk}</Option>
-              <Option value="warsaw">{mentorModal.timezone.warsaw}</Option>
-              <Option value="kaliningrad">
-                {mentorModal.timezone.kaliningrad}
-              </Option>
-            </OptGroup>
-          </Select>
-        </Col>
-        <Col span={14}>
-          <RangePicker
-            style={{ marginLeft: "2rem" }}
-            showTime={{
-              hideDisabledOptions: true,
-            }}
-            format="YYYY-MM-DD HH:mm"
-            // onChange={onChange}
+        <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
+          <TextArea
+            rows={5}
+            placeholder="Task Description"
+            value={permanentEvent.description}
           />
         </Col>
-      </Row>
 
-      <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
-        <Input placeholder="Additional url" />
-      </Col>
-
-      <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
-        <Checkbox
-        // onchange={onchange}
-        >
-          Checkbox for feedback
-        </Checkbox>
-      </Col>
-
-      <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
-        <Select
-          defaultValue="Online/Offline"
-          style={{ width: 200 }}
-          onChange={onEventLocationChange}
-        >
-          <OptGroup label="Place">
-            <Option value="online">{mentorModal.isOnline.online}</Option>
-            <Option value="offline">{mentorModal.isOnline.offline}</Option>
-          </OptGroup>
-        </Select>
-
-        {isOfflineEvent && (
-          <Col span={12} rer={feedbackRef} style={{ marginTop: "1rem" }}>
-            <Input placeholder="Town" />
-            <Select defaultValue="Type of street" style={{ width: 200 }}>
-              <OptGroup label="Type">
-                <Option value="online">{mentorModal.streetType.avenue}</Option>
-                <Option value="offline">{mentorModal.streetType.street}</Option>
-                <Option value="offline">{mentorModal.streetType.lane}</Option>
-              </OptGroup>
+        <Row style={{ marginTop: "1rem" }}>
+          <Col span={8} style={{ marginLeft: "2rem" }}>
+            <Select
+              defaultValue={"Timezone" + " " + permanentEvent.timeZone}
+              style={{ width: 200 }}
+              // onChange={handleChange}
+            >
+              <OptGroup label="Timezones">{getTimeZones(TIME_ZONES)}</OptGroup>
             </Select>
-            <Input placeholder="Street" />
-            <Input placeholder="№ of house" />
           </Col>
-        )}
-      </Col>
+          <Col span={14}>
+            <RangePicker
+              style={{ marginLeft: "2rem" }}
+              showTime={{
+                hideDisabledOptions: true,
+              }}
+              format={DATE_FORMAT}
+              value={[
+                moment(
+                  permanentEvent.currentDate + " " + permanentEvent.currentTime,
+                  DATE_FORMAT
+                ),
+                !permanentEvent.deadline
+                  ? ""
+                  : moment(
+                      `${permanentEvent.deadline} ${permanentEvent.currentTime}`,
+                      DATE_FORMAT
+                    ),
+              ]}
+            />
+          </Col>
+        </Row>
 
-      <Row style={{ textAlign: "right" }}>
-        <Col span={11}></Col>
-        <Col span={12}>
-          <Button style={{ marginRight: "1rem" }}>Save</Button>
-          <Button>Cancel</Button>
+        <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
+          <Input
+            placeholder="Additional url"
+            value={permanentEvent.descriptionUrl}
+          />
         </Col>
-      </Row>
-    </div>
-  );
+
+        <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
+          <Checkbox
+          // onchange={onchange}
+          >
+            Checkbox for feedback
+          </Checkbox>
+        </Col>
+
+        <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
+          <Select
+            defaultValue="Online/Offline"
+            style={{ width: 200 }}
+            onChange={onEventLocationChange}
+          >
+            <OptGroup label="Place">
+              <Option value="online">{MENTOR_MODAL.isOnline.online}</Option>
+              <Option value="offline">{MENTOR_MODAL.isOnline.offline}</Option>
+            </OptGroup>
+          </Select>
+
+          {isOfflineEvent && (
+            <Col span={12} style={{ marginTop: "1rem" }}>
+              <Input placeholder="Town" style={{ marginBottom: "5px" }} />
+              <Select
+                defaultValue="Type of street"
+                style={{ width: 200, marginBottom: "5px" }}
+              >
+                <OptGroup label="Type">
+                  <Option value="online">
+                    {MENTOR_MODAL.streetType.avenue}
+                  </Option>
+                  <Option value="offline">
+                    {MENTOR_MODAL.streetType.street}
+                  </Option>
+                  <Option value="offline">
+                    {MENTOR_MODAL.streetType.lane}
+                  </Option>
+                </OptGroup>
+              </Select>
+              <Input placeholder="Street" style={{ marginBottom: "5px" }} />
+              <Input placeholder="№ of house" />
+            </Col>
+          )}
+        </Col>
+      </Modal>
+    );
+  }
+  return null;
 };
 
 export default ModalWindowEdit;

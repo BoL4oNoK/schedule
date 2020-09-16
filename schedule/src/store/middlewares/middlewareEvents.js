@@ -1,6 +1,7 @@
 import { actionTypes } from '../actions';
 import { getEvents, postEvent, updateEventById, deleteEventById } from '../../services/services';
 import addCurrentTimeToEvents from '../addCurrenttimeToEvents';
+import createDeadlineEvents from '../../utils/createDeadlineEvents';
 
 
 const middlewareEvents = (store) => (next) => async (action) => {
@@ -11,8 +12,8 @@ const middlewareEvents = (store) => (next) => async (action) => {
         store.dispatch({
           type: actionTypes.GET_EVENTS_SUCCESS,
           data: addCurrentTimeToEvents(
-            events,
-            store.getState().timeZoneReducer.timeZone
+            createDeadlineEvents(events),
+            store.getState().optionsReducer.timeZone
           ),
         });
       } catch (e) {
@@ -28,7 +29,7 @@ const middlewareEvents = (store) => (next) => async (action) => {
           type: actionTypes.GET_EVENTS_SUCCESS,
           data: addCurrentTimeToEvents(
             events,
-            store.getState().timeZoneReducer.timeZone
+            store.getState().optionsReducer.timeZone
           ),
         });
       } catch (e) {
@@ -43,7 +44,7 @@ const middlewareEvents = (store) => (next) => async (action) => {
           type: actionTypes.GET_EVENTS_SUCCESS,
           data: addCurrentTimeToEvents(
             events,
-            store.getState().timeZoneReducer.timeZone
+            store.getState().optionsReducer.timeZone
           ),
         });
       } catch (e) {

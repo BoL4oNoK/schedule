@@ -1,11 +1,11 @@
-import { actionTypes } from '../actions';
+import { actionTypes } from "../actions";
 
 const initialState = {
   userModalWindowVisability: false,
-  editModalWindowVisability: false
+  editModalWindowVisability: false,
 };
 
-export default function modalWindowReducer (state = initialState, action) {
+export default function modalWindowReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.CHANGE_USER_MODAL_WINDOW_VISIBLE: {
       return {
@@ -19,6 +19,7 @@ export default function modalWindowReducer (state = initialState, action) {
         editModalWindowVisability: action.data,
       };
     }
-    default: return state;
+    default:
+      return state;
   }
 }

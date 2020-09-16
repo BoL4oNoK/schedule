@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { Drawer, Button, Space } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
 import TaskColorCustomizer from '../task-color-customizer/task-color-customizer';
+import ShowRowsButton from '../hide-and-show-rows-button/ShowRowsButton';
+
 export default function SettingsModal() {
 	const [visible, setVisible] = useState('');
 
