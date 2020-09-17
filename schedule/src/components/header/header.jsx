@@ -23,10 +23,10 @@ export default function Header() {
 	return (
 		<>
 			<Row justify="space-between">
-				<Col span={8}>
+				<Col span={12}>
 					<ImpairedVersion />
 				</Col>
-				<Col span={8} style={{ float: 'right' }}>
+				<Col span={12} style={{ float: 'right' }}>
 					<SettingsModal />
 					<StudentMentorSwitch />
 				</Col>
