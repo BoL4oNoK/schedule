@@ -6,10 +6,11 @@ import { actionCreator } from '../../../store/actions';
 
 export default function ShowRowsButton() {
   const dispatch = useDispatch();
-  const visibleRows = useSelector(state => state.visibleRowsReducer.visibleRows);
+  const visibleRows = useSelector(state => state.optionsReducer.visibleRows);
 
   function onHideButtonClick() {
     dispatch(actionCreator.changeVisibleRows(null));
+    dispatch(actionCreator.saveOptions());
   } 
 
   return (
