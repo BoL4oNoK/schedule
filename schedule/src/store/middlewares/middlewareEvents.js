@@ -1,6 +1,7 @@
 import { actionTypes } from '../actions';
 import { getEvents, postEvent, updateEventById, deleteEventById } from '../../services/services';
 import addCurrentTimeToEvents from '../addCurrenttimeToEvents';
+import createDeadlineEvents from '../../utils/createDeadlineEvents';
 
 const middlewareEvents = (store) => (next) => async (action) => {
   switch (action.type) {
@@ -10,7 +11,7 @@ const middlewareEvents = (store) => (next) => async (action) => {
         store.dispatch({
           type: actionTypes.GET_EVENTS_SUCCESS,
           data: addCurrentTimeToEvents(
-            events,
+            createDeadlineEvents(events),
             store.getState().optionsReducer.timeZone
           ),
         });

@@ -11,7 +11,7 @@ export default function StudentMentorSwitch() {
   console.log(user)
   const onClick = (e) => {
     dispatch(actionCreator.changeUser(e.target.value));
-    dispatch(actionCreator.seveOptions());
+    dispatch(actionCreator.saveOptions());
   }
 	return (
 		<Radio.Group
