@@ -1,8 +1,12 @@
+import { changeConfirmLocale } from 'antd/lib/modal/locale';
+import { TIME_ZONES } from '../constants/constants';
+
 const addCurrentTimeToEvents = (events, appTimeZone) => events.map(event => {
-  const currentDateObj = new Date(+new Date(event.dateTime) + (+appTimeZone - +event.timeZone) * 3600 * 1000);
+  const appTimeZoneValue = TIME_ZONES.find(el => el.name === appTimeZone).value;
+  const currentDateObj = new Date(+new Date(event.dateTime) + (+appTimeZoneValue - +event.timeZone) * 3600 * 1000);
   let deadlineObj = {};
   if (event.deadlineDateTime) {
-    const currentDeadlineDateObj = new Date(+new Date(event.deadlineDateTime) + (+appTimeZone - +event.timeZone) * 3600 * 1000);
+    const currentDeadlineDateObj = new Date(+new Date(event.deadlineDateTime) + (+appTimeZoneValue - +event.timeZone) * 3600 * 1000);
     const [deadlineDate, deadlineTime] = currentDeadlineDateObj.toLocaleString().slice(0,-3).split(', ');
     deadlineObj = {currentDeadlineDateObj, currentDeadlineDate: deadlineDate, currentDeadlineTime: deadlineTime};
   }
