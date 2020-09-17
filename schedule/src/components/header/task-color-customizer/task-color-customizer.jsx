@@ -13,7 +13,7 @@ export default function TaskColorCustomizer() {
 	const color = useSelector(state => state.optionsReducer.color);
 	const changeColor = (colorsObj) => {
 		dispatch(actionCreator.changeColor(colorsObj));
-		dispatch(actionCreator.seveOptions())
+		dispatch(actionCreator.saveOptions())
 	}
 
 	const [current, setCurrent] = useState(TASKS_TYPES[0]);
@@ -46,8 +46,10 @@ export default function TaskColorCustomizer() {
 		let text = '';
 		return TASKS_TYPES.map((task, i) => {
 			if (colorData[task]) {
-				background = colorData[task][1].hex
-				text = colorData[task][0].hex
+				const colorBg = colorData[task][1].rgb;
+				const colorText = colorData[task][0].rgb;
+				background = `rgba(${colorBg.r}, ${colorBg.g}, ${colorBg.b}, ${colorBg.a})`;
+				text = `rgba(${colorText.r}, ${colorText.g}, ${colorText.b}, ${colorText.a})`;
 			} else {
 				background = '#fff'
 				text = '#000'
