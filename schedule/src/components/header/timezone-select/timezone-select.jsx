@@ -1,20 +1,24 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Select } from "antd";
+import { TIME_ZONES } from '../../../constants/constants';
+import { actionCreator } from '../../../store/actions';
 
 const { Option } = Select;
 
 export default function TimezoneSelect() {
+  const timeZone = useSelector(state => state.optionsReducer.timeZone);
+  const dispatch = useDispatch();
+console.log(timeZone)
+
+  const onChange = (e) => {
+    dispatch(actionCreator.setTimeZone(e));
+    dispatch(actionCreator.saveOptions());
+  }
+
 	return (
-		<Select defaultValue="minsk" style={{ width: 175 }}>
-			<Option value="london">Europe/London</Option>
-			<Option value="warshaw">Europe/Warshaw</Option>
-			<Option value="kyiv">Europe/Kyiv</Option>
-			<Option value="minsk">Europe/Minsk</Option>
-			<Option value="moscow">Europe/Moscow</Option>
-			<Option value="volgograd">Europe/Volgograd</Option>
-			<Option value="yekaterinburg">Europe/Yekaterinburg</Option>
-			<Option value="tashkent">Asia/Tashkent</Option>
-			<Option value="tbilisi">Asia/Tbilisi</Option>
+		<Select value={timeZone} style={{ width: 175 }} onChange={onChange}>
+      {TIME_ZONES.map(zone => <Option value={zone.name} key={zone.name}>{zone.name}</Option>)}
 		</Select>
 	)
 }

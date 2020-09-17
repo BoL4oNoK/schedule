@@ -3,7 +3,6 @@ import { getEvents, postEvent, updateEventById, deleteEventById } from '../../se
 import addCurrentTimeToEvents from '../addCurrenttimeToEvents';
 import createDeadlineEvents from '../../utils/createDeadlineEvents';
 
-
 const middlewareEvents = (store) => (next) => async (action) => {
   switch (action.type) {
     case actionTypes.INIT_EVENTS:

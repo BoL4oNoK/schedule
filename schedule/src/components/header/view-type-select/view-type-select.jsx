@@ -19,7 +19,7 @@ export default function ViewTypeSelect() {
 
 	const changeView = (value) => {
     dispatch(actionCreator.changeView(value));
-    dispatch(actionCreator.seveOptions());
+    dispatch(actionCreator.saveOptions());
 	}
 
 	return (
