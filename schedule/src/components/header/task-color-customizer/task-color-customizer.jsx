@@ -48,7 +48,6 @@ export default function TaskColorCustomizer() {
 			if (colorData[task]) {
 				const colorBg = colorData[task][1].rgb;
 				const colorText = colorData[task][0].rgb;
-				console.log(colorBg);
 				background = `rgba(${colorBg.r}, ${colorBg.g}, ${colorBg.b}, ${colorBg.a})`;
 				text = `rgba(${colorText.r}, ${colorText.g}, ${colorText.b}, ${colorText.a})`;
 			} else {
