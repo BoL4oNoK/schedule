@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Row, Col, Select, Input, Checkbox, DatePicker, Modal } from "antd";
 import "antd/dist/antd.css";
 import "./ModalWindow.scss";
@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { actionCreator } from "../../store/actions";
 import moment from "moment";
 import { getTasks, getTimeZones } from "./../../utils/editWindowUtils";
+import OfflineComponent from "./OfflineComponent";
 
 const { Option, OptGroup } = Select;
 const { TextArea } = Input;
@@ -22,7 +23,6 @@ const { RangePicker } = DatePicker;
 const ModalWindowEdit = () => {
   const { DATE_FORMAT } = userModal;
   const dispatch = useDispatch();
-  const [isOfflineEvent, setIsOfflineEvent] = useState(false);
 
   const [stateEditWindow, setStateEditWindow] = useState({
     taskName: "",
@@ -33,7 +33,7 @@ const ModalWindowEdit = () => {
     dateDeadline: "",
     taskUrl: "",
     feedBackCheckBox: false,
-    isOnline: "",
+    isOline: true,
   });
 
   const visible = useSelector(
@@ -43,16 +43,22 @@ const ModalWindowEdit = () => {
     return state.permanentEventReducer.permanentEvent;
   });
 
-  const onEventLocationChange = (e) => {
-    if (e === "online") {
-      setIsOfflineEvent(false);
-    } else {
-      setIsOfflineEvent(true);
-    }
-  };
-
   const handleCancel = () => {
     dispatch(actionCreator.changeEditModalWindowVisible(!visible));
+  };
+
+  const onEventLocationChange = (e) => {
+    if (e === "online") {
+      setStateEditWindow({
+        ...stateEditWindow,
+        isOnline: false,
+      });
+    } else {
+      setStateEditWindow({
+        ...stateEditWindow,
+        isOnline: true,
+      });
+    }
   };
 
   const onEventChange = (e) => {
@@ -63,7 +69,6 @@ const ModalWindowEdit = () => {
   };
 
   const onSelectTypeChange = (e) => {
-    console.log(e);
     setStateEditWindow({
       ...stateEditWindow,
       typeName: e,
@@ -71,11 +76,21 @@ const ModalWindowEdit = () => {
   };
 
   const onTimeZoneChange = (e) => {
+    setStateEditWindow({
+      ...stateEditWindow,
+      timeZone: e,
+    });
+  };
+
+  const onCheckboxChange = (e) => {
+    setStateEditWindow({
+      ...stateEditWindow,
+      feedBackCheckBox: e.target.checked,
+    });
+  };
+
+  const onDateChange = (e) => {
     console.log(e);
-    // setStateEditWindow({
-    //   ...stateEditWindow,
-    //   tymeZone: e,
-    // });
   };
 
   if (permanentEvent) {
@@ -164,6 +179,7 @@ const ModalWindowEdit = () => {
                       DATE_FORMAT
                     ),
               ]}
+              onChange={onDateChange}
             />
           </Col>
         </Row>
@@ -171,13 +187,20 @@ const ModalWindowEdit = () => {
         <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
           <Input
             placeholder="Additional url"
-            value={permanentEvent.descriptionUrl}
+            attr="taskUrl"
+            value={
+              stateEditWindow.taskUrl
+                ? stateEditWindow.taskUrl
+                : permanentEvent.descriptionUrl
+            }
+            onChange={onEventChange}
           />
         </Col>
 
         <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
           <Checkbox
-          // onchange={onchange}
+            onChange={onCheckboxChange}
+            checked={stateEditWindow.feedBackCheckBox}
           >
             Checkbox for feedback
           </Checkbox>
@@ -195,26 +218,8 @@ const ModalWindowEdit = () => {
             </OptGroup>
           </Select>
 
-          {isOfflineEvent && (
-            <Col span={12} style={{ marginTop: "1rem" }}>
-              <Input placeholder="Town" style={{ marginBottom: "5px" }} />
-              <Select
-                defaultValue="Type of street"
-                style={{ width: 200, marginBottom: "5px" }}
-              >
-                <OptGroup label="Type">
-                  <Option value="avenue">
-                    {MENTOR_MODAL.streetType.avenue}
-                  </Option>
-                  <Option value="street">
-                    {MENTOR_MODAL.streetType.street}
-                  </Option>
-                  <Option value="lane">{MENTOR_MODAL.streetType.lane}</Option>
-                </OptGroup>
-              </Select>
-              <Input placeholder="Street" style={{ marginBottom: "5px" }} />
-              <Input placeholder="№ of house" />
-            </Col>
+          {stateEditWindow.isOnline && (
+            <OfflineComponent MENTOR_MODAL={MENTOR_MODAL} />
           )}
         </Col>
       </Modal>
