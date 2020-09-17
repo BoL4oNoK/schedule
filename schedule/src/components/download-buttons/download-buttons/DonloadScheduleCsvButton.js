@@ -17,6 +17,7 @@ export default function DownloadCsvTableButton() {
         filename={'RSS-chedule.csv'}
         target='_blank'
         headers={HEADERS_FOR_TABLE_CSV}
+        separator={";"}
       >
         { DOWNLOAD_BUTTONS_NAME.downloadCsvButtonName }
       </CSVLink>
