@@ -85,20 +85,20 @@ const TASKS_TYPES = [
 ];
 
 const TIME_ZONES = [
-  { name: "Europe/London", value: "+01" },
-  { name: "Europe/Warsaw", value: "+02" },
-  { name: "Europe/Kiev", value: "+03" },
-  { name: "Europe/Minsk", value: "+03" },
-  { name: "Europe/Moscow", value: "+03" },
-  { name: "Europe/Volgograd", value: "+04" },
-  { name: "Asia/Yekaterinburg", value: "+05" },
-  { name: "Asia/Tashkent", value: "+05" },
-  { name: "Asia/Tbilisi", value: "+04" },
+  { name: "Europe/London", value: "+1" },
+  { name: "Europe/Warsaw", value: "+2" },
+  { name: "Europe/Kiev", value: "+3" },
+  { name: "Europe/Minsk", value: "+3" },
+  { name: "Europe/Moscow", value: "+3" },
+  { name: "Europe/Volgograd", value: "+4" },
+  { name: "Asia/Yekaterinburg", value: "+5" },
+  { name: "Asia/Tashkent", value: "+5" },
+  { name: "Asia/Tbilisi", value: "+4" },
 ];
 
 const HIDE_BUTTON_NAME = {
-  hideRowsButtonName: 'Hide Rows',
-  showRowsButtonName: 'Show All Rows',
+  hideRowsButtonName: "Hide Rows",
+  showRowsButtonName: "Show All Rows",
 };
 
 export {
@@ -115,5 +115,5 @@ export {
   ADD_NEW_EVENT_BUTTON_NAME,
   TASKS_TYPES,
   TIME_ZONES,
-  HIDE_BUTTON_NAME
+  HIDE_BUTTON_NAME,
 };

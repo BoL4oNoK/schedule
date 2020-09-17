@@ -1,14 +1,5 @@
 import React, { useState, useRef } from "react";
-import {
-  Row,
-  Col,
-  Select,
-  Button,
-  Input,
-  Checkbox,
-  DatePicker,
-  Modal,
-} from "antd";
+import { Row, Col, Select, Input, Checkbox, DatePicker, Modal } from "antd";
 import "antd/dist/antd.css";
 import "./ModalWindow.scss";
 import {
@@ -20,26 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreator } from "../../store/actions";
 import moment from "moment";
-
-function getTasks(TASKS_TYPES) {
-  return TASKS_TYPES.map((el) => {
-    return (
-      <Option value={el} key={el}>
-        {el}
-      </Option>
-    );
-  });
-}
-
-function getTimeZones(TIME_ZONES) {
-  return TIME_ZONES.map((el) => {
-    return (
-      <Option value={el.name} key={el.name}>
-        {el.name}({el.value})
-      </Option>
-    );
-  });
-}
+import { getTasks, getTimeZones } from "./../../utils/editWindowUtils";
 
 const { Option, OptGroup } = Select;
 const { TextArea } = Input;
@@ -51,6 +23,19 @@ const ModalWindowEdit = () => {
   const { DATE_FORMAT } = userModal;
   const dispatch = useDispatch();
   const [isOfflineEvent, setIsOfflineEvent] = useState(false);
+
+  const [stateEditWindow, setStateEditWindow] = useState({
+    taskName: "",
+    typeName: "",
+    taskDescription: "",
+    timeZone: "",
+    dateGiven: "",
+    dateDeadline: "",
+    taskUrl: "",
+    feedBackCheckBox: false,
+    isOnline: "",
+  });
+
   const visible = useSelector(
     (state) => state.modalWindowReducer.editModalWindowVisability
   );
@@ -70,21 +55,62 @@ const ModalWindowEdit = () => {
     dispatch(actionCreator.changeEditModalWindowVisible(!visible));
   };
 
+  const onEventChange = (e) => {
+    setStateEditWindow({
+      ...stateEditWindow,
+      [e.target.getAttribute("attr")]: e.target.value,
+    });
+  };
+
+  const onSelectTypeChange = (e) => {
+    console.log(e);
+    setStateEditWindow({
+      ...stateEditWindow,
+      typeName: e,
+    });
+  };
+
+  const onTimeZoneChange = (e) => {
+    console.log(e);
+    // setStateEditWindow({
+    //   ...stateEditWindow,
+    //   tymeZone: e,
+    // });
+  };
+
   if (permanentEvent) {
     console.log(permanentEvent);
     return (
       <Modal visible={visible} onCancel={handleCancel}>
-        <h2 className="wrapper-modal-edit__header">Edit event mode</h2>
+        <h2
+          className="wrapper-modal-edit__header"
+          style={{ fontWeight: "300" }}
+        >
+          Edit task
+        </h2>
 
         <Row gutter={16} style={{ marginTop: "1rem" }}>
           <Col span={6} style={{ marginLeft: "2rem" }}>
-            <Input placeholder="Task Name" value={permanentEvent.name} />
+            <Input
+              placeholder="Task Name"
+              attr="taskName"
+              value={
+                stateEditWindow.taskName
+                  ? stateEditWindow.taskName
+                  : permanentEvent.name
+              }
+              onChange={onEventChange}
+            />
           </Col>
           <Col span={6}>
             <Select
-              value={permanentEvent.type}
               style={{ width: 200 }}
-              // onChange={handleChange}
+              value={
+                stateEditWindow.typeName
+                  ? stateEditWindow.typeName
+                  : permanentEvent.type
+              }
+              onChange={onSelectTypeChange}
             >
               <OptGroup label="TaskTitle">{getTasks(TASKS_TYPES)}</OptGroup>
             </Select>
@@ -95,16 +121,26 @@ const ModalWindowEdit = () => {
           <TextArea
             rows={5}
             placeholder="Task Description"
-            value={permanentEvent.description}
+            attr="taskDescription"
+            value={
+              stateEditWindow.taskDescription
+                ? stateEditWindow.taskDescription
+                : permanentEvent.description
+            }
+            onChange={onEventChange}
           />
         </Col>
 
         <Row style={{ marginTop: "1rem" }}>
           <Col span={8} style={{ marginLeft: "2rem" }}>
             <Select
-              defaultValue={"Timezone" + " " + permanentEvent.timeZone}
               style={{ width: 200 }}
-              // onChange={handleChange}
+              value={
+                stateEditWindow.timeZone
+                  ? stateEditWindow.timeZone
+                  : permanentEvent.timeZone
+              }
+              onChange={onTimeZoneChange}
             >
               <OptGroup label="Timezones">{getTimeZones(TIME_ZONES)}</OptGroup>
             </Select>
@@ -121,10 +157,10 @@ const ModalWindowEdit = () => {
                   permanentEvent.currentDate + " " + permanentEvent.currentTime,
                   DATE_FORMAT
                 ),
-                !permanentEvent.deadline
+                !permanentEvent.deadlineDateTime
                   ? ""
                   : moment(
-                      `${permanentEvent.deadline} ${permanentEvent.currentTime}`,
+                      `${permanentEvent.currentDeadlineDate} ${permanentEvent.currentDeadlineTime}`,
                       DATE_FORMAT
                     ),
               ]}
@@ -167,15 +203,13 @@ const ModalWindowEdit = () => {
                 style={{ width: 200, marginBottom: "5px" }}
               >
                 <OptGroup label="Type">
-                  <Option value="online">
+                  <Option value="avenue">
                     {MENTOR_MODAL.streetType.avenue}
                   </Option>
-                  <Option value="offline">
+                  <Option value="street">
                     {MENTOR_MODAL.streetType.street}
                   </Option>
-                  <Option value="offline">
-                    {MENTOR_MODAL.streetType.lane}
-                  </Option>
+                  <Option value="lane">{MENTOR_MODAL.streetType.lane}</Option>
                 </OptGroup>
               </Select>
               <Input placeholder="Street" style={{ marginBottom: "5px" }} />
