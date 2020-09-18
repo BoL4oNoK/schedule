@@ -17,6 +17,7 @@ export default function HideRowsButton() {
     });
     dispatch(actionCreator.changeVisibleRows(eventsCopy));
     dispatch(actionCreator.changeHightlitedRowStatus(false));
+    dispatch(actionCreator.saveOptions())
   } 
 
   return (

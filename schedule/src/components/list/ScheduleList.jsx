@@ -27,7 +27,7 @@ export default function ScheduleList() {
   const modalWindowVisible = useSelector((state) => state.modalWindowReducer.userModalWindowVisability);
   const data = useSelector((state) => state.eventsReducer.events) || [];
   const hightlitedRows = useSelector(state => state.hightlitedRowReducer.hightlitedRows);
-  const visibleRows = useSelector(state => state.visibleRowsReducer.visibleRows);
+  const visibleRows = useSelector(state => state.optionsReducer.visibleRows);
   let arr;
   const list = (
     <List
