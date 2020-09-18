@@ -1,17 +1,19 @@
 import React from "react";
 import {
-    ExclamationCircleOutlined
+    WarningTwoTone
 } from '@ant-design/icons';
 import "antd/dist/antd.css";
 
 import {  Modal  } from "antd";
 const { confirm } = Modal;
 
-const confirmModal = (onOkFn) => {
+const confirmModal = (eventName, onOkFn) => {
     confirm({
-        title: 'Do you want to delete these items?',
-        icon: <ExclamationCircleOutlined />,
-        content: "This action could not be reverted",
+        title: `Do you want to delete event "${eventName}"?`,
+        icon: <WarningTwoTone twoToneColor="#ff0000" />,
+        content: 'This action could not be reverted',
+        okText: 'Yes, delete event!',
+        okType: 'danger',
         onOk() {
           onOkFn();
         },
