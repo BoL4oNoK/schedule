@@ -1,7 +1,6 @@
 import { actionTypes } from '../actions';
 import { getEvents, postEvent, updateEventById, deleteEventById } from '../../services/services';
-import addCurrentTimeToEvents from '../addCurrenttimeToEvents';
-import createDeadlineEvents from '../../utils/createDeadlineEvents';
+import updateEventDataObjects from '../../utils/updateEventDataObjects';
 
 const middlewareEvents = (store) => (next) => async (action) => {
   switch (action.type) {
@@ -10,8 +9,8 @@ const middlewareEvents = (store) => (next) => async (action) => {
         const { data: events } = await getEvents();
         store.dispatch({
           type: actionTypes.GET_EVENTS_SUCCESS,
-          data: addCurrentTimeToEvents(
-            createDeadlineEvents(events),
+          data: updateEventDataObjects(
+            events,
             store.getState().optionsReducer.timeZone
           ),
         });
@@ -26,8 +25,8 @@ const middlewareEvents = (store) => (next) => async (action) => {
         const { data: events } = await getEvents();
         store.dispatch({
           type: actionTypes.GET_EVENTS_SUCCESS,
-          data: addCurrentTimeToEvents(
-            createDeadlineEvents(events),
+          data: updateEventDataObjects(
+            events,
             store.getState().optionsReducer.timeZone
           ),
         });
@@ -41,7 +40,7 @@ const middlewareEvents = (store) => (next) => async (action) => {
         const { data: events } = await getEvents();
         store.dispatch({
           type: actionTypes.GET_EVENTS_SUCCESS,
-          data: addCurrentTimeToEvents(
+          data: updateEventDataObjects(
             events,
             store.getState().optionsReducer.timeZone
           ),
@@ -56,10 +55,11 @@ const middlewareEvents = (store) => (next) => async (action) => {
         const { data: events } = await getEvents();
         store.dispatch({ 
           type: actionTypes.GET_EVENTS_SUCCESS,
-          data: addCurrentTimeToEvents(
-            createDeadlineEvents(events),
+          data: updateEventDataObjects(
+            events,
             store.getState().optionsReducer.timeZone
-          ), });
+          ), 
+        });
       } catch (e) {
         console.log(e);
       }
