@@ -59,12 +59,13 @@ const middlewareEvents = (store) => (next) => async (action) => {
       try {
         await deleteEventById(action.data);
         const { data: events } = await getEvents();
-        store.dispatch({ 
+        store.dispatch({
           type: actionTypes.GET_EVENTS_SUCCESS,
           data: addCurrentTimeToEvents(
             createDeadlineEvents(events),
             store.getState().optionsReducer.timeZone
-          ), });
+          ),
+        });
       } catch (e) {
         console.log(e);
       }

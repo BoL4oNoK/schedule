@@ -10,7 +10,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreator } from "../../store/actions";
 import moment from "moment";
-import { getTasks, getTimeZones } from "./../../utils/editWindowUtils";
+import {
+  getTasks,
+  getTimeZones,
+  getRightData,
+} from "./../../utils/editWindowUtils";
 import OfflineComponent from "./OfflineComponent";
 
 const { Option, OptGroup } = Select;
@@ -34,30 +38,30 @@ const ModalWindowEdit = () => {
   };
 
   const [stateEditWindow, setStateEditWindow] = useState({
-    comment: "",
-    dateTime: "",
-    deadlineDateTime: "",
     description: "",
-    descriptionUrl: "",
-    id: "",
-    name: "",
-    organizer: "",
     place: "",
-    timeZone: "",
+    dateTime: "",
+    organizer: "",
+    comment: "",
+    descriptionUrl: "",
     type: "",
+    deadlineDateTime: "",
+    timeZone: "",
+    name: "",
+    id: "",
   });
 
-  // comment: ""
-  // dateTime: "2020-09-22 00:00"
-  // deadlineDateTime: "2020-10-25 23:59"
-  // description: ""
-  // descriptionUrl: "https://github.com/AlreadyBored/basic-js"
-  // id: "dfwrTl7zThBela6Yc8Jy"
-  // name: "Алгоритмические задания Stage#1. Part #1"
-  // organizer: "AlreadyBored"
-  // place: ""
-  // timeZone: "+3"
-  // type: "js task"
+  // "description": "Материалы для изучения основ HTML",
+  // "place": "",
+  // "dateTime": "2020-09-06 12:00",
+  // "organizer": "dzmitry-varabei",
+  // "comment": "",
+  // "descriptionUrl": "https://github.com/rolling-scopes-school/tasks/blob/master/tasks/code-basics.md",
+  // "type": "selfeducation",
+  // "deadlineDateTime": "2020-09-14 23:59",
+  // "timeZone": "+3",
+  // "name": "Self HTML Basic",
+  // "id": "pgFgdMFF5sWd3svUTOwj"
 
   useEffect(() => {
     setStateEditWindow({ ...permanentEvent });
@@ -115,12 +119,14 @@ const ModalWindowEdit = () => {
   };
 
   const onModalSubmit = () => {
-    dispatch(actionCreator.updateEvent([stateEditWindow.id, stateEditWindow]));
+    const rightData = getRightData(stateEditWindow);
+    console.log(rightData);
+    dispatch(actionCreator.updateEvent([rightData.id, rightData]));
     dispatch(actionCreator.changeEditModalWindowVisible(!visible));
   };
 
   if (permanentEvent) {
-    console.log(stateEditWindow);
+    console.log(permanentEvent);
     return (
       <Modal visible={visible} onCancel={handleCancel} onOk={onModalSubmit}>
         <h2

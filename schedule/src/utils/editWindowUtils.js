@@ -22,4 +22,20 @@ function getTimeZones(TIME_ZONES) {
   });
 }
 
-export { getTasks, getTimeZones };
+const getRightData = (state) => {
+  return {
+    description: state.description,
+    place: state.place,
+    dateTime: state.dateTime,
+    organizer: state.organizer,
+    comment: state.comment,
+    descriptionUrl: state.descriptionUrl,
+    type: state.type,
+    deadlineDateTime: state.deadlineDateTime,
+    timeZone: state.timeZone,
+    name: state.name,
+    id: state.id,
+  };
+};
+
+export { getTasks, getTimeZones, getRightData };
