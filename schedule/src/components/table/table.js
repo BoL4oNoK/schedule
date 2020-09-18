@@ -15,7 +15,7 @@ export default function TableForSchedule() {
   const userView = useSelector((state) => state.optionsReducer.user);
   const userModalWindowVisible = useSelector((state) => state.modalWindowReducer.userModalWindowVisability);
   const hightlitedRows = useSelector((state) => state.hightlitedRowReducer.hightlitedRows);
-  const visibleRows = useSelector((state) => state.visibleRowsReducer.visibleRows);
+  const visibleRows = useSelector((state) => state.optionsReducer.visibleRows);
   const editModalWindowVisible = useSelector((state) => state.modalWindowReducer.editModalWindowVisability);
 
   let rightColumns = selectedColumns.map((type) => {
