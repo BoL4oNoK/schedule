@@ -4,8 +4,11 @@ import { columns, mentorColumn } from "./columns/columns";
 import { useSelector, useDispatch } from "react-redux";
 import { USERS } from "../../constants/constants";
 import { actionCreator } from "../../store/actions";
+import confirmModal from '../confirmModal/confirmModal';
 
 import { Table } from "antd";
+
+let addEvent = false;
 
 export default function TableForSchedule() {
   const dispatch = useDispatch();
@@ -47,10 +50,16 @@ export default function TableForSchedule() {
           const selectedEvent = (record.customEvent) ? events.find(el => el.id === record.id) : record;
           dispatch(actionCreator.changePermanentEvent(selectedEvent));
           dispatch(actionCreator.changeUserModalWindowVisible(!userModalWindowVisible));
-        } else if (event.target.textContent === "Edit") {
+        } else if (event.target.parentNode.classList.contains('anticon-edit') || event.target.closest('span.anticon-edit')) {
           const selectedEvent = (record.customEvent) ? events.find(el => el.id === record.id) : record;
           dispatch(actionCreator.changePermanentEvent(selectedEvent));
           dispatch(actionCreator.changeEditModalWindowVisible(!editModalWindowVisible));
+        } else if (event.target.parentNode.classList.contains('anticon-delete') || event.target.closest('span.anticon-delete')) {
+          const selectedEvent = (record.customEvent) ? events.find(el => el.id === record.id) : record;
+          confirmModal(() => {
+            console.log('> delete event: ', selectedEvent.id);
+            dispatch(actionCreator.deleteEvent(selectedEvent.id));
+          });
         }
       },
     };
