@@ -27,7 +27,7 @@ const middlewareEvents = (store) => (next) => async (action) => {
         store.dispatch({
           type: actionTypes.GET_EVENTS_SUCCESS,
           data: addCurrentTimeToEvents(
-            events,
+            createDeadlineEvents(events),
             store.getState().optionsReducer.timeZone
           ),
         });
@@ -54,7 +54,12 @@ const middlewareEvents = (store) => (next) => async (action) => {
       try {
         await deleteEventById(action.data);
         const { data: events } = await getEvents();
-        store.dispatch({ type: actionTypes.GET_EVENTS_SUCCESS, data: events });
+        store.dispatch({ 
+          type: actionTypes.GET_EVENTS_SUCCESS,
+          data: addCurrentTimeToEvents(
+            createDeadlineEvents(events),
+            store.getState().optionsReducer.timeZone
+          ), });
       } catch (e) {
         console.log(e);
       }
