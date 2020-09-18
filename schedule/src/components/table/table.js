@@ -8,8 +8,6 @@ import confirmModal from '../confirmModal/confirmModal';
 
 import { Table } from "antd";
 
-let addEvent = false;
-
 export default function TableForSchedule() {
   const dispatch = useDispatch();
   const events = useSelector((state) => state.eventsReducer.events);

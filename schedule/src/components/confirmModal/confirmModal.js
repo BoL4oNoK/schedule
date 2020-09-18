@@ -9,9 +9,9 @@ const { confirm } = Modal;
 
 const confirmModal = (onOkFn) => {
     confirm({
-        title: 'Do you Want to delete these items?',
+        title: 'Do you want to delete these items?',
         icon: <ExclamationCircleOutlined />,
-        content: 'Some descriptions',
+        content: "This action could not be reverted",
         onOk() {
           onOkFn();
         },
