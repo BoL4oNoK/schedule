@@ -1,7 +1,12 @@
-import { actionTypes } from '../actions';
-import { getEvents, postEvent, updateEventById, deleteEventById } from '../../services/services';
-import addCurrentTimeToEvents from '../addCurrenttimeToEvents';
-import createDeadlineEvents from '../../utils/createDeadlineEvents';
+import { actionTypes } from "../actions";
+import {
+  getEvents,
+  postEvent,
+  updateEventById,
+  deleteEventById,
+} from "../../services/services";
+import addCurrentTimeToEvents from "../addCurrenttimeToEvents";
+import createDeadlineEvents from "../../utils/createDeadlineEvents";
 
 const middlewareEvents = (store) => (next) => async (action) => {
   switch (action.type) {
@@ -37,7 +42,7 @@ const middlewareEvents = (store) => (next) => async (action) => {
       break;
     case actionTypes.UPDATE_EVENT:
       try {
-        await updateEventById(action.data);
+        await updateEventById(...action.data);
         const { data: events } = await getEvents();
         store.dispatch({
           type: actionTypes.GET_EVENTS_SUCCESS,

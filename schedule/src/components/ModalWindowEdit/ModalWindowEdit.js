@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Select, Input, Checkbox, DatePicker, Modal } from "antd";
 import "antd/dist/antd.css";
 import "./ModalWindow.scss";
@@ -6,7 +6,6 @@ import {
   MENTOR_MODAL,
   TASKS_TYPES,
   TIME_ZONES,
-  userModal,
 } from "./../../constants/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreator } from "../../store/actions";
@@ -21,45 +20,62 @@ const { RangePicker } = DatePicker;
 // Edit modal window component
 
 const ModalWindowEdit = () => {
-  const { DATE_FORMAT } = userModal;
   const dispatch = useDispatch();
 
-  const [stateEditWindow, setStateEditWindow] = useState({
-    taskName: "",
-    typeName: "",
-    taskDescription: "",
-    timeZone: "",
-    dateGiven: "",
-    dateDeadline: "",
-    taskUrl: "",
-    feedBackCheckBox: false,
-    isOline: true,
-  });
-
-  const visible = useSelector(
-    (state) => state.modalWindowReducer.editModalWindowVisability
-  );
   const permanentEvent = useSelector((state) => {
     return state.permanentEventReducer.permanentEvent;
   });
+  const visible = useSelector(
+    (state) => state.modalWindowReducer.editModalWindowVisability
+  );
 
   const handleCancel = () => {
     dispatch(actionCreator.changeEditModalWindowVisible(!visible));
   };
 
-  const onEventLocationChange = (e) => {
+  const [stateEditWindow, setStateEditWindow] = useState({
+    comment: "",
+    dateTime: "",
+    deadlineDateTime: "",
+    description: "",
+    descriptionUrl: "",
+    id: "",
+    name: "",
+    organizer: "",
+    place: "",
+    timeZone: "",
+    type: "",
+  });
+
+  // comment: ""
+  // dateTime: "2020-09-22 00:00"
+  // deadlineDateTime: "2020-10-25 23:59"
+  // description: ""
+  // descriptionUrl: "https://github.com/AlreadyBored/basic-js"
+  // id: "dfwrTl7zThBela6Yc8Jy"
+  // name: "Алгоритмические задания Stage#1. Part #1"
+  // organizer: "AlreadyBored"
+  // place: ""
+  // timeZone: "+3"
+  // type: "js task"
+
+  useEffect(() => {
+    setStateEditWindow({ ...permanentEvent });
+  }, [permanentEvent]);
+
+  function onEventLocationChange(e) {
     if (e === "online") {
       setStateEditWindow({
         ...stateEditWindow,
-        isOnline: false,
+        place: "online",
       });
     } else {
       setStateEditWindow({
         ...stateEditWindow,
-        isOnline: true,
+        place: "offline",
       });
     }
-  };
+  }
 
   const onEventChange = (e) => {
     setStateEditWindow({
@@ -71,7 +87,7 @@ const ModalWindowEdit = () => {
   const onSelectTypeChange = (e) => {
     setStateEditWindow({
       ...stateEditWindow,
-      typeName: e,
+      type: e,
     });
   };
 
@@ -89,14 +105,24 @@ const ModalWindowEdit = () => {
     });
   };
 
-  const onDateChange = (e) => {
-    console.log(e);
+  const onDateChange = (event) => {
+    console.log(event);
+    setStateEditWindow({
+      ...stateEditWindow,
+      dateTime: event[0]._i,
+      deadlineDateTime: event[1]._i,
+    });
+  };
+
+  const onModalSubmit = () => {
+    dispatch(actionCreator.updateEvent([stateEditWindow.id, stateEditWindow]));
+    dispatch(actionCreator.changeEditModalWindowVisible(!visible));
   };
 
   if (permanentEvent) {
-    console.log(permanentEvent);
+    console.log(stateEditWindow);
     return (
-      <Modal visible={visible} onCancel={handleCancel}>
+      <Modal visible={visible} onCancel={handleCancel} onOk={onModalSubmit}>
         <h2
           className="wrapper-modal-edit__header"
           style={{ fontWeight: "300" }}
@@ -108,23 +134,15 @@ const ModalWindowEdit = () => {
           <Col span={6} style={{ marginLeft: "2rem" }}>
             <Input
               placeholder="Task Name"
-              attr="taskName"
-              value={
-                stateEditWindow.taskName
-                  ? stateEditWindow.taskName
-                  : permanentEvent.name
-              }
+              attr="name"
+              value={stateEditWindow.name}
               onChange={onEventChange}
             />
           </Col>
           <Col span={6}>
             <Select
               style={{ width: 200 }}
-              value={
-                stateEditWindow.typeName
-                  ? stateEditWindow.typeName
-                  : permanentEvent.type
-              }
+              value={stateEditWindow.type}
               onChange={onSelectTypeChange}
             >
               <OptGroup label="TaskTitle">{getTasks(TASKS_TYPES)}</OptGroup>
@@ -136,12 +154,8 @@ const ModalWindowEdit = () => {
           <TextArea
             rows={5}
             placeholder="Task Description"
-            attr="taskDescription"
-            value={
-              stateEditWindow.taskDescription
-                ? stateEditWindow.taskDescription
-                : permanentEvent.description
-            }
+            attr="description"
+            value={stateEditWindow.description}
             onChange={onEventChange}
           />
         </Col>
@@ -150,11 +164,7 @@ const ModalWindowEdit = () => {
           <Col span={8} style={{ marginLeft: "2rem" }}>
             <Select
               style={{ width: 200 }}
-              value={
-                stateEditWindow.timeZone
-                  ? stateEditWindow.timeZone
-                  : permanentEvent.timeZone
-              }
+              value={stateEditWindow.timeZone}
               onChange={onTimeZoneChange}
             >
               <OptGroup label="Timezones">{getTimeZones(TIME_ZONES)}</OptGroup>
@@ -166,17 +176,14 @@ const ModalWindowEdit = () => {
               showTime={{
                 hideDisabledOptions: true,
               }}
-              format={DATE_FORMAT}
+              format={MENTOR_MODAL.DATE_FORMAT}
               value={[
-                moment(
-                  permanentEvent.currentDate + " " + permanentEvent.currentTime,
-                  DATE_FORMAT
-                ),
+                moment(stateEditWindow.dateTime, MENTOR_MODAL.DATE_FORMAT),
                 !permanentEvent.deadlineDateTime
                   ? ""
                   : moment(
-                      `${permanentEvent.currentDeadlineDate} ${permanentEvent.currentDeadlineTime}`,
-                      DATE_FORMAT
+                      stateEditWindow.deadlineDateTime,
+                      MENTOR_MODAL.DATE_FORMAT
                     ),
               ]}
               onChange={onDateChange}
@@ -187,23 +194,14 @@ const ModalWindowEdit = () => {
         <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
           <Input
             placeholder="Additional url"
-            attr="taskUrl"
-            value={
-              stateEditWindow.taskUrl
-                ? stateEditWindow.taskUrl
-                : permanentEvent.descriptionUrl
-            }
+            attr="descriptionUrl"
+            value={stateEditWindow.descriptionUrl}
             onChange={onEventChange}
           />
         </Col>
 
         <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
-          <Checkbox
-            onChange={onCheckboxChange}
-            checked={stateEditWindow.feedBackCheckBox}
-          >
-            Checkbox for feedback
-          </Checkbox>
+          <Checkbox onChange={onCheckboxChange}>Checkbox for feedback</Checkbox>
         </Col>
 
         <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
@@ -218,8 +216,10 @@ const ModalWindowEdit = () => {
             </OptGroup>
           </Select>
 
-          {stateEditWindow.isOnline && (
+          {stateEditWindow.place === "offline" ? (
             <OfflineComponent MENTOR_MODAL={MENTOR_MODAL} />
+          ) : (
+            ""
           )}
         </Col>
       </Modal>

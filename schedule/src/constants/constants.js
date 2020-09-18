@@ -15,6 +15,7 @@ const MENTOR_MODAL = {
     street: "Улица",
     lane: "Переулок",
   },
+  DATE_FORMAT: "YYYY-MM-DD HH:mm",
 };
 
 const urls = {
