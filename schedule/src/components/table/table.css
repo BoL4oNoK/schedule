@@ -38,3 +38,25 @@
 .ant-table-cell-fix-left, .ant-table-cell-fix-right {
   background: inherit;
 }
+
+.anticon-delete {
+  margin-left: 5px;
+}
+
+.anticon-edit,
+.anticon-delete {
+  cursor: pointer;
+}
+
+.anticon-edit:hover,
+.anticon-delete:hover {
+  border: 1px dashed;
+}
+
+.anticon-edit:hover {
+  border-color: #40a9ff;
+}
+
+.anticon-delete:hover {
+  border-color: #eb2f96;
+}

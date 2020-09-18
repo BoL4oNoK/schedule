@@ -1,5 +1,5 @@
 import { actionTypes } from '../actions';
-import addCurrentTimeToEvents from '../addCurrenttimeToEvents';
+import addCurrentTimeToEvents from '../../utils/addCurrenttimeToEvents';
 
 const localName = 'scheduleOptions';
 
