@@ -52,6 +52,7 @@ const ModalWindowEdit = () => {
   });
 
   const [deadLineCheckbox, setDeadlineCheckbox] = useState(false);
+  const [isOnline, setIsOnline] = useState(true);
 
   useEffect(() => {
     setStateEditWindow({ ...permanentEvent });
@@ -61,17 +62,7 @@ const ModalWindowEdit = () => {
   }, [permanentEvent]);
 
   function onEventLocationChange(e) {
-    if (e === "online") {
-      setStateEditWindow({
-        ...stateEditWindow,
-        place: "online",
-      });
-    } else {
-      setStateEditWindow({
-        ...stateEditWindow,
-        place: "offline",
-      });
-    }
+    setIsOnline(!isOnline);
   }
 
   const onEventChange = (e) => {
@@ -111,7 +102,6 @@ const ModalWindowEdit = () => {
   };
 
   const onDeadlineCheckboxChange = (e) => {
-    console.log(refRangePicker.current);
     if (e.target.checked === true) {
       setStateEditWindow({
         ...stateEditWindow,
@@ -129,12 +119,11 @@ const ModalWindowEdit = () => {
   const onModalSubmit = () => {
     const rightData = getRightData(stateEditWindow);
     console.log(rightData);
-    dispatch(actionCreator.updateEvent([rightData.id, rightData]));
-    dispatch(actionCreator.changeEditModalWindowVisible(!visible));
+    // dispatch(actionCreator.updateEvent([rightData.id, rightData]));
+    // dispatch(actionCreator.changeEditModalWindowVisible(!visible));
   };
 
   if (permanentEvent) {
-    console.log(permanentEvent);
     return (
       <Modal visible={visible} onCancel={handleCancel} onOk={onModalSubmit}>
         <h2
@@ -241,10 +230,10 @@ const ModalWindowEdit = () => {
             </OptGroup>
           </Select>
 
-          {stateEditWindow.place === "offline" ? (
-            <OfflineComponent MENTOR_MODAL={MENTOR_MODAL} />
-          ) : (
+          {isOnline === true ? (
             ""
+          ) : (
+            <OfflineComponent MENTOR_MODAL={MENTOR_MODAL} />
           )}
         </Col>
       </Modal>
