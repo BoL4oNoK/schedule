@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Row, Col, Select, Input, Checkbox, DatePicker, Modal } from "antd";
 import "antd/dist/antd.css";
 import "./ModalWindow.scss";
@@ -25,7 +25,7 @@ const { RangePicker } = DatePicker;
 
 const ModalWindowEdit = () => {
   const dispatch = useDispatch();
-
+  const refRangePicker = useRef();
   const permanentEvent = useSelector((state) => {
     return state.permanentEventReducer.permanentEvent;
   });
@@ -51,20 +51,13 @@ const ModalWindowEdit = () => {
     id: "",
   });
 
-  // "description": "Материалы для изучения основ HTML",
-  // "place": "",
-  // "dateTime": "2020-09-06 12:00",
-  // "organizer": "dzmitry-varabei",
-  // "comment": "",
-  // "descriptionUrl": "https://github.com/rolling-scopes-school/tasks/blob/master/tasks/code-basics.md",
-  // "type": "selfeducation",
-  // "deadlineDateTime": "2020-09-14 23:59",
-  // "timeZone": "+3",
-  // "name": "Self HTML Basic",
-  // "id": "pgFgdMFF5sWd3svUTOwj"
+  const [deadLineCheckbox, setDeadlineCheckbox] = useState(false);
 
   useEffect(() => {
     setStateEditWindow({ ...permanentEvent });
+    if (permanentEvent) {
+      setDeadlineCheckbox(permanentEvent.deadlineDateTime ? true : false);
+    }
   }, [permanentEvent]);
 
   function onEventLocationChange(e) {
@@ -109,13 +102,28 @@ const ModalWindowEdit = () => {
     });
   };
 
-  const onDateChange = (event) => {
-    console.log(event);
+  const onDateChange = (date, dateString) => {
     setStateEditWindow({
       ...stateEditWindow,
-      dateTime: event[0]._i,
-      deadlineDateTime: event[1]._i,
+      dateTime: dateString[0],
+      deadlineDateTime: dateString[1],
     });
+  };
+
+  const onDeadlineCheckboxChange = (e) => {
+    console.log(refRangePicker.current);
+    if (e.target.checked === true) {
+      setStateEditWindow({
+        ...stateEditWindow,
+        deadlineDateTime: refRangePicker.current.props.defaultValue[1]._i,
+      });
+    } else {
+      setStateEditWindow({
+        ...stateEditWindow,
+        deadlineDateTime: "",
+      });
+    }
+    setDeadlineCheckbox(!deadLineCheckbox);
   };
 
   const onModalSubmit = () => {
@@ -167,7 +175,7 @@ const ModalWindowEdit = () => {
         </Col>
 
         <Row style={{ marginTop: "1rem" }}>
-          <Col span={8} style={{ marginLeft: "2rem" }}>
+          <Col span={6} style={{ marginLeft: "2rem" }}>
             <Select
               style={{ width: 200 }}
               value={stateEditWindow.timeZone}
@@ -176,24 +184,35 @@ const ModalWindowEdit = () => {
               <OptGroup label="Timezones">{getTimeZones(TIME_ZONES)}</OptGroup>
             </Select>
           </Col>
-          <Col span={14}>
+          <Col span={12}>
             <RangePicker
+              ref={refRangePicker}
               style={{ marginLeft: "2rem" }}
               showTime={{
                 hideDisabledOptions: true,
               }}
               format={MENTOR_MODAL.DATE_FORMAT}
-              value={[
+              disabled={[false, !deadLineCheckbox]}
+              onChange={onDateChange}
+              defaultValue={[
                 moment(stateEditWindow.dateTime, MENTOR_MODAL.DATE_FORMAT),
-                !permanentEvent.deadlineDateTime
-                  ? ""
+                !stateEditWindow.deadlineDateTime
+                  ? moment("2020-12-31 10:10", MENTOR_MODAL.DATE_FORMAT)
                   : moment(
                       stateEditWindow.deadlineDateTime,
                       MENTOR_MODAL.DATE_FORMAT
                     ),
               ]}
-              onChange={onDateChange}
             />
+          </Col>
+          <Col span={4}>
+            <Checkbox
+              onChange={onDeadlineCheckboxChange}
+              style={{ marginTop: "5px" }}
+              checked={deadLineCheckbox | false}
+            >
+              Deadline
+            </Checkbox>
           </Col>
         </Row>
 

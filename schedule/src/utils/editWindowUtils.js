@@ -31,7 +31,7 @@ const getRightData = (state) => {
     comment: state.comment,
     descriptionUrl: state.descriptionUrl,
     type: state.type,
-    deadlineDateTime: state.deadlineDateTime,
+    deadlineDateTime: state.deadlineDateTime ? state.deadlineDateTime : "",
     timeZone: state.timeZone,
     name: state.name,
     id: state.id,
