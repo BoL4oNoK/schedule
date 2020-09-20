@@ -4,7 +4,7 @@ import { GithubOutlined } from "@ant-design/icons";
 import { GIT_AVATAR, GIT_LINK } from "../../constants/constants";
 import { selectColor } from "../../utils/selectColor";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreator } from '../../store/actions';
+import { actionCreator } from "../../store/actions";
 import "./ScheduleList.css";
 import "antd/dist/antd.css";
 function dateFormatReadable(dateTime) {
@@ -24,10 +24,16 @@ function dateFormatReadable(dateTime) {
 }
 export default function ScheduleList() {
   const dispatch = useDispatch();
-  const modalWindowVisible = useSelector((state) => state.modalWindowReducer.userModalWindowVisability);
+  const modalWindowVisible = useSelector(
+    (state) => state.modalWindowReducer.userModalWindowVisability
+  );
   const data = useSelector((state) => state.eventsReducer.events) || [];
-  const hightlitedRows = useSelector(state => state.hightlitedRowReducer.hightlitedRows);
-  const visibleRows = useSelector(state => state.visibleRowsReducer.visibleRows);
+  const hightlitedRows = useSelector(
+    (state) => state.hightlitedRowReducer.hightlitedRows
+  );
+  const visibleRows = useSelector(
+    (state) => state.visibleRowsReducer.visibleRows
+  );
   let arr;
   const list = (
     <List
@@ -39,18 +45,31 @@ export default function ScheduleList() {
         },
         pageSize: 5,
       }}
-      dataSource={ visibleRows ? visibleRows : data }
+      dataSource={visibleRows ? visibleRows : data}
       renderItem={(item) => (
         <List.Item
           onClick={(event) => {
-            if (event.target.parentNode.classList.contains('ant-list-item') && !event.target.parentNode.classList.contains('row-hightlight')) {
-              event.target.parentNode.classList.add('row-hightlight');
+            if (
+              event.target.parentNode.classList.contains("ant-list-item") &&
+              !event.target.parentNode.classList.contains("row-hightlight")
+            ) {
+              event.target.parentNode.classList.add("row-hightlight");
               dispatch(actionCreator.changeHightlitedRowStatus(true));
-              dispatch(actionCreator.changeHightlitedRows( hightlitedRows ? [...hightlitedRows, item] : [ item ]));
-            } else if (event.target.parentNode.classList.contains('row-hightlight')) {
-              event.target.parentNode.classList.remove('row-hightlight');
+              dispatch(
+                actionCreator.changeHightlitedRows(
+                  hightlitedRows ? [...hightlitedRows, item] : [item]
+                )
+              );
+            } else if (
+              event.target.parentNode.classList.contains("row-hightlight")
+            ) {
+              event.target.parentNode.classList.remove("row-hightlight");
               dispatch(actionCreator.changeHightlitedRowStatus(false));
-              dispatch(actionCreator.changeHightlitedRows(hightlitedRows.filter((el) => el.id !== item.id)));
+              dispatch(
+                actionCreator.changeHightlitedRows(
+                  hightlitedRows.filter((el) => el.id !== item.id)
+                )
+              );
             }
           }}
           key={item.eventId}
@@ -68,11 +87,17 @@ export default function ScheduleList() {
             avatar={<Avatar src={`${GIT_AVATAR}${item.organizer}`} />}
             title={
               <Button
-                type='text'
+                type="text"
                 onClick={() => {
-                  const selectedEvent = (item.customEvent) ? data.find(el => el.id === item.id) : item;
+                  const selectedEvent = item.customEvent
+                    ? data.find((el) => el.id === item.id)
+                    : item;
                   dispatch(actionCreator.changePermanentEvent(selectedEvent));
-                  dispatch(actionCreator.changeUserModalWindowVisible(!modalWindowVisible));
+                  dispatch(
+                    actionCreator.changeUserModalWindowVisible(
+                      !modalWindowVisible
+                    )
+                  );
                 }}
               >
                 {item.name}
@@ -83,14 +108,11 @@ export default function ScheduleList() {
 
           <div>
             {
-              ((arr = [
-                item.type,
-                dateFormatReadable(new Date(item.dateTime)),
-                item.place,
-                item.descriptionUrl,
-              ].filter(function (el) {
-                return el;
-              })),
+              ((arr = [item.type, item.place, item.descriptionUrl].filter(
+                function (el) {
+                  return el;
+                }
+              )),
               arr.map((element, idx) =>
                 element.includes("http") ? (
                   <Tag key={idx}>
@@ -112,8 +134,8 @@ export default function ScheduleList() {
             <div className="optionalBlock">
               <Tag color={selectColor("deadline")}>deadline</Tag>
               <Tag>
-              {item.currentDeadlineDate} {item.currentDeadlineTime}
-            </Tag>
+                {item.currentDeadlineDate} {item.currentDeadlineTime}
+              </Tag>
             </div>
           ) : null}
         </List.Item>

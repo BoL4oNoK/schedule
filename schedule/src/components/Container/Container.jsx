@@ -8,6 +8,7 @@ import ScheduleList from "../list/ScheduleList";
 import UserWindow from "../UserWindow/UserWindow";
 import CalendarForSchedule from "../../components/calendar/calendar";
 import ModalWindowEdit from "./../ModalWindowEdit/ModalWindowEdit";
+import AddNewEventModal from "./../AddNewEventModal/AddNewEventModal";
 
 import { VIEWS_FOR_SCHEDULE } from "../../constants/constants";
 
@@ -43,6 +44,7 @@ const Container = () => {
       </div>
       <UserWindow />
       <ModalWindowEdit />
+      <AddNewEventModal />
     </>
   );
 };
