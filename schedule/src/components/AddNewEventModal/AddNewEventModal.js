@@ -1,5 +1,14 @@
 import React, { useState, useCallback, useRef } from "react";
-import { Row, Col, Select, Input, DatePicker, Modal, Button } from "antd";
+import {
+  Row,
+  Col,
+  Select,
+  Input,
+  DatePicker,
+  Modal,
+  Button,
+  Checkbox,
+} from "antd";
 import "antd/dist/antd.css";
 import "./ModalWindow.scss";
 import {
@@ -67,6 +76,7 @@ const AddNewEventModal = () => {
   const { DATE_FORMAT } = userModal;
   const dispatch = useDispatch();
   const [isOfflineEvent, setIsOfflineEvent] = useState(false);
+  const [isEventWithDeadline, setisEventWithDeadline] = useState(true);
   const visible = useSelector(
     (state) => state.modalWindowReducer.AddNewEventModalVisability
   );
@@ -80,6 +90,9 @@ const AddNewEventModal = () => {
     } else {
       setIsOfflineEvent(true);
     }
+  };
+  const onEventDeadlineChange = (e) => {
+    setisEventWithDeadline(e.target.checked);
   };
   const onFinish = (values) => {
     console.log(values);
@@ -155,15 +168,28 @@ const AddNewEventModal = () => {
               </Select>
             </FormItem>
           </Col>
+          <Checkbox onChange={onEventDeadlineChange} defaultChecked>
+            Task with deadline?
+          </Checkbox>
           <Col span={14}>
             <FormItem name="currentDate">
-              <RangePicker
-                style={{ marginLeft: "2rem" }}
-                showTime={{
-                  hideDisabledOptions: true,
-                }}
-                format={DATE_FORMAT}
-              />
+              {isEventWithDeadline ? (
+                <RangePicker
+                  style={{ marginLeft: "2rem" }}
+                  showTime={{
+                    hideDisabledOptions: true,
+                  }}
+                  format={DATE_FORMAT}
+                />
+              ) : (
+                <DatePicker
+                  style={{ marginLeft: "2rem" }}
+                  showTime={{
+                    hideDisabledOptions: true,
+                  }}
+                  format={DATE_FORMAT}
+                />
+              )}
             </FormItem>
           </Col>
         </Row>
@@ -197,25 +223,20 @@ const AddNewEventModal = () => {
                   style={{ width: 200, marginBottom: "5px" }}
                 >
                   <OptGroup label="Type">
-                    <Option value="online">
+                    <Option value="avenue">
                       {MENTOR_MODAL.streetType.avenue}
                     </Option>
-                    <Option value="offline">
+                    <Option value="street">
                       {MENTOR_MODAL.streetType.street}
                     </Option>
-                    <Option value="offline">
-                      {MENTOR_MODAL.streetType.lane}
-                    </Option>
+                    <Option value="lane">{MENTOR_MODAL.streetType.lane}</Option>
                   </OptGroup>
                 </Select>
                 <Input placeholder="Street" style={{ marginBottom: "5px" }} />
                 <Input placeholder="№ of house" />
               </Col>
               <Col>
-                <YMaps
-                  query={{ apikey: map.KEY }}
-                  onApiAvaliable={(ymaps) => console.log("map", ymaps)}
-                >
+                <YMaps query={{ apikey: map.KEY }}>
                   <div>
                     <Map
                       defaultState={{
@@ -258,23 +279,3 @@ const AddNewEventModal = () => {
 };
 
 export default AddNewEventModal;
-/*
-comment: ""
-currentDate: "22.09.2020"
-currentDateObj: Tue Sep 22 2020 00:00:00 GMT+0300 (Москва, стандартное время) {}
-currentDeadlineDate: "25.10.2020"
-currentDeadlineDateObj: Sun Oct 25 2020 23:59:00 GMT+0300 (Москва, стандартное время) {}
-currentDeadlineTime: "23:59"
-currentTime: "00:00"
-dateTime: "2020-09-22 00:00"
-deadlineDateTime: "2020-10-25 23:59"
-description: ""
-descriptionUrl: "https://github.com/AlreadyBored/basic-js"
-eventId: 5
-id: "dfwrTl7zThBela6Yc8Jy"
-name: "Алгоритмические задания Stage#1. Part #1"
-organizer: "AlreadyBored"
-place: ""
-timeZone: "+3"
-type: "js task"
-*/
