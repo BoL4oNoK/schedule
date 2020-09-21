@@ -14,6 +14,7 @@ import {
   getTasks,
   getTimeZones,
   getRightData,
+  getRightTime,
 } from "./../../utils/editWindowUtils";
 import OfflineComponent from "./OfflineComponent";
 
@@ -23,7 +24,7 @@ const { RangePicker } = DatePicker;
 
 // Edit modal window component
 
-const ModalWindowEdit = () => {
+const ModalWindowEdit = ({ getFeedbackState }) => {
   const dispatch = useDispatch();
   const refRangePicker = useRef();
   const permanentEvent = useSelector((state) => {
@@ -70,6 +71,10 @@ const ModalWindowEdit = () => {
   function onEventLocationChange(e) {
     if (e === "online") {
       setIsOnline(true);
+      setStateEditWindow({
+        ...stateEditWindow,
+        place: "",
+      });
     } else {
       setIsOnline(false);
     }
@@ -93,13 +98,6 @@ const ModalWindowEdit = () => {
     setStateEditWindow({
       ...stateEditWindow,
       timeZone: e,
-    });
-  };
-
-  const onCheckboxChange = (e) => {
-    setStateEditWindow({
-      ...stateEditWindow,
-      feedBackCheckBox: e.target.checked,
     });
   };
 
@@ -161,12 +159,12 @@ const ModalWindowEdit = () => {
 
   const onModalSubmit = () => {
     const rightData = getRightData(stateEditWindow);
-    console.log(rightData);
     // dispatch(actionCreator.updateEvent([rightData.id, rightData]));
     // dispatch(actionCreator.changeEditModalWindowVisible(!visible));
   };
 
   if (permanentEvent) {
+    const rightTime = getRightTime(permanentEvent);
     return (
       <Modal visible={visible} onCancel={handleCancel} onOk={onModalSubmit}>
         <h2
@@ -227,11 +225,11 @@ const ModalWindowEdit = () => {
               disabled={[false, !deadLineCheckbox]}
               onChange={onDateChange}
               defaultValue={[
-                moment(stateEditWindow.dateTime, MENTOR_MODAL.DATE_FORMAT),
-                !stateEditWindow.deadlineDateTime
+                moment(rightTime.dateTime, MENTOR_MODAL.DATE_FORMAT),
+                !rightTime.deadlineDateTime
                   ? moment("2020-12-31 10:10", MENTOR_MODAL.DATE_FORMAT)
                   : moment(
-                      stateEditWindow.deadlineDateTime,
+                      rightTime.deadlineDateTime,
                       MENTOR_MODAL.DATE_FORMAT
                     ),
               ]}
@@ -258,7 +256,7 @@ const ModalWindowEdit = () => {
         </Col>
 
         <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
-          <Checkbox onChange={onCheckboxChange}>Checkbox for feedback</Checkbox>
+          <Checkbox onChange={getFeedbackState}>Checkbox for feedback</Checkbox>
         </Col>
 
         <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreator } from "../../store/actions";
 import TableForSchedule from "../table/table";
@@ -16,6 +16,11 @@ const { calendar, list } = VIEWS_FOR_SCHEDULE;
 const Container = () => {
   const view = useSelector((state) => state.optionsReducer.viewStatus);
   const dispatch = useDispatch();
+  const [isFeedback, setIsFeedback] = useState(false);
+
+  const getFeedbackState = (e) => {
+    setIsFeedback(!isFeedback);
+  };
 
   useEffect(() => {
     dispatch(actionCreator.initEvents());
@@ -42,7 +47,7 @@ const Container = () => {
         {changeViewForm()}
       </div>
       <UserWindow />
-      <ModalWindowEdit />
+      <ModalWindowEdit getFeedbackState={getFeedbackState} />
     </>
   );
 };

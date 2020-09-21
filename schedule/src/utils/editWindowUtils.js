@@ -38,4 +38,18 @@ const getRightData = (state) => {
   };
 };
 
-export { getTasks, getTimeZones, getRightData };
+const getRightTime = (permanentEvent) => {
+  const dateObj = {};
+  const dateTime = permanentEvent.currentTime;
+  const currentDate = permanentEvent.currentDate.split(".").reverse().join("-");
+  const deadlineTime = permanentEvent.currentDeadlineTime;
+  const deadlineDate = permanentEvent.currentDeadlineDate
+    .split(".")
+    .reverse()
+    .join("-");
+  dateObj.dateTime = `${currentDate} ${dateTime}`;
+  dateObj.deadlineDateTime = `${deadlineDate} ${deadlineTime}`;
+  return dateObj;
+};
+
+export { getTasks, getTimeZones, getRightData, getRightTime };
