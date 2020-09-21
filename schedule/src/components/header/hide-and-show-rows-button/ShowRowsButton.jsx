@@ -13,12 +13,18 @@ export default function ShowRowsButton() {
     dispatch(actionCreator.saveOptions());
   } 
 
+  
   return (
-    <Button
-      type={ visibleRows ? 'primary' : 'default' }
-      onClick={onHideButtonClick}
-    >
-      { HIDE_BUTTON_NAME.showRowsButtonName }
-    </Button>
+    <>
+      {
+        visibleRows ? <Button
+          style={{ margin: '0 10px 0 0' }}
+          type={ visibleRows ? 'primary' : 'default' }
+          onClick={onHideButtonClick}
+        >
+          { HIDE_BUTTON_NAME.showRowsButtonName }
+        </Button> : null
+      }
+    </>
   );
 }

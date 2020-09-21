@@ -17,7 +17,7 @@ console.log(timeZone)
   }
 
 	return (
-		<Select value={timeZone} style={{ width: 175 }} onChange={onChange}>
+		<Select value={timeZone} style={{ width: 175, margin:'0 10px 0 0' }} onChange={onChange}>
       {TIME_ZONES.map(zone => <Option value={zone.name} key={zone.name}>{zone.name}</Option>)}
 		</Select>
 	)
