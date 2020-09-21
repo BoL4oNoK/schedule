@@ -102,7 +102,7 @@ export const columns = [
     dataIndex: 'organizer',
     className: 'column-organizer',
     render: (organizer) => {
-      if (organizer) {
+      if (organizer && organizer.length) {
         return (
           <div className='schdule-table__organizer'>
               <a

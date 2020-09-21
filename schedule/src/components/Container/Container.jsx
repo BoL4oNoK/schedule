@@ -8,6 +8,7 @@ import ScheduleList from "../list/ScheduleList";
 import UserWindow from "../UserWindow/UserWindow";
 import CalendarForSchedule from "../../components/calendar/calendar";
 import ModalWindowEdit from "./../ModalWindowEdit/ModalWindowEdit";
+import DonwloadButtonsContainer from '../download-buttons/DownloadButtons';
 
 import { VIEWS_FOR_SCHEDULE } from "../../constants/constants";
 
@@ -38,12 +39,14 @@ const Container = () => {
     <>
       <h1>Schedule</h1>
       <Header />
-      <div className={`${isImpairedVersion ? 'impairedVersion' : ''} view-container`}>
+
+      <div className={`${isImpairedVersion ? 'impairedVersion' : ''} view-container`} id="schedule-view">
         <Preloader />
         {changeViewForm()}
       </div>
       <UserWindow />
       <ModalWindowEdit />
+      <DonwloadButtonsContainer />
     </>
   );
 };

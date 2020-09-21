@@ -57,6 +57,7 @@ const ModalWindowEdit = () => {
   const permanentEvent = useSelector((state) => {
     return state.permanentEventReducer.permanentEvent;
   });
+  const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
 
   const onEventLocationChange = (e) => {
     if (e === "online") {
@@ -73,7 +74,7 @@ const ModalWindowEdit = () => {
   if (permanentEvent) {
     console.log(permanentEvent);
     return (
-      <Modal visible={visible} onCancel={handleCancel}>
+      <Modal visible={visible} onCancel={handleCancel} className={ isImpairedVersion ? 'impairedVersion' : '' }>
         <h2 className="wrapper-modal-edit__header">Edit event mode</h2>
 
         <Row gutter={16} style={{ marginTop: "1rem" }}>

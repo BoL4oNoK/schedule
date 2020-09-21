@@ -32,21 +32,17 @@ const UserWindow = () => {
   function handleCancel() {
     dispatch(actionCreator.changeUserModalWindowVisible(!visible));
   };
-
-  if (event !== null) {
-    if (event.place.length !== 0) {
-      setNeedMap(true);
-    }
-  }
-
   
   // const town = 'Минск';
   // const isStreet = 'улица';
   // const street = 'Якубова';
   // const house = '66';
-  // useEffect(() => {
-  //   createMap(town, isStreet, street, house).then(location => setLocation(location));
-  // }, []);
+  useEffect(() => {
+    if (event !== null && event.place.length !== 0) {
+      setNeedMap(true);
+    }
+    createMap().then(location => setLocation(location));
+  }, []);
   const mapData = {
     center: (location !== null) ? [location.latitude, location.longitude] : '',
     zoom: 15,

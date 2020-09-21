@@ -97,10 +97,27 @@ const TIME_ZONES = [
   { name: "Asia/Tbilisi", value: "+04" },
 ];
 
+const HEADERS_FOR_TABLE_CSV = [
+  { label: 'Date', key: 'currentDate' },
+  { label: 'Time', key: 'currentTime' },
+  { label: 'Type', key: 'type' },
+  { label: 'Name', key: 'name' },
+  { label: 'Place', key: 'place' },
+  { label: 'Description', key: 'description' },
+  { label: 'Description URL', key: 'descriptionUrl' },
+  { label: 'Organizer', key: 'organizer' },
+  { label: 'Comment', key: 'comment' },
+];
+
 const HIDE_BUTTON_NAME = {
   hideRowsButtonName: 'Hide Rows',
   showRowsButtonName: 'Show All Rows',
 };
+
+const DOWNLOAD_BUTTONS_NAME = {
+  downloadCsvButtonName: 'Download CSV',
+  downloadPdfButtonName: 'Download PDF', 
+}
 
 export {
   GIT_LINK,
@@ -116,5 +133,7 @@ export {
   ADD_NEW_EVENT_BUTTON_NAME,
   TASKS_TYPES,
   TIME_ZONES,
-  HIDE_BUTTON_NAME
+  HIDE_BUTTON_NAME,
+  DOWNLOAD_BUTTONS_NAME,
+  HEADERS_FOR_TABLE_CSV
 };
