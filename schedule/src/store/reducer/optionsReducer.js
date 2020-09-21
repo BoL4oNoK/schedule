@@ -1,13 +1,14 @@
 import { actionTypes } from '../actions';
-import { TABLE_COLUMNS, VIEWS_FOR_SCHEDULE, USERS } from '../../constants/constants';
+import { TABLE_COLUMNS, VIEWS_FOR_SCHEDULE, USERS, TIME_ZONES } from '../../constants/constants';
 
 const initialState = {
   viewStatus: VIEWS_FOR_SCHEDULE.table,
   user: USERS.student,
-  timeZone: 0,
+  timeZone: TIME_ZONES[3].name,
   tableColumnsVisible: TABLE_COLUMNS,
   color: {},
-  impairedVersion: false
+  impairedVersion: false,
+  visibleRows: null,
 };
 
 export default function optionsReducer (state = initialState, action) {
@@ -64,6 +65,13 @@ export default function optionsReducer (state = initialState, action) {
 
     case actionTypes.GET_OPTIONS_FAIL: {
       return state;
+    }
+
+    case actionTypes.CHANGE_VISIBLE_ROWS: {
+      return {
+        ...state,
+        visibleRows: action.data, 
+      };
     }
 
     default: return state;

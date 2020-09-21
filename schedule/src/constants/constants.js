@@ -57,6 +57,7 @@ const TABLE_COLUMNS = [
 const COLUMNS_TEXT = {
   descriptionLink: "Description Link",
   editButtonName: "Edit",
+  deleteButtonName: "Delete",
   onlineStatus: "Online",
 };
 

@@ -23,10 +23,10 @@ export default function Header() {
 	return (
 		<>
 			<Row justify="space-between">
-				<Col span={8}>
+				<Col span={12}>
 					<ImpairedVersion />
 				</Col>
-				<Col span={8} style={{ float: 'right' }}>
+				<Col span={12} style={{ float: 'right' }}>
 					<SettingsModal />
 					<StudentMentorSwitch />
 				</Col>
@@ -38,8 +38,8 @@ export default function Header() {
 					<HideRowsButton />
 				</Col>
 				<Col span={8}>
-					{ view === VIEWS_FOR_SCHEDULE.table ? <ColumnVisible /> : null }
-					{ user === USERS.mentor ?  <Button type="primary" ghost> { ADD_NEW_EVENT_BUTTON_NAME } </Button> : null }
+					{view === VIEWS_FOR_SCHEDULE.table ? <ColumnVisible /> : null}
+					{user === USERS.mentor ? <Button style={{ float: 'right', margin: '0 10px' }} type="primary" ghost> {ADD_NEW_EVENT_BUTTON_NAME} </Button> : null}
 				</Col>
 			</Row>
 		</>
