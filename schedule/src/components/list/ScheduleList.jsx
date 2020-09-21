@@ -26,6 +26,8 @@ export default function ScheduleList() {
   const dispatch = useDispatch();
   const modalWindowVisible = useSelector((state) => state.modalWindowReducer.userModalWindowVisability);
   const data = useSelector((state) => state.eventsReducer.events) || [];
+  const hightlitedRows = useSelector(state => state.hightlitedRowReducer.hightlitedRows);
+  const visibleRows = useSelector(state => state.optionsReducer.visibleRows);
   let arr;
   const list = (
     <List
@@ -37,10 +39,21 @@ export default function ScheduleList() {
         },
         pageSize: 5,
       }}
-      dataSource={data || []}
+      dataSource={ visibleRows ? visibleRows : data }
       renderItem={(item) => (
         <List.Item
-          key={item.id}
+          onClick={(event) => {
+            if (event.target.parentNode.classList.contains('ant-list-item') && !event.target.parentNode.classList.contains('row-hightlight')) {
+              event.target.parentNode.classList.add('row-hightlight');
+              dispatch(actionCreator.changeHightlitedRowStatus(true));
+              dispatch(actionCreator.changeHightlitedRows( hightlitedRows ? [...hightlitedRows, item] : [ item ]));
+            } else if (event.target.parentNode.classList.contains('row-hightlight')) {
+              event.target.parentNode.classList.remove('row-hightlight');
+              dispatch(actionCreator.changeHightlitedRowStatus(false));
+              dispatch(actionCreator.changeHightlitedRows(hightlitedRows.filter((el) => el.id !== item.id)));
+            }
+          }}
+          key={item.eventId}
           actions={[
             <a
               className="schdule-table__organizer-link"
@@ -57,7 +70,8 @@ export default function ScheduleList() {
               <Button
                 type='text'
                 onClick={() => {
-                  dispatch(actionCreator.changePermanentEvent(item));
+                  const selectedEvent = (item.customEvent) ? data.find(el => el.id === item.id) : item;
+                  dispatch(actionCreator.changePermanentEvent(selectedEvent));
                   dispatch(actionCreator.changeUserModalWindowVisible(!modalWindowVisible));
                 }}
               >
@@ -94,9 +108,12 @@ export default function ScheduleList() {
             </Tag>
             <Tag>{item.place.length ? item.place : "online"}</Tag>
           </div>
-          {!item.type.includes("test") && !item.type.includes("deadline") ? (
+          {item.currentDeadlineDate ? (
             <div className="optionalBlock">
-              <Tag color={selectColor(item.type)}>{item.type}</Tag>
+              <Tag color={selectColor("deadline")}>deadline</Tag>
+              <Tag>
+              {item.currentDeadlineDate} {item.currentDeadlineTime}
+            </Tag>
             </div>
           ) : null}
         </List.Item>

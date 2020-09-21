@@ -15,15 +15,16 @@ const { Option } = Select;
 
 export default function ViewTypeSelect() {
 	const dispatch = useDispatch();
-	const view = useSelector(state => state.viewReducer.viewStatus);
+	const view = useSelector(state => state.optionsReducer.viewStatus);
 
 	const changeView = (value) => {
-		dispatch(actionCreator.changeView(value));
+    dispatch(actionCreator.changeView(value));
+    dispatch(actionCreator.saveOptions());
 	}
 
 	return (
 		<Select
-			 defaultValue={view}
+			 value={view}
 			 style={{ width: 120, margin: '0 10px 0 0' }}
 			 onChange={changeView}
 		>

@@ -1,4 +1,5 @@
 import { actionTypes } from '../actions';
+import addCurrentTimeToEvents from '../../utils/addCurrenttimeToEvents';
 
 const localName = 'scheduleOptions';
 
@@ -12,10 +13,16 @@ const middlewareOptions = (store) => (next) => async (action) => {
         store.dispatch({ type: actionTypes.GET_OPTIONS_FAIL });
       }
       break;
-    case actionTypes.SET_OPTIONS:
-      localStorage.setItem(localName, JSON.stringify(action.data));
-      store.dispatch({ type: actionTypes.GET_OPTIONS_SUCCESS, data: action.data});
+    case actionTypes.SAVE_OPTIONS:
+      localStorage.setItem(localName, JSON.stringify(store.getState().optionsReducer));
       break;
+    case actionTypes.SET_TIME_ZONE:
+      store.dispatch({
+        type: actionTypes.GET_EVENTS_SUCCESS,
+        data: addCurrentTimeToEvents(
+          store.getState().eventsReducer.events,
+          action.data
+        )});
     default:
       next(action);
       break;

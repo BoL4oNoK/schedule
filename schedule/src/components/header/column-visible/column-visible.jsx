@@ -36,19 +36,21 @@ export default function ColumnVisible() {
 const plainOptions = TABLE_COLUMNS;
 
 function Columns() {
-	const checkList = useSelector(state => state.columnVisibleReducer.tableColumnsVisible);
+	const checkList = useSelector(state => state.optionsReducer.tableColumnsVisible);
 	const dispatch = useDispatch();
 	const [indeterminate, setIndeterminate] = useState(true);
 	const [checkAll, setCheckAll] = useState(true);
 
 	const onChange = checkedList => {
 		dispatch(actionCreator.changeColumnsVisible(checkedList))
+		dispatch(actionCreator.saveOptions());
 		setIndeterminate(!!checkedList.length && checkedList.length < plainOptions.length);
 		setCheckAll(checkedList.length === plainOptions.length);
 	};
 
 	const onCheckAllChange = e => {
 		dispatch(actionCreator.changeColumnsVisible(e.target.checked ? plainOptions : []))
+		dispatch(actionCreator.saveOptions());
 		setIndeterminate(false);
 		setCheckAll(e.target.checked);
 	};

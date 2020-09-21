@@ -1,40 +1,45 @@
 
 import React, { useState } from 'react'
-import { Modal, Button, Space } from 'antd';
+import { Drawer, Button, Space } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
 import TaskColorCustomizer from '../task-color-customizer/task-color-customizer';
+import ShowRowsButton from '../hide-and-show-rows-button/ShowRowsButton';
+
 export default function SettingsModal() {
 	const [visible, setVisible] = useState('');
 
-	const showModal = () => {
+	const showDrawer = () => {
 		setVisible(true);
 	};
 
-	const handleOk = e => {
+	const onClose = () => {
 		setVisible(false);
-	};
-
-	const handleCancel = e => {
-		setVisible(false);
-	};
+	}
 
 	return (
 		<>
 			<Space style={{ float: 'right' }} >
 				<Button
-					onClick={showModal}
+					onClick={showDrawer}
 					className="settings-btn"
 				>
 					<SettingFilled />
 				</Button>
 			</Space>
-			<Modal
+			<Drawer
+				title="Settings"
+				placement="right"
+				closable={true}
+				onClose={onClose}
 				visible={visible}
-				onOk={handleOk}
-				onCancel={handleCancel}
+				width="320"
+				bodyStyle={{ padding: "0 25px" }}
+				headerStyle={{ textTransform: "uppercase" }}
 			>
 				<TaskColorCustomizer />
-			</Modal>
+				<ShowRowsButton />
+			</Drawer>
+
 		</>
 	);
 

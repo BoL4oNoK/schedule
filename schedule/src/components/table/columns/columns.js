@@ -5,7 +5,9 @@ import {
   Button
 } from 'antd';
 import {
-  GithubOutlined
+  GithubOutlined,
+  EditTwoTone,
+  DeleteTwoTone,
 } from '@ant-design/icons';
 import { filtersForType } from './filters'; 
 import { GIT_LINK, COLUMNS_TEXT } from '../../../constants/constants';
@@ -135,5 +137,10 @@ export const mentorColumn = {
   className: 'column-action',
   width: 100,
   fixed: 'right',
-  render: () =>  <Button type="dashed">{COLUMNS_TEXT.editButtonName}</Button>
+  render: () =>  (
+    <>
+      <EditTwoTone twoToneColor="#40a9ff" style={{ fontSize: "20px"}} title={COLUMNS_TEXT.editButtonName} />
+      <DeleteTwoTone twoToneColor="#eb2f96" style={{ fontSize: "20px"}} title={COLUMNS_TEXT.deleteButtonName} />
+    </>
+  )
 }

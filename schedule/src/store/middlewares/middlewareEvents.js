@@ -1,7 +1,6 @@
 import { actionTypes } from '../actions';
 import { getEvents, postEvent, updateEventById, deleteEventById } from '../../services/services';
-import addCurrentTimeToEvents from '../addCurrenttimeToEvents';
-
+import updateEventDataObjects from '../../utils/updateEventDataObjects';
 
 const middlewareEvents = (store) => (next) => async (action) => {
   switch (action.type) {
@@ -10,9 +9,9 @@ const middlewareEvents = (store) => (next) => async (action) => {
         const { data: events } = await getEvents();
         store.dispatch({
           type: actionTypes.GET_EVENTS_SUCCESS,
-          data: addCurrentTimeToEvents(
+          data: updateEventDataObjects(
             events,
-            store.getState().timeZoneReducer.timeZone
+            store.getState().optionsReducer.timeZone
           ),
         });
       } catch (e) {
@@ -26,9 +25,9 @@ const middlewareEvents = (store) => (next) => async (action) => {
         const { data: events } = await getEvents();
         store.dispatch({
           type: actionTypes.GET_EVENTS_SUCCESS,
-          data: addCurrentTimeToEvents(
+          data: updateEventDataObjects(
             events,
-            store.getState().timeZoneReducer.timeZone
+            store.getState().optionsReducer.timeZone
           ),
         });
       } catch (e) {
@@ -41,9 +40,9 @@ const middlewareEvents = (store) => (next) => async (action) => {
         const { data: events } = await getEvents();
         store.dispatch({
           type: actionTypes.GET_EVENTS_SUCCESS,
-          data: addCurrentTimeToEvents(
+          data: updateEventDataObjects(
             events,
-            store.getState().timeZoneReducer.timeZone
+            store.getState().optionsReducer.timeZone
           ),
         });
       } catch (e) {
@@ -54,7 +53,13 @@ const middlewareEvents = (store) => (next) => async (action) => {
       try {
         await deleteEventById(action.data);
         const { data: events } = await getEvents();
-        store.dispatch({ type: actionTypes.GET_EVENTS_SUCCESS, data: events });
+        store.dispatch({ 
+          type: actionTypes.GET_EVENTS_SUCCESS,
+          data: updateEventDataObjects(
+            events,
+            store.getState().optionsReducer.timeZone
+          ), 
+        });
       } catch (e) {
         console.log(e);
       }

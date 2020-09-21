@@ -16,14 +16,14 @@ function dateCellRender(value, data) {
     return (
       <ul className="events">
         {listData.map(item => (
-          CalendarElement(item)
+          <CalendarElement key={item.eventId} event={item} data={data} />
         ))}
       </ul>
     );
 }
 
 export default function CalendarForSchedule() {
-    let events = useSelector(state => state.eventsReducer.events);
+    let events = useSelector(state => state.eventsReducer.events) || [];
 
     return <Calendar 
         dateCellRender={(value) => dateCellRender(value, events)}
