@@ -1,0 +1,14 @@
+.impairedVersion, .impairedVersion .ant-select, .impairedVersion .ant-btn, .impairedVersion .ant-switch-inner {
+  font-size: 18px;
+}
+
+.ant-row {
+  padding: 5px 0;
+}
+
+.impairedVersion .ant-row {
+  padding: 10px 0;
+}
+
+
+

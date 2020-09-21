@@ -16,6 +16,7 @@ const { calendar, list } = VIEWS_FOR_SCHEDULE;
 const Container = () => {
   const view = useSelector((state) => state.optionsReducer.viewStatus);
   const dispatch = useDispatch();
+  const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
 
   useEffect(() => {
     dispatch(actionCreator.initEvents());
@@ -37,7 +38,7 @@ const Container = () => {
     <>
       <h1>Schedule</h1>
       <Header />
-      <div className="view-container">
+      <div className={`${isImpairedVersion ? 'impairedVersion' : ''} view-container`}>
         <Preloader />
         {changeViewForm()}
       </div>

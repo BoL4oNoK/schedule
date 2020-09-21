@@ -14,3 +14,11 @@
 .ant-divider-horizontal.ant-divider-with-text {
   font-size: 17px;
 }
+
+.impairedVersion, .impairedVersion .ant-divider-horizontal.ant-divider-with-text, .impairedVersion .ant-modal-title {
+  font-size: 20px;
+}
+
+.impairedVersion a, .impairedVersion b, .impairedVersion p, .impairedVersion input {
+  font-size: 18px;
+}
