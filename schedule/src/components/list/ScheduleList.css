@@ -1,3 +1,7 @@
 .optionalBlock{
     margin-top:.75vh;
 }
+
+.impairedVersion .ant-list-item-action li {
+  font-size: 18px;
+}

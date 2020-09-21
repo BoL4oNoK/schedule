@@ -40,3 +40,9 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+.impairedVersion .ant-badge-status-text, .impairedVersion .ant-picker-calendar,
+.impairedVersion .ant-radio-group .ant-radio-button-wrapper,
+.impairedVersion .ant-select-item-option-content {
+  font-size: 18px;
+}
