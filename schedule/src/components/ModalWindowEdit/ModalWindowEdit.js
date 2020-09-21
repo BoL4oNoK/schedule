@@ -37,6 +37,15 @@ const ModalWindowEdit = () => {
     dispatch(actionCreator.changeEditModalWindowVisible(!visible));
   };
 
+  const [deadLineCheckbox, setDeadlineCheckbox] = useState(false);
+  const [isOnline, setIsOnline] = useState(true);
+  const [address, setAddress] = useState({
+    town: "",
+    typeOfStreet: "",
+    street: "",
+    house: "",
+  });
+
   const [stateEditWindow, setStateEditWindow] = useState({
     description: "",
     place: "",
@@ -51,9 +60,6 @@ const ModalWindowEdit = () => {
     id: "",
   });
 
-  const [deadLineCheckbox, setDeadlineCheckbox] = useState(false);
-  const [isOnline, setIsOnline] = useState(true);
-
   useEffect(() => {
     setStateEditWindow({ ...permanentEvent });
     if (permanentEvent) {
@@ -62,7 +68,11 @@ const ModalWindowEdit = () => {
   }, [permanentEvent]);
 
   function onEventLocationChange(e) {
-    setIsOnline(!isOnline);
+    if (e === "online") {
+      setIsOnline(true);
+    } else {
+      setIsOnline(false);
+    }
   }
 
   const onEventChange = (e) => {
@@ -114,6 +124,39 @@ const ModalWindowEdit = () => {
       });
     }
     setDeadlineCheckbox(!deadLineCheckbox);
+  };
+
+  const onOfflineInputTypeEvent = (e) => {
+    setAddress({
+      ...address,
+      [e.target.getAttribute("attr")]: e.target.value,
+    });
+  };
+
+  const onOfflineSelectTypeEvent = (e) => {
+    if (e === "avenue") {
+      setAddress({
+        ...address,
+        typeOfStreet: "проспект",
+      });
+    } else if (e === "street") {
+      setAddress({
+        ...address,
+        typeOfStreet: "улица",
+      });
+    } else {
+      setAddress({
+        ...address,
+        typeOfStreet: "переулок",
+      });
+    }
+  };
+
+  const onOfflineSubmit = () => {
+    setStateEditWindow({
+      ...stateEditWindow,
+      place: `${address.town} ${address.typeOfStreet} ${address.street} ${address.house}`,
+    });
   };
 
   const onModalSubmit = () => {
@@ -233,7 +276,12 @@ const ModalWindowEdit = () => {
           {isOnline === true ? (
             ""
           ) : (
-            <OfflineComponent MENTOR_MODAL={MENTOR_MODAL} />
+            <OfflineComponent
+              MENTOR_MODAL={MENTOR_MODAL}
+              onOfflineInputTypeEvent={onOfflineInputTypeEvent}
+              onOfflineSelectTypeEvent={onOfflineSelectTypeEvent}
+              onOfflineSubmit={onOfflineSubmit}
+            />
           )}
         </Col>
       </Modal>

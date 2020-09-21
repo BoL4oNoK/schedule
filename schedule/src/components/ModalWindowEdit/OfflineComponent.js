@@ -1,14 +1,25 @@
 import React from "react";
-import { Col, Select, Input } from "antd";
+import { Col, Select, Input, Button } from "antd";
 const { Option, OptGroup } = Select;
 
-const OfflineComponent = ({ MENTOR_MODAL }) => {
+const OfflineComponent = ({
+  MENTOR_MODAL,
+  onOfflineInputTypeEvent,
+  onOfflineSelectTypeEvent,
+  onOfflineSubmit,
+}) => {
   return (
     <Col span={12} style={{ marginTop: "1rem" }}>
-      <Input placeholder="Town" style={{ marginBottom: "5px" }} />
+      <Input
+        placeholder="Town"
+        style={{ marginBottom: "5px" }}
+        attr="town"
+        onChange={onOfflineInputTypeEvent}
+      />
       <Select
         defaultValue="Type of street"
         style={{ width: 200, marginBottom: "5px" }}
+        onChange={onOfflineSelectTypeEvent}
       >
         <OptGroup label="Type">
           <Option value="avenue">{MENTOR_MODAL.streetType.avenue}</Option>
@@ -16,8 +27,24 @@ const OfflineComponent = ({ MENTOR_MODAL }) => {
           <Option value="lane">{MENTOR_MODAL.streetType.lane}</Option>
         </OptGroup>
       </Select>
-      <Input placeholder="Street" style={{ marginBottom: "5px" }} />
-      <Input placeholder="№ of house" />
+      <Input
+        placeholder="Street"
+        style={{ marginBottom: "5px" }}
+        attr="street"
+        onChange={onOfflineInputTypeEvent}
+      />
+      <Input
+        placeholder="№ of house"
+        attr="house"
+        onChange={onOfflineInputTypeEvent}
+      />
+      <Button
+        type="primary"
+        onClick={onOfflineSubmit}
+        style={{ marginTop: "5px" }}
+      >
+        Set Address
+      </Button>
     </Col>
   );
 };
