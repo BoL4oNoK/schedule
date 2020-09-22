@@ -53,10 +53,11 @@ function Columns() {
 		dispatch(actionCreator.saveOptions());
 		setIndeterminate(false);
 		setCheckAll(e.target.checked);
-	};
+  };
+  const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
 
 	return (
-		<div className="columns-visible-dropdown">
+		<div className={`${isImpairedVersion ? 'impairedVersion' : ''} columns-visible-dropdown`}>
 			<div className="site-checkbox-all-wrapper">
 				<Checkbox
 					indeterminate={indeterminate}

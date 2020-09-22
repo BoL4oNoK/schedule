@@ -52,7 +52,7 @@ export default function optionsReducer (state = initialState, action) {
     case actionTypes.CHANGE_VERSION: {
       return {
         ...state,
-        impairedVersion: !state.impairedVersion,
+        impairedVersion: action.data,
       };
     }
 

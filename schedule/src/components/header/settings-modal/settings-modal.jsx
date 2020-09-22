@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Drawer, Button, Space } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
 import TaskColorCustomizer from '../task-color-customizer/task-color-customizer';
+import './settings-modal.css'
 
 export default function SettingsModal() {
 	const [visible, setVisible] = useState('');
@@ -12,7 +13,9 @@ export default function SettingsModal() {
 
 	const onClose = () => {
 		setVisible(false);
-	}
+  }
+  
+  const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
 
 	return (
 		<>
@@ -31,10 +34,11 @@ export default function SettingsModal() {
 				onClose={onClose}
 				visible={visible}
 				width="320"
-				bodyStyle={{ padding: "0 25px" }}
+        bodyStyle={{ padding: "0 25px"}}
+        className={ isImpairedVersion ? 'impairedVersion' : '' }
 				headerStyle={{ textTransform: "uppercase" }}
 			>
-				<TaskColorCustomizer />
+			<TaskColorCustomizer isImpairedVersion={isImpairedVersion}/>
 			</Drawer>
 		</>
 	);
