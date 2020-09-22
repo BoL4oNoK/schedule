@@ -1,5 +1,11 @@
 .student-mentor-switch {
 	position: absolute;
+	display: flex;
+	flex-direction: row;
 	top: calc(-100% - 10px);
 	right: 0;
+}
+
+.student-mentor-button {
+	width: 50%;
 }

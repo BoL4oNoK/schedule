@@ -19,7 +19,16 @@ export default function StudentMentorSwitch() {
 			value={user}
 			buttonStyle="solid"
 			className="student-mentor-switch" >
-        { Object.values(USERS).map(item => <Radio.Button value={item} key={item} onClick={onClick}>{item}</Radio.Button>) }
+        { 
+          Object.values(USERS).map(item => <Radio.Button
+            className="student-mentor-button"
+            value={item}
+            key={item}
+            onClick={onClick}
+          >
+            { item }
+          </Radio.Button>)
+        }
 		</Radio.Group>
 	);
 }
