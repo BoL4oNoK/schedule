@@ -6,6 +6,7 @@ import {
   MENTOR_MODAL,
   TASKS_TYPES,
   TIME_ZONES,
+  DefaultEditState,
 } from "./../../constants/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreator } from "../../store/actions";
@@ -17,7 +18,6 @@ import {
   getRightTime,
 } from "./../../utils/editWindowUtils";
 import OfflineComponent from "./OfflineComponent";
-
 const { Option, OptGroup } = Select;
 const { TextArea } = Input;
 const { RangePicker } = DatePicker;
@@ -47,19 +47,12 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
     house: "",
   });
 
-  const [stateEditWindow, setStateEditWindow] = useState({
-    description: "",
-    place: "",
-    dateTime: "",
-    organizer: "",
-    comment: "",
-    descriptionUrl: "",
-    type: "",
-    deadlineDateTime: "",
-    timeZone: "",
-    name: "",
-    id: "",
+  const [rightEventDate, setRightEventDate] = useState({
+    dateTime: "2020-09-15 00:00",
+    deadlineDateTime: "2020-09-15 00:00",
   });
+
+  const [stateEditWindow, setStateEditWindow] = useState(DefaultEditState);
   const isImpairedVersion = useSelector(
     (state) => state.optionsReducer.impairedVersion
   );
@@ -68,6 +61,8 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
     setStateEditWindow({ ...permanentEvent });
     if (permanentEvent) {
       setDeadlineCheckbox(permanentEvent.deadlineDateTime ? true : false);
+      const rightTime = getRightTime(permanentEvent);
+      setRightEventDate(rightTime);
     }
   }, [permanentEvent]);
 
@@ -110,13 +105,17 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
       dateTime: dateString[0],
       deadlineDateTime: dateString[1],
     });
+    setRightEventDate({
+      dateTime: dateString[0],
+      deadlineDateTime: dateString[1],
+    });
   };
 
   const onDeadlineCheckboxChange = (e) => {
     if (e.target.checked === true) {
       setStateEditWindow({
         ...stateEditWindow,
-        deadlineDateTime: refRangePicker.current.props.defaultValue[1]._i,
+        deadlineDateTime: refRangePicker.current.props.value[1]._i,
       });
     } else {
       setStateEditWindow({
@@ -150,13 +149,11 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
 
   const onModalSubmit = () => {
     const rightData = getRightData(stateEditWindow);
-    console.log(rightData);
-    // dispatch(actionCreator.updateEvent([rightData.id, rightData]));
-    // dispatch(actionCreator.changeEditModalWindowVisible(!visible));
+    dispatch(actionCreator.updateEvent([rightData.id, rightData]));
+    dispatch(actionCreator.changeEditModalWindowVisible(!visible));
   };
 
   if (permanentEvent) {
-    const rightTime = getRightTime(permanentEvent);
     return (
       <Modal
         visible={visible}
@@ -221,12 +218,14 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
               format={MENTOR_MODAL.DATE_FORMAT}
               disabled={[false, !deadLineCheckbox]}
               onChange={onDateChange}
-              defaultValue={[
-                moment(rightTime.dateTime, MENTOR_MODAL.DATE_FORMAT),
-                !rightTime.deadlineDateTime
+              value={[
+                !rightEventDate.dateTime
+                  ? moment("2020-12-31 10:10", MENTOR_MODAL.DATE_FORMAT)
+                  : moment(rightEventDate.dateTime, MENTOR_MODAL.DATE_FORMAT),
+                !rightEventDate.deadlineDateTime
                   ? moment("2020-12-31 10:10", MENTOR_MODAL.DATE_FORMAT)
                   : moment(
-                      rightTime.deadlineDateTime,
+                      rightEventDate.deadlineDateTime,
                       MENTOR_MODAL.DATE_FORMAT
                     ),
               ]}
@@ -258,7 +257,7 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
 
         <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
           <Select
-            defaultValue="Online/Offline"
+            defaultValue={stateEditWindow.place === "" ? "Online" : "Offline"}
             style={{ width: 200 }}
             onChange={onEventLocationChange}
           >

@@ -120,6 +120,20 @@ const DOWNLOAD_BUTTONS_NAME = {
   downloadPdfButtonName: "Download PDF",
 };
 
+const DefaultEditState = {
+  description: "",
+  place: "",
+  dateTime: "",
+  organizer: "",
+  comment: "",
+  descriptionUrl: "",
+  type: "",
+  deadlineDateTime: "",
+  timeZone: "",
+  name: "",
+  id: "",
+};
+
 export {
   GIT_LINK,
   urls,
@@ -137,4 +151,5 @@ export {
   HIDE_BUTTON_NAME,
   DOWNLOAD_BUTTONS_NAME,
   HEADERS_FOR_TABLE_CSV,
+  DefaultEditState,
 };

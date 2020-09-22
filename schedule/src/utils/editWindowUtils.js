@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import { Select } from "antd";
 const { Option } = Select;
 
@@ -31,7 +31,10 @@ const getRightData = (state) => {
     comment: state.comment,
     descriptionUrl: state.descriptionUrl,
     type: state.type,
-    deadlineDateTime: state.deadlineDateTime ? state.deadlineDateTime : "",
+    deadlineDateTime:
+      state.deadlineDateTime !== "2020-12-31 10:10"
+        ? state.deadlineDateTime
+        : "",
     timeZone: state.timeZone,
     name: state.name,
     id: state.id,
@@ -42,13 +45,17 @@ const getRightTime = (permanentEvent) => {
   const dateObj = {};
   const dateTime = permanentEvent.currentTime;
   const currentDate = permanentEvent.currentDate.split(".").reverse().join("-");
-  const deadlineTime = permanentEvent.currentDeadlineTime;
-  const deadlineDate = permanentEvent.currentDeadlineDate
-    .split(".")
-    .reverse()
-    .join("-");
   dateObj.dateTime = `${currentDate} ${dateTime}`;
-  dateObj.deadlineDateTime = `${deadlineDate} ${deadlineTime}`;
+
+  if (permanentEvent.currentDeadlineTime) {
+    const deadlineTime = permanentEvent.currentDeadlineTime;
+    const deadlineDate = permanentEvent.currentDeadlineDate
+      .split(".")
+      .reverse()
+      .join("-");
+    dateObj.deadlineDateTime = `${deadlineDate} ${deadlineTime}`;
+  }
+
   return dateObj;
 };
 
