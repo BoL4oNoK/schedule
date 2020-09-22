@@ -8,6 +8,7 @@ const { Option } = Select;
 
 export default function TimezoneSelect() {
   const timeZone = useSelector(state => state.optionsReducer.timeZone);
+  const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
   const dispatch = useDispatch();
 
   const onChange = (e) => {
@@ -18,10 +19,10 @@ export default function TimezoneSelect() {
 	return (
     <Select
       value={timeZone}
-      style={{ width: 170 }}
+      style={{ width: isImpairedVersion ? "220" : "175", margin: "0 10px 0 0" }}
       onChange={onChange}
     >
-      { TIME_ZONES.map(zone => <Option value={zone.name} key={zone.name}>{zone.name}</Option>) }
+      {TIME_ZONES.map(zone => <Option  style={{ fontSize: `${isImpairedVersion ? "18px" : "14px"}` }} value={zone.name} key={zone.name}>{zone.name}</Option>)}
 		</Select>
 	);
 }

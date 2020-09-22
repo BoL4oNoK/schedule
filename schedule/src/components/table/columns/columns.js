@@ -57,7 +57,21 @@ export const columns = [
     key: 'name',
     dataIndex: 'name',
     className: 'column-name',
-    render: (name) => <Button type='text' className='table-event-name'>{ name }</Button>
+    render: (name) => {
+      return (
+        <Button 
+          type='text'
+          className='table-event-name'
+          style={{ maxWidth: 170 }}
+        >
+          <span
+            style={{ textOverflow: 'ellipsis', overflow: 'hidden', width: 150, textAlign: 'left' }}
+          >
+            { name }
+          </span>
+        </Button>
+      )
+    }
   },
   {
     title: 'Place',
@@ -102,7 +116,7 @@ export const columns = [
     dataIndex: 'organizer',
     className: 'column-organizer',
     render: (organizer) => {
-      if (organizer.length) {
+      if (organizer && organizer.length) {
         return (
           <div className='schdule-table__organizer'>
               <a
@@ -139,8 +153,8 @@ export const mentorColumn = {
   fixed: 'right',
   render: () =>  (
     <>
-      <EditTwoTone twoToneColor="#40a9ff" style={{ fontSize: "20px"}} title={COLUMNS_TEXT.editButtonName} />
-      <DeleteTwoTone twoToneColor="#eb2f96" style={{ fontSize: "20px"}} title={COLUMNS_TEXT.deleteButtonName} />
+      <EditTwoTone twoToneColor="#40a9ff" title={COLUMNS_TEXT.editButtonName} />
+      <DeleteTwoTone twoToneColor="#eb2f96" title={COLUMNS_TEXT.deleteButtonName} />
     </>
   )
 }

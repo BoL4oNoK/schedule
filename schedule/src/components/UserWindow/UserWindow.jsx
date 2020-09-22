@@ -27,6 +27,7 @@ const UserWindow = () => {
   const [needMap, setNeedMap] = useState(false);
   const [location, setLocation] = useState(null);
   const { RangePicker } = DatePicker;
+  const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
 
   function handleCancel() {
     dispatch(actionCreator.changeUserModalWindowVisible(!visible));
@@ -54,6 +55,7 @@ const UserWindow = () => {
         visible={visible}
         onCancel={handleCancel}
         footer={null}
+        className={isImpairedVersion ? 'impairedVersion' : ''}
       >
         <Space align='center' className='task'>
           <h2>{event.name}</h2>

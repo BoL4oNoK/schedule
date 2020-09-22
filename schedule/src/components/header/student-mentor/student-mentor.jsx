@@ -9,6 +9,8 @@ export default function StudentMentorSwitch() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.optionsReducer.user);
 
+  const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
+
   const onClick = (e) => {
     dispatch(actionCreator.changeUser(e.target.value));
     dispatch(actionCreator.saveOptions());
@@ -18,7 +20,7 @@ export default function StudentMentorSwitch() {
 		<Radio.Group
 			value={user}
 			buttonStyle="solid"
-			className="student-mentor-switch" >
+      className={`${isImpairedVersion ? 'impairedVersion' : ''} student-mentor-switch`} >
         { 
           Object.values(USERS).map(item => <Radio.Button
             className="student-mentor-button"

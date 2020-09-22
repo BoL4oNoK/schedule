@@ -9,3 +9,7 @@
 .student-mentor-button {
 	width: 50%;
 }
+
+.impairedVersion.student-mentor-switch * {
+  font-size: 20px;
+}
