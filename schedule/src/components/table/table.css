@@ -36,7 +36,7 @@
 }
 
 .ant-table-cell-fix-left, .ant-table-cell-fix-right {
-  background: inherit;
+  background: white;
 }
 
 .anticon-delete {

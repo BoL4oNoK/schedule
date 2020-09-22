@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './calendar.css';
 import 'antd/dist/antd.css';
-import { Calendar } from 'antd';
+import { Calendar, Result } from 'antd';
 import CalendarElement from './calendarElement';
 import dateFormat from '../../utils/dateformat';
 import { useSelector } from 'react-redux';
@@ -24,8 +24,28 @@ function dateCellRender(value, data) {
 
 export default function CalendarForSchedule() {
     let events = useSelector(state => state.eventsReducer.events) || [];
+    const [viewWith, setViewWidth] = useState(true);
 
-    return <Calendar 
-        dateCellRender={(value) => dateCellRender(value, events)}
-    />;
+    useEffect(() => {
+      if (document.documentElement.clientWidth < 560) {
+        setViewWidth(false);
+      }
+    }, []);
+
+    window.addEventListener(`resize`, event => {
+      document.documentElement.clientWidth < 560 ? setViewWidth(false) : setViewWidth(true);
+    }, false);
+
+    return (
+      <>
+        {
+          viewWith ? <Calendar
+            dateCellRender={(value) => dateCellRender(value, events)}
+          /> : <Result
+            title="Window Size"
+            subTitle="Sorry, this window size not available for calendar."
+          />
+        }
+      </>
+    );
 }
