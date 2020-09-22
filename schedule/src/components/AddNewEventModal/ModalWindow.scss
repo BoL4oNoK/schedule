@@ -1,7 +1,7 @@
 .wrapper-modal-edit {
   &__header {
     text-align: center;
-    font-size: 3rem;
+    font-size: 2.5rem;
   }
 }
 
@@ -9,4 +9,7 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
+}
+.ant-modal {
+  top: 3%;
 }

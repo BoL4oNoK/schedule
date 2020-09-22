@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState } from "react";
 import {
   Row,
   Col,
@@ -26,9 +26,9 @@ import {
   GeolocationControl,
   FullscreenControl,
   ZoomControl,
-  SearchControl,
 } from "react-yandex-maps";
 import { map } from "../../constants/constants";
+import createMap from "../map/map";
 import Form, { useForm } from "antd/lib/form/Form";
 import FormItem from "antd/lib/form/FormItem";
 
@@ -51,28 +51,12 @@ function getTimeZones(TIME_ZONES) {
     );
   });
 }
-function dateFormatReadable(dateTime) {
-  const m =
-    dateTime.getMonth() + 1 < 10
-      ? `0${dateTime.getMonth() + 1}`
-      : dateTime.getMonth() + 1;
-  const d =
-    dateTime.getDate() < 10 ? `0${dateTime.getDate()}` : dateTime.getDate();
-  const t =
-    dateTime.getHours() +
-    ":" +
-    (dateTime.getMinutes() < 10
-      ? `0${dateTime.getMinutes()}`
-      : dateTime.getMinutes());
-  return `${t} ${d}.${m}.${dateTime.getFullYear()}`;
-}
-
 const { Option, OptGroup } = Select;
 const { TextArea } = Input;
 const { RangePicker } = DatePicker;
 
 const AddNewEventModal = () => {
-  const searchControl = useRef(null);
+  const timeZone = useSelector((state) => state.optionsReducer.timeZone);
   const { DATE_FORMAT } = userModal;
   const dispatch = useDispatch();
   const [isOfflineEvent, setIsOfflineEvent] = useState(false);
@@ -80,10 +64,7 @@ const AddNewEventModal = () => {
   const visible = useSelector(
     (state) => state.modalWindowReducer.AddNewEventModalVisability
   );
-  const Show = (data) => {
-    console.log(searchControl.getResult(data.index));
-    console.log("REF:", searchControl, searchControl.current);
-  };
+  const [mapCoord, setmapCoord] = useState([53.868833, 27.596686]);
   const onEventLocationChange = (e) => {
     if (e === "online") {
       setIsOfflineEvent(false);
@@ -92,35 +73,57 @@ const AddNewEventModal = () => {
     }
   };
   const onEventDeadlineChange = (e) => {
+    form.setFieldsValue({ currentDate: null });
     setisEventWithDeadline(e.target.checked);
   };
-  const onFinish = (values) => {
-    console.log(values);
+  const onFinish = async (values) => {
+    const resEvent = {
+      id: "0000",
+      name: values.name,
+      description: values.description,
+      descriptionUrl: values.descriptionUrl,
+      type: values.type,
+      timeZone: values.timeZone,
+      dateTime: Array.isArray(values.currentDate)
+        ? `${values.currentDate[0].year()}-${values.currentDate[0].month()}-${values.currentDate[0].date()} ${values.currentDate[0].hours()}:${values.currentDate[0].minutes()}`
+        : `${values.currentDate.year()}-${values.currentDate.month()}-${values.currentDate.date()} ${values.currentDate.hours()}:${values.currentDate.minutes()}`,
+      place: !isOfflineEvent
+        ? ""
+        : JSON.stringify({
+            town: values.town,
+            typeStreet: "улица",
+            streetName: values.streetName,
+            buildingNbr: values.buildingNbr,
+          }),
+      comment: "",
+      organizer: "kate-latushkina",
+      deadlineDateTime: Array.isArray(values.currentDate)
+        ? `${values.currentDate[1].year()}-${values.currentDate[1].month()}-${values.currentDate[1].date()} ${values.currentDate[1].hours()}:${values.currentDate[1].minutes()}`
+        : "",
+    };
+    if (isOfflineEvent) {
+      const coordObj = await createMap(
+        values.town,
+        values.typeStreet,
+        values.streetName,
+        values.buildingNbr
+      );
+      console.log(coordObj);
+      setmapCoord([+coordObj.latitude, +coordObj.longitude]);
+      console.log(mapCoord);
+    }
+    console.log(resEvent, values);
   };
   const handleCancel = () => {
     dispatch(actionCreator.AddNewEventModalVisability(!visible));
   };
-  const onSubmit = useCallback((values) => {
-    console.log(values);
-  }, []);
+
   const [form] = useForm();
 
   return (
-    <Modal
-      visible={visible}
-      footer={
-        null
-      } /*{[
-        <Button key="back" onClick={handleCancel}>
-          Cancel
-        </Button>,
-        <Button key="submit" type="primary" onClick={onSubmit}>
-          Submit
-        </Button>,
-      ]}*/
-    >
+    <Modal visible={visible} footer={null} onCancel={handleCancel}>
       <h2 className="wrapper-modal-edit__header">Add new event</h2>
-      <Form form={form} onFinish={onFinish} onSubmit={onSubmit} name="basic">
+      <Form form={form} onFinish={onFinish} name="basic">
         <Row gutter={16} style={{ marginTop: "1rem" }}>
           <Col span={6} style={{ marginLeft: "2rem" }}>
             <FormItem
@@ -160,8 +163,8 @@ const AddNewEventModal = () => {
 
         <Row style={{ marginTop: "1rem" }}>
           <Col span={8} style={{ marginLeft: "2rem" }}>
-            <FormItem name="timeZone">
-              <Select defaultValue={"Timezone" + " "} style={{ width: 200 }}>
+            <FormItem name="timeZone" initialValue={timeZone}>
+              <Select style={{ width: 200 }}>
                 <OptGroup label="Timezones">
                   {getTimeZones(TIME_ZONES)}
                 </OptGroup>
@@ -172,7 +175,16 @@ const AddNewEventModal = () => {
             Task with deadline?
           </Checkbox>
           <Col span={14}>
-            <FormItem name="currentDate">
+            <FormItem
+              name="currentDate"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input Task Date!",
+                },
+              ]}
+              onChange={console.log(form.currentDate)}
+            >
               {isEventWithDeadline ? (
                 <RangePicker
                   style={{ marginLeft: "2rem" }}
@@ -203,7 +215,7 @@ const AddNewEventModal = () => {
         <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
           <FormItem name="place">
             <Select
-              defaultValue="Online/Offline"
+              placeholder="Online/Offline"
               style={{ width: 200 }}
               onChange={onEventLocationChange}
             >
@@ -217,35 +229,31 @@ const AddNewEventModal = () => {
           {isOfflineEvent && (
             <Row>
               <Col span={12} style={{ marginTop: "1rem" }}>
-                <Input placeholder="Town" style={{ marginBottom: "5px" }} />
-                <Select
-                  defaultValue="Type of street"
-                  style={{ width: 200, marginBottom: "5px" }}
-                >
-                  <OptGroup label="Type">
-                    <Option value="avenue">
-                      {MENTOR_MODAL.streetType.avenue}
-                    </Option>
-                    <Option value="street">
-                      {MENTOR_MODAL.streetType.street}
-                    </Option>
-                    <Option value="lane">{MENTOR_MODAL.streetType.lane}</Option>
-                  </OptGroup>
-                </Select>
-                <Input placeholder="Street" style={{ marginBottom: "5px" }} />
-                <Input placeholder="№ of house" />
+                <FormItem name="town">
+                  <Input placeholder="Town" style={{ marginBottom: "5px" }} />
+                </FormItem>
+                <FormItem name="streetName">
+                  <Input placeholder="Street" style={{ marginBottom: "5px" }} />
+                </FormItem>
+                <FormItem name="buildingNbr">
+                  <Input placeholder="№ of house" />
+                </FormItem>
               </Col>
               <Col>
                 <YMaps query={{ apikey: map.KEY }}>
                   <div>
                     <Map
                       defaultState={{
-                        center: [55.75, 37.57],
+                        center: mapCoord,
+                        zoom: 9,
+                      }}
+                      state={{
+                        center: mapCoord,
                         zoom: 9,
                       }}
                     >
                       <Placemark
-                        geometry={[55.684758, 37.738521]}
+                        geometry={mapCoord}
                         options={{
                           draggable: true,
                           fillColor: "#DB709377",
@@ -260,7 +268,6 @@ const AddNewEventModal = () => {
                       <GeolocationControl options={{ float: "left" }} />
                       <FullscreenControl />
                       <ZoomControl options={{ float: "right" }} />
-                      <SearchControl instanceRef={searchControl} />
                     </Map>
                   </div>
                 </YMaps>
@@ -268,7 +275,10 @@ const AddNewEventModal = () => {
             </Row>
           )}
         </Col>
-        <FormItem>
+        <FormItem className="ant-modal-footer">
+          <Button key="back" onClick={handleCancel}>
+            Cancel
+          </Button>
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
