@@ -48,7 +48,8 @@
   cursor: pointer;
 }
 
-.anticon-edit {
+.anticon-edit,
+.anticon-delete {
   font-size: 20px;
 }
 
@@ -75,10 +76,7 @@
   font-style: italic;
 }
 
-.impairedVersion .anticon-edit {
+.impairedVersion .anticon-edit,
+.impairedVersion .anticon-delete {
   font-size: 26px;
-}
-
-.ant-btn > span {
-  white-space: break-spaces;
 }

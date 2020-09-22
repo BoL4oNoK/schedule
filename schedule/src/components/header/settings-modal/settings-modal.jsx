@@ -34,7 +34,6 @@ export default function SettingsModal() {
 				closable={true}
 				onClose={onClose}
 				visible={visible}
-				width="320"
         bodyStyle={{ padding: "0 25px"}}
         className={ isImpairedVersion ? 'impairedVersion' : '' }
 				headerStyle={{ textTransform: "uppercase" }}
