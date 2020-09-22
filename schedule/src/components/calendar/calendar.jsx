@@ -5,6 +5,13 @@ import { Calendar, Result } from 'antd';
 import CalendarElement from './calendarElement';
 import dateFormat from '../../utils/dateformat';
 import { useSelector } from 'react-redux';
+import { CALENDAR_VIEW_LIMITS } from '../../constants/constants';
+
+const {
+  warningTitle,
+  warningDescription,
+  widthLimit,
+} = CALENDAR_VIEW_LIMITS;
 
 function getListData(value, data) {
     const textDate = dateFormat(value.year(), value.month() + 1, value.date());
@@ -27,13 +34,13 @@ export default function CalendarForSchedule() {
     const [viewWith, setViewWidth] = useState(true);
 
     useEffect(() => {
-      if (document.documentElement.clientWidth < 560) {
+      if (document.documentElement.clientWidth < widthLimit) {
         setViewWidth(false);
       }
     }, []);
 
     window.addEventListener(`resize`, event => {
-      document.documentElement.clientWidth < 560 ? setViewWidth(false) : setViewWidth(true);
+      document.documentElement.clientWidth < widthLimit ? setViewWidth(false) : setViewWidth(true);
     }, false);
 
     return (
@@ -42,8 +49,8 @@ export default function CalendarForSchedule() {
           viewWith ? <Calendar
             dateCellRender={(value) => dateCellRender(value, events)}
           /> : <Result
-            title="Window Size"
-            subTitle="Sorry, this window size not available for calendar."
+            title={ warningTitle }
+            subTitle={ warningDescription }
           />
         }
       </>
