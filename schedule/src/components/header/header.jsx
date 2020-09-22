@@ -35,7 +35,7 @@ export default function Header() {
 				</Col>
 			</Row>
 			<Row>
-				<Col span={16}>
+				<Col span={16} className='header-selection-col'>
 					<ViewTypeSelect />
 					<TimezoneSelect />
 					<ShowRowsButton />

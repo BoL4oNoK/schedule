@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { Drawer, Button, Space } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
 import TaskColorCustomizer from '../task-color-customizer/task-color-customizer';

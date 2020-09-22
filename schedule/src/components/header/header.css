@@ -10,5 +10,15 @@
   padding: 10px 0;
 }
 
+.header-selection-col {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.header-selection-col .ant-select, 
+.header-selection-col .ant-btn {
+  margin: 3px 10px 3px 0;
+  height: 32px;
+}
 
 

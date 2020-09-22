@@ -19,7 +19,7 @@ export default function TimezoneSelect() {
 	return (
     <Select
       value={timeZone}
-      style={{ width: isImpairedVersion ? "220" : "175", margin: "0 10px 0 0" }}
+      style={{ width: isImpairedVersion ? "220" : "175" }}
       onChange={onChange}
     >
       {TIME_ZONES.map(zone => <Option  style={{ fontSize: `${isImpairedVersion ? "18px" : "14px"}` }} value={zone.name} key={zone.name}>{zone.name}</Option>)}
