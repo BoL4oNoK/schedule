@@ -68,7 +68,7 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
     }
   }, [permanentEvent]);
 
-  function onEventLocationChange(e) {
+  const onEventLocationChange = (e) => {
     if (e === "online") {
       setIsOnline(true);
       setStateEditWindow({
@@ -78,7 +78,7 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
     } else {
       setIsOnline(false);
     }
-  }
+  };
 
   const onEventChange = (e) => {
     setStateEditWindow({
@@ -132,33 +132,22 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
   };
 
   const onOfflineSelectTypeEvent = (e) => {
-    if (e === "avenue") {
-      setAddress({
-        ...address,
-        typeOfStreet: "проспект",
-      });
-    } else if (e === "street") {
-      setAddress({
-        ...address,
-        typeOfStreet: "улица",
-      });
-    } else {
-      setAddress({
-        ...address,
-        typeOfStreet: "переулок",
-      });
-    }
+    setAddress({
+      ...address,
+      typeOfStreet: e,
+    });
   };
 
   const onOfflineSubmit = () => {
     setStateEditWindow({
       ...stateEditWindow,
-      place: `${address.town} ${address.typeOfStreet} ${address.street} ${address.house}`,
+      place: JSON.stringify(address),
     });
   };
 
   const onModalSubmit = () => {
     const rightData = getRightData(stateEditWindow);
+    console.log(rightData);
     // dispatch(actionCreator.updateEvent([rightData.id, rightData]));
     // dispatch(actionCreator.changeEditModalWindowVisible(!visible));
   };

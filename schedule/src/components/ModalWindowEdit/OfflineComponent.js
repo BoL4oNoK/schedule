@@ -22,9 +22,9 @@ const OfflineComponent = ({
         onChange={onOfflineSelectTypeEvent}
       >
         <OptGroup label="Type">
-          <Option value="avenue">{MENTOR_MODAL.streetType.avenue}</Option>
-          <Option value="street">{MENTOR_MODAL.streetType.street}</Option>
-          <Option value="lane">{MENTOR_MODAL.streetType.lane}</Option>
+          <Option value="проспект">{MENTOR_MODAL.streetType.avenue}</Option>
+          <Option value="улица">{MENTOR_MODAL.streetType.street}</Option>
+          <Option value="переулок">{MENTOR_MODAL.streetType.lane}</Option>
         </OptGroup>
       </Select>
       <Input
