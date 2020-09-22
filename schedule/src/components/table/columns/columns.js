@@ -102,7 +102,7 @@ export const columns = [
     dataIndex: 'organizer',
     className: 'column-organizer',
     render: (organizer) => {
-      if (organizer.length) {
+      if (organizer && organizer.length) {
         return (
           <div className='schdule-table__organizer'>
               <a
@@ -139,8 +139,8 @@ export const mentorColumn = {
   fixed: 'right',
   render: () =>  (
     <>
-      <EditTwoTone twoToneColor="#40a9ff" style={{ fontSize: "20px"}} title={COLUMNS_TEXT.editButtonName} />
-      <DeleteTwoTone twoToneColor="#eb2f96" style={{ fontSize: "20px"}} title={COLUMNS_TEXT.deleteButtonName} />
+      <EditTwoTone twoToneColor="#40a9ff" title={COLUMNS_TEXT.editButtonName} />
+      <DeleteTwoTone twoToneColor="#eb2f96" title={COLUMNS_TEXT.deleteButtonName} />
     </>
   )
 }

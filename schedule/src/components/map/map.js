@@ -4,7 +4,7 @@ const {
   KEY,
 } = map;
 
-async function createMap(town, isStreet, street, house) {
+async function createMap(town = 'Минск', isStreet = '', street = '', house = '') {
   const road = street.replace(/\s+/g, '+');
   const res = await fetch(`https://geocode-maps.yandex.ru/1.x/?format=json&apikey=${KEY}&geocode=${town},+${isStreet}+${road},+дом+${house}`);
   const data = await res.json();

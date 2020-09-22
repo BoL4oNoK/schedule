@@ -60,6 +60,9 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
     name: "",
     id: "",
   });
+  const isImpairedVersion = useSelector(
+    (state) => state.optionsReducer.impairedVersion
+  );
 
   useEffect(() => {
     setStateEditWindow({ ...permanentEvent });
@@ -155,12 +158,17 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
   if (permanentEvent) {
     const rightTime = getRightTime(permanentEvent);
     return (
-      <Modal visible={visible} onCancel={handleCancel} onOk={onModalSubmit}>
+      <Modal
+        visible={visible}
+        onCancel={handleCancel}
+        onOk={onModalSubmit}
+        className={isImpairedVersion ? "impairedVersion" : ""}
+      >
         <h2
           className="wrapper-modal-edit__header"
           style={{ fontWeight: "300" }}
         >
-          Edit task
+          Edit event mode
         </h2>
 
         <Row gutter={16} style={{ marginTop: "1rem" }}>

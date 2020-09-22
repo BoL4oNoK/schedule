@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { HIDE_BUTTON_NAME } from '../../../constants/constants';
 import { actionCreator } from '../../../store/actions';
 
-export default function ShowRowsButton() {
+export default function ShowRowsButton({ isImpairedVersion }) {
   const dispatch = useDispatch();
   const visibleRows = useSelector(state => state.optionsReducer.visibleRows);
 
@@ -17,6 +17,7 @@ export default function ShowRowsButton() {
     <Button
       type={ visibleRows ? 'primary' : 'default' }
       onClick={onHideButtonClick}
+      className={isImpairedVersion ? "impairedVersion" : ""}
     >
       { HIDE_BUTTON_NAME.showRowsButtonName }
     </Button>
