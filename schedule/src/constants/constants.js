@@ -119,6 +119,8 @@ const DOWNLOAD_BUTTONS_NAME = {
   downloadPdfButtonName: 'Download PDF', 
 }
 
+const IMPAIRED_SWITCH_TITLE = 'Version for the visually impaired';
+
 export {
   GIT_LINK,
   urls,
@@ -135,5 +137,6 @@ export {
   TIME_ZONES,
   HIDE_BUTTON_NAME,
   DOWNLOAD_BUTTONS_NAME,
-  HEADERS_FOR_TABLE_CSV
+  HEADERS_FOR_TABLE_CSV,
+  IMPAIRED_SWITCH_TITLE
 };

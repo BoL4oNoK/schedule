@@ -8,11 +8,12 @@ import './student-mentor.css'
 export default function StudentMentorSwitch() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.optionsReducer.user);
-  console.log(user)
+
   const onClick = (e) => {
     dispatch(actionCreator.changeUser(e.target.value));
     dispatch(actionCreator.saveOptions());
   }
+
 	return (
 		<Radio.Group
 			value={user}
@@ -20,5 +21,5 @@ export default function StudentMentorSwitch() {
 			className="student-mentor-switch" >
         { Object.values(USERS).map(item => <Radio.Button value={item} key={item} onClick={onClick}>{item}</Radio.Button>) }
 		</Radio.Group>
-	)
+	);
 }

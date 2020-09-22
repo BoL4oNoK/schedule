@@ -1,14 +1,19 @@
 import React from 'react'
-import { Switch, Typography } from "antd";
+import { Switch, Tooltip } from "antd";
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
+
+import { IMPAIRED_SWITCH_TITLE } from '../../../constants/constants';
 
 export default function ImpairedVersion() {
 	return (
-		<div>
-			<Switch
-				checkedChildren={<EyeOutlined />}
-        unCheckedChildren={<EyeInvisibleOutlined />}
-			/> 	<Typography.Text>Version for the visually impaired</Typography.Text>
-		</div>
-	)
+			<Tooltip
+				title={ IMPAIRED_SWITCH_TITLE }
+				placement='right'
+			>
+				<Switch
+					checkedChildren={<EyeOutlined />}
+					unCheckedChildren={<EyeInvisibleOutlined />}
+				/>
+			</Tooltip>
+	);
 }
