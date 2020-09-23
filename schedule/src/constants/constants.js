@@ -15,6 +15,7 @@ const MENTOR_MODAL = {
     street: "Улица",
     lane: "Переулок",
   },
+  DATE_FORMAT: "YYYY-MM-DD HH:mm",
 };
 
 const urls = {
@@ -86,38 +87,52 @@ const TASKS_TYPES = [
 ];
 
 const TIME_ZONES = [
-  { name: "Europe/London", value: "+01" },
-  { name: "Europe/Warsaw", value: "+02" },
-  { name: "Europe/Kiev", value: "+03" },
-  { name: "Europe/Minsk", value: "+03" },
-  { name: "Europe/Moscow", value: "+03" },
-  { name: "Europe/Volgograd", value: "+04" },
-  { name: "Asia/Yekaterinburg", value: "+05" },
-  { name: "Asia/Tashkent", value: "+05" },
-  { name: "Asia/Tbilisi", value: "+04" },
+  { name: "Europe/London", value: "+1" },
+  { name: "Europe/Warsaw", value: "+2" },
+  { name: "Europe/Kiev", value: "+3" },
+  { name: "Europe/Minsk", value: "+3" },
+  { name: "Europe/Moscow", value: "+3" },
+  { name: "Europe/Volgograd", value: "+4" },
+  { name: "Asia/Yekaterinburg", value: "+5" },
+  { name: "Asia/Tashkent", value: "+5" },
+  { name: "Asia/Tbilisi", value: "+4" },
 ];
 
 const HEADERS_FOR_TABLE_CSV = [
-  { label: 'Date', key: 'currentDate' },
-  { label: 'Time', key: 'currentTime' },
-  { label: 'Type', key: 'type' },
-  { label: 'Name', key: 'name' },
-  { label: 'Place', key: 'place' },
-  { label: 'Description', key: 'description' },
-  { label: 'Description URL', key: 'descriptionUrl' },
-  { label: 'Organizer', key: 'organizer' },
-  { label: 'Comment', key: 'comment' },
+  { label: "Date", key: "currentDate" },
+  { label: "Time", key: "currentTime" },
+  { label: "Type", key: "type" },
+  { label: "Name", key: "name" },
+  { label: "Place", key: "place" },
+  { label: "Description", key: "description" },
+  { label: "Description URL", key: "descriptionUrl" },
+  { label: "Organizer", key: "organizer" },
+  { label: "Comment", key: "comment" },
 ];
 
 const HIDE_BUTTON_NAME = {
-  hideRowsButtonName: 'Hide Rows',
-  showRowsButtonName: 'Show All Rows',
+  hideRowsButtonName: "Hide Rows",
+  showRowsButtonName: "Show All Rows",
 };
 
 const DOWNLOAD_BUTTONS_NAME = {
-  downloadCsvButtonName: 'Download CSV',
-  downloadPdfButtonName: 'Download PDF', 
-}
+  downloadCsvButtonName: "Download CSV",
+  downloadPdfButtonName: "Download PDF",
+};
+
+const DefaultEditState = {
+  description: "",
+  place: "",
+  dateTime: "",
+  organizer: "",
+  comment: "",
+  descriptionUrl: "",
+  type: "",
+  deadlineDateTime: "",
+  timeZone: "",
+  name: "",
+  id: "",
+};
 
 export {
   GIT_LINK,
@@ -135,5 +150,6 @@ export {
   TIME_ZONES,
   HIDE_BUTTON_NAME,
   DOWNLOAD_BUTTONS_NAME,
-  HEADERS_FOR_TABLE_CSV
+  HEADERS_FOR_TABLE_CSV,
+  DefaultEditState,
 };
