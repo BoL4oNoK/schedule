@@ -8,13 +8,13 @@ import { actionCreator } from '../../../store/actions';
 
 const { Option } = Select;
 
-export default function TaskColorCustomizer() {
+export default function TaskColorCustomizer({ isImpairedVersion }) {
 	const dispatch = useDispatch();
 	const color = useSelector(state => state.optionsReducer.color);
 	const changeColor = (colorsObj) => {
 		dispatch(actionCreator.changeColor(colorsObj));
-		dispatch(actionCreator.seveOptions())
-	}
+		dispatch(actionCreator.saveOptions())
+  }
 
 	const [current, setCurrent] = useState(TASKS_TYPES[0]);
 	const [displayColorPicker, setDisplayColorPicker] = useState({ text: false, bg: false });
@@ -46,13 +46,15 @@ export default function TaskColorCustomizer() {
 		let text = '';
 		return TASKS_TYPES.map((task, i) => {
 			if (colorData[task]) {
-				background = colorData[task][1].hex
-				text = colorData[task][0].hex
+				const colorBg = colorData[task][1].rgb;
+				const colorText = colorData[task][0].rgb;
+				background = `rgba(${colorBg.r}, ${colorBg.g}, ${colorBg.b}, ${colorBg.a})`;
+				text = `rgba(${colorText.r}, ${colorText.g}, ${colorText.b}, ${colorText.a})`;
 			} else {
 				background = '#fff'
 				text = '#000'
 			}
-			return <Option style={{ background: background, color: text }} key={i} className={`task-type-${task}`} value={task} >{task}</Option>
+			return <Option style={{ background: background, color: text }} key={i} className={`task-type-${task} ${isImpairedVersion ? "impairedVersion" : ""}`} value={task} >{task}</Option>
 		})
 	}
 
@@ -172,7 +174,7 @@ export default function TaskColorCustomizer() {
 			<Divider
 				dashed={true}
 				orientation="left">Task color</Divider>
-			<div className="task-color-selector">
+			<div className={`${isImpairedVersion ? "impairedVersion" : ""} task-color-selector`}>
 				<div className="color-select-container"><span>Task type: </span>
 					<Select
 						defaultValue={current}
@@ -232,7 +234,8 @@ export default function TaskColorCustomizer() {
 			</div>
 			<div className="taskExample" style={{
 				background: `${currentBgColor}`,
-				color: `${currentTextColor}`
+        color: `${currentTextColor}`,
+        fontSize: isImpairedVersion ? "18px" : "14px"
 			}}>Task example</div>
 			<Divider dashed />
 		</>

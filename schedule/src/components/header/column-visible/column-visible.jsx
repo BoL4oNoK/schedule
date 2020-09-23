@@ -42,21 +42,22 @@ function Columns() {
 	const [checkAll, setCheckAll] = useState(true);
 
 	const onChange = checkedList => {
-    dispatch(actionCreator.changeColumnsVisible(checkedList))
-    dispatch(actionCreator.seveOptions());
+		dispatch(actionCreator.changeColumnsVisible(checkedList))
+		dispatch(actionCreator.saveOptions());
 		setIndeterminate(!!checkedList.length && checkedList.length < plainOptions.length);
 		setCheckAll(checkedList.length === plainOptions.length);
 	};
 
 	const onCheckAllChange = e => {
-    dispatch(actionCreator.changeColumnsVisible(e.target.checked ? plainOptions : []))
-    dispatch(actionCreator.seveOptions());
+		dispatch(actionCreator.changeColumnsVisible(e.target.checked ? plainOptions : []))
+		dispatch(actionCreator.saveOptions());
 		setIndeterminate(false);
 		setCheckAll(e.target.checked);
-	};
+  };
+  const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
 
 	return (
-		<div className="columns-visible-dropdown">
+		<div className={`${isImpairedVersion ? 'impairedVersion' : ''} columns-visible-dropdown`}>
 			<div className="site-checkbox-all-wrapper">
 				<Checkbox
 					indeterminate={indeterminate}

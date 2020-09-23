@@ -27,25 +27,22 @@ const UserWindow = () => {
   const [needMap, setNeedMap] = useState(false);
   const [location, setLocation] = useState(null);
   const { RangePicker } = DatePicker;
+  const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
 
   function handleCancel() {
     dispatch(actionCreator.changeUserModalWindowVisible(!visible));
   };
-
-  if (event !== null) {
-    if (event.place.length !== 0) {
-      setNeedMap(true);
-    }
-  }
-
   
   // const town = 'Минск';
   // const isStreet = 'улица';
   // const street = 'Якубова';
   // const house = '66';
-  // useEffect(() => {
-  //   createMap(town, isStreet, street, house).then(location => setLocation(location));
-  // }, []);
+  useEffect(() => {
+    if (event !== null && event.place.length !== 0) {
+      setNeedMap(true);
+    }
+    createMap().then(location => setLocation(location));
+  }, []);
   const mapData = {
     center: (location !== null) ? [location.latitude, location.longitude] : '',
     zoom: 15,
@@ -58,6 +55,7 @@ const UserWindow = () => {
         visible={visible}
         onCancel={handleCancel}
         footer={null}
+        className={isImpairedVersion ? 'impairedVersion' : ''}
       >
         <Space align='center' className='task'>
           <h2>{event.name}</h2>

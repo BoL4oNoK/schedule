@@ -17,6 +17,7 @@ export default function HideRowsButton() {
     });
     dispatch(actionCreator.changeVisibleRows(eventsCopy));
     dispatch(actionCreator.changeHightlitedRowStatus(false));
+    dispatch(actionCreator.saveOptions())
   } 
 
   return (
@@ -24,6 +25,7 @@ export default function HideRowsButton() {
       {
         hightlitedRowStatus ? 
           <Button
+            style={{ margin: '0 10px 0 0' }}
             type="dashed"
             onClick={onHideButtonClick}
           >

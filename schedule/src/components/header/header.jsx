@@ -10,6 +10,8 @@ import TimezoneSelect from "./timezone-select/timezone-select";
 import ViewTypeSelect from "./view-type-select/view-type-select";
 import HideRowsButton from "./hide-and-show-rows-button/HideRowsButton";
 import { actionCreator } from "../../store/actions";
+import ShowRowsButton from "./hide-and-show-rows-button/ShowRowsButton";
+import "./header.css";
 
 import {
   USERS,
@@ -20,12 +22,16 @@ import {
 export default function Header() {
   const view = useSelector((state) => state.optionsReducer.viewStatus);
   const user = useSelector((state) => state.optionsReducer.user);
+  const isImpairedVersion = useSelector(
+    (state) => state.optionsReducer.impairedVersion
+  );
   const dispatch = useDispatch();
   const AddNewEventModalVisible = useSelector(
     (state) => state.modalWindowReducer.AddNewEventModalVisibility
   );
+
   return (
-    <>
+    <div className={isImpairedVersion ? "impairedVersion" : ""}>
       <Row justify="space-between">
         <Col span={12}>
           <ImpairedVersion />
@@ -35,10 +41,11 @@ export default function Header() {
           <StudentMentorSwitch />
         </Col>
       </Row>
-      <Row style={{ padding: "10px 0" }}>
+      <Row>
         <Col span={16}>
           <ViewTypeSelect />
           <TimezoneSelect />
+          <ShowRowsButton />
           <HideRowsButton />
         </Col>
         <Col span={8}>
@@ -62,6 +69,6 @@ export default function Header() {
           ) : null}
         </Col>
       </Row>
-    </>
+    </div>
   );
 }

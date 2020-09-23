@@ -15,7 +15,8 @@ const { Option } = Select;
 
 export default function ViewTypeSelect() {
 	const dispatch = useDispatch();
-	const view = useSelector(state => state.optionsReducer.viewStatus);
+  const view = useSelector(state => state.optionsReducer.viewStatus);
+  const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
 
 	const changeView = (value) => {
     dispatch(actionCreator.changeView(value));
@@ -25,16 +26,16 @@ export default function ViewTypeSelect() {
 	return (
 		<Select
 			 value={view}
-			 style={{ width: 120, margin: '0 10px 0 0' }}
+			 style={{ width: isImpairedVersion ? 135 : 120, margin: '0 10px 0 0' }}
 			 onChange={changeView}
 		>
-			<Option value={table}>
+			<Option value={table} style={{ fontSize: isImpairedVersion ? "18px" : "14px" }}>
 				<TableOutlined />  <Typography.Text>Table</Typography.Text>
 			</Option>
-			<Option value={list}>
+			<Option value={list} style={{ fontSize: isImpairedVersion ? "18px" : "14px" }}>
 				<UnorderedListOutlined />  <Typography.Text>List</Typography.Text>
 			</Option>
-			<Option value={calendar}>
+			<Option value={calendar} style={{ fontSize: isImpairedVersion ? "18px" : "14px" }}>
 				<CalendarOutlined />  <Typography.Text>Calendar</Typography.Text>
 			</Option>
 		</Select>

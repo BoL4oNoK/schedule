@@ -38,3 +38,47 @@
 .ant-table-cell-fix-left, .ant-table-cell-fix-right {
   background: inherit;
 }
+
+.anticon-delete {
+  margin-left: 5px;
+}
+
+.anticon-edit,
+.anticon-delete {
+  cursor: pointer;
+}
+
+.anticon-edit {
+  font-size: 20px;
+}
+
+.anticon-edit:hover,
+.anticon-delete:hover {
+  border: 1px dashed;
+}
+
+.anticon-edit:hover {
+  border-color: #40a9ff;
+}
+
+.anticon-delete:hover {
+  border-color: #eb2f96;
+}
+
+.impairedVersion .ant-table.ant-table-small, .impairedVersion .ant-tag {
+  font-size: 18px;
+}
+
+.impairedVersion .table-event-name{
+  font-size: 18px;
+  color: black;
+  font-style: italic;
+}
+
+.impairedVersion .anticon-edit {
+  font-size: 26px;
+}
+
+.ant-btn > span {
+  white-space: break-spaces;
+}

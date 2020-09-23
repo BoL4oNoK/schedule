@@ -31,9 +31,7 @@ export default function ScheduleList() {
   const hightlitedRows = useSelector(
     (state) => state.hightlitedRowReducer.hightlitedRows
   );
-  const visibleRows = useSelector(
-    (state) => state.visibleRowsReducer.visibleRows
-  );
+  const visibleRows = useSelector((state) => state.optionsReducer.visibleRows);
   let arr;
   const list = (
     <List

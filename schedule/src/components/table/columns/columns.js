@@ -5,7 +5,9 @@ import {
   Button
 } from 'antd';
 import {
-  GithubOutlined
+  GithubOutlined,
+  EditTwoTone,
+  DeleteTwoTone,
 } from '@ant-design/icons';
 import { filtersForType } from './filters'; 
 import { GIT_LINK, COLUMNS_TEXT } from '../../../constants/constants';
@@ -55,7 +57,21 @@ export const columns = [
     key: 'name',
     dataIndex: 'name',
     className: 'column-name',
-    render: (name) => <Button type='text' className='table-event-name'>{ name }</Button>
+    render: (name) => {
+      return (
+        <Button 
+          type='text'
+          className='table-event-name'
+          style={{ maxWidth: 170 }}
+        >
+          <span
+            style={{ textOverflow: 'ellipsis', overflow: 'hidden', width: 150, textAlign: 'left' }}
+          >
+            { name }
+          </span>
+        </Button>
+      )
+    }
   },
   {
     title: 'Place',
@@ -100,7 +116,7 @@ export const columns = [
     dataIndex: 'organizer',
     className: 'column-organizer',
     render: (organizer) => {
-      if (organizer.length) {
+      if (organizer && organizer.length) {
         return (
           <div className='schdule-table__organizer'>
               <a
@@ -135,5 +151,10 @@ export const mentorColumn = {
   className: 'column-action',
   width: 100,
   fixed: 'right',
-  render: () =>  <Button type="dashed">{COLUMNS_TEXT.editButtonName}</Button>
+  render: () =>  (
+    <>
+      <EditTwoTone twoToneColor="#40a9ff" title={COLUMNS_TEXT.editButtonName} />
+      <DeleteTwoTone twoToneColor="#eb2f96" title={COLUMNS_TEXT.deleteButtonName} />
+    </>
+  )
 }
