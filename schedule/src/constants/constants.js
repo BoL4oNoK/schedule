@@ -36,6 +36,7 @@ const userModal = {
   URL_DESCTIPTION: "Description URL",
   LOCATION: "Location",
   ONLINE: "Online",
+  COMMENT: 'Comment',
   DATE_FORMAT: "DD-MM-YYYY HH:mm",
 };
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
-import { Modal, Space, Tag, Divider } from 'antd';
+import { Modal, Space, Tag, Divider, Input } from 'antd';
 import { DatePicker } from 'antd';
 import moment from 'moment';
 import 'antd/dist/antd.css';
@@ -17,10 +17,13 @@ const {
   DATE_FORMAT,
   TASK_DESCTIPTION,
   LOCATION,
-  URL_DESCTIPTION
+  URL_DESCTIPTION,
+  COMMENT
 } = userModal;
 
-const UserWindow = () => {
+const UserWindow = (props) => {
+  const { Search } = Input;
+  const { isFeedback } = props;
   const dispatch = useDispatch();
   const visible = useSelector(state => state.modalWindowReducer.userModalWindowVisability);
   const event = useSelector(state => state.permanentEventReducer.permanentEvent);
@@ -28,11 +31,15 @@ const UserWindow = () => {
   const [location, setLocation] = useState(null);
   const { RangePicker } = DatePicker;
   const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
-
+  const events = useSelector(state => state.commentReducer.comment);
+  
   function handleCancel() {
     dispatch(actionCreator.changeUserModalWindowVisible(!visible));
   };
-  
+
+  // if (event) {
+  //   console.log(JSON.parse(event.place))
+  // }
   // const town = 'Минск';
   // const isStreet = 'улица';
   // const street = 'Якубова';
@@ -41,12 +48,17 @@ const UserWindow = () => {
     if (event !== null && event.place.length !== 0) {
       setNeedMap(true);
     }
+
     createMap().then(location => setLocation(location));
   }, []);
   const mapData = {
     center: (location !== null) ? [location.latitude, location.longitude] : '',
     zoom: 15,
   };
+
+  function saveComment() {
+    dispatch(actionCreator.addComment());
+  }
 
   return ((event == null) ? '' : (
     <>
@@ -61,24 +73,24 @@ const UserWindow = () => {
           <h2>{event.name}</h2>
           {
             !event.currentDeadlineDate
-              ? <DatePicker 
-                  value={moment(event.currentDate + ' ' + event.currentTime, DATE_FORMAT)}
-                  disabled
-                  format={DATE_FORMAT}
-                />
+              ? <DatePicker
+                value={moment(event.currentDate + ' ' + event.currentTime, DATE_FORMAT)}
+                disabled
+                format={DATE_FORMAT}
+              />
               : <RangePicker
-                  value={[
-                    moment(event.currentDate + ' ' + event.currentTime, DATE_FORMAT),
-                    moment(event.currentDeadlineDate + ' ' + event.currentDeadlineTime, DATE_FORMAT)
-                  ]}
-                  disabled
-                  format={DATE_FORMAT}
-                />
+                value={[
+                  moment(event.currentDate + ' ' + event.currentTime, DATE_FORMAT),
+                  moment(event.currentDeadlineDate + ' ' + event.currentDeadlineTime, DATE_FORMAT)
+                ]}
+                disabled
+                format={DATE_FORMAT}
+              />
           }
         </Space>
         <Tag color={selectColor(event.type)} key={event.type}>
-            {event.type}
-          </Tag>
+          {event.type}
+        </Tag>
         <div className='task-description'>
           <Divider orientation='left'>{TASK_DESCTIPTION}</Divider>
           <p>{event.description}</p>
@@ -98,6 +110,13 @@ const UserWindow = () => {
               </Map>
             </YMaps>
             : <b>{ONLINE}</b>}
+        </div>
+        <div>
+          {(!isFeedback) ? '' : (
+            <div>
+              <Divider orientation='left'>{COMMENT}</Divider>
+              <Search placeholder="Leave a comment..." onSearch={saveComment} enterButton="Save" />
+            </div>)}
         </div>
       </Modal>
     </>
