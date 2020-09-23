@@ -1,6 +1,11 @@
-import { actionTypes } from '../actions';
-import { getEvents, postEvent, updateEventById, deleteEventById } from '../../services/services';
-import updateEventDataObjects from '../../utils/updateEventDataObjects';
+import { actionTypes } from "../actions";
+import {
+  getEvents,
+  postEvent,
+  updateEventById,
+  deleteEventById,
+} from "../../services/services";
+import updateEventDataObjects from "../../utils/updateEventDataObjects";
 
 const middlewareEvents = (store) => (next) => async (action) => {
   switch (action.type) {
@@ -36,7 +41,7 @@ const middlewareEvents = (store) => (next) => async (action) => {
       break;
     case actionTypes.UPDATE_EVENT:
       try {
-        await updateEventById(action.data);
+        await updateEventById(...action.data);
         const { data: events } = await getEvents();
         store.dispatch({
           type: actionTypes.GET_EVENTS_SUCCESS,
@@ -53,12 +58,12 @@ const middlewareEvents = (store) => (next) => async (action) => {
       try {
         await deleteEventById(action.data);
         const { data: events } = await getEvents();
-        store.dispatch({ 
+        store.dispatch({
           type: actionTypes.GET_EVENTS_SUCCESS,
           data: updateEventDataObjects(
             events,
             store.getState().optionsReducer.timeZone
-          ), 
+          ),
         });
       } catch (e) {
         console.log(e);

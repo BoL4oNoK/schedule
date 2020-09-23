@@ -33,15 +33,17 @@ export default function CalendarForSchedule() {
     let events = useSelector(state => state.eventsReducer.events) || [];
     const [viewWith, setViewWidth] = useState(true);
 
+    function windowResizeHandler() {
+      document.documentElement.clientWidth < widthLimit ? setViewWidth(false) : setViewWidth(true);
+    }
+
     useEffect(() => {
       if (document.documentElement.clientWidth < widthLimit) {
         setViewWidth(false);
       }
+      window.addEventListener('resize', windowResizeHandler, false);
+      return () => window.removeEventListener('resize', windowResizeHandler);
     }, []);
-
-    window.addEventListener(`resize`, event => {
-      document.documentElement.clientWidth < widthLimit ? setViewWidth(false) : setViewWidth(true);
-    }, false);
 
     return (
       <>

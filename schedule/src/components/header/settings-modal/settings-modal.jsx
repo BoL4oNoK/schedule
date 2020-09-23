@@ -3,20 +3,22 @@ import { useSelector } from 'react-redux';
 import { Drawer, Button, Space } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
 import TaskColorCustomizer from '../task-color-customizer/task-color-customizer';
-import './settings-modal.css'
+import './settings-modal.css';
 
 export default function SettingsModal() {
-	const [visible, setVisible] = useState('');
-
-	const showDrawer = () => {
-		setVisible(true);
-	};
-
-	const onClose = () => {
-		setVisible(false);
-  }
+  const [visible, setVisible] = useState(false);
   
-  const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
+  const isImpairedVersion = useSelector(
+    (state) => state.optionsReducer.impairedVersion
+  );
+
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
 
 	return (
 		<>
@@ -42,5 +44,4 @@ export default function SettingsModal() {
 			</Drawer>
 		</>
 	);
-
 }
