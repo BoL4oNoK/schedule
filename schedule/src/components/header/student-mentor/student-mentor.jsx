@@ -8,18 +8,29 @@ import './student-mentor.css'
 export default function StudentMentorSwitch() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.optionsReducer.user);
+
   const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
-  console.log(user)
+
   const onClick = (e) => {
     dispatch(actionCreator.changeUser(e.target.value));
     dispatch(actionCreator.saveOptions());
   }
+
 	return (
 		<Radio.Group
 			value={user}
 			buttonStyle="solid"
-			className={`${isImpairedVersion ? 'impairedVersion' : ''} student-mentor-switch`} >
-        { Object.values(USERS).map(item => <Radio.Button value={item} key={item} onClick={onClick}>{item}</Radio.Button>) }
+      className={`${isImpairedVersion ? 'impairedVersion' : ''} student-mentor-switch`} >
+        { 
+          Object.values(USERS).map(item => <Radio.Button
+            className="student-mentor-button"
+            value={item}
+            key={item}
+            onClick={onClick}
+          >
+            { item }
+          </Radio.Button>)
+        }
 		</Radio.Group>
-	)
+	);
 }
