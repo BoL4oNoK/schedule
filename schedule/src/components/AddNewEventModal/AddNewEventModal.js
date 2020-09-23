@@ -42,14 +42,20 @@ function getTasks(TASKS_TYPES) {
   });
 }
 
-function getTimeZones(TIME_ZONES) {
+function getTimeZonesValues(TIME_ZONES) {
   return TIME_ZONES.map((el) => {
     return (
-      <Option value={el.name} key={el.name}>
+      <Option value={el.value} key={el.name}>
         {el.name}({el.value})
       </Option>
     );
   });
+}
+function dateFormatReadable(year, month, day, hours, minutes) {
+  const m = month + 1 < 10 ? `0${month + 1}` : month + 1;
+  const d = day < 10 ? `0${day}` : day;
+  const t = hours + ":" + (minutes < 10 ? `0${minutes}` : minutes);
+  return `${year}-${m}-${d} ${t}`;
 }
 const { Option, OptGroup } = Select;
 const { TextArea } = Input;
@@ -64,6 +70,7 @@ const AddNewEventModal = () => {
   const visible = useSelector(
     (state) => state.modalWindowReducer.AddNewEventModalVisability
   );
+
   const [mapCoord, setmapCoord] = useState([53.868833, 27.596686]);
   const onEventLocationChange = (e) => {
     if (e === "online") {
@@ -72,21 +79,36 @@ const AddNewEventModal = () => {
       setIsOfflineEvent(true);
     }
   };
+  const formatTimeZoneInitial = (timeName) => {
+    return TIME_ZONES[TIME_ZONES.findIndex((x) => x.name === timeName)].value;
+  };
   const onEventDeadlineChange = (e) => {
     form.setFieldsValue({ currentDate: null });
     setisEventWithDeadline(e.target.checked);
   };
   const onFinish = async (values) => {
     const resEvent = {
-      id: "0000",
+      id: "000",
       name: values.name,
       description: values.description,
       descriptionUrl: values.descriptionUrl,
       type: values.type,
-      timeZone: values.timeZone,
+      timeZone: form.getFieldValue("timeZone"),
       dateTime: Array.isArray(values.currentDate)
-        ? `${values.currentDate[0].year()}-${values.currentDate[0].month()}-${values.currentDate[0].date()} ${values.currentDate[0].hours()}:${values.currentDate[0].minutes()}`
-        : `${values.currentDate.year()}-${values.currentDate.month()}-${values.currentDate.date()} ${values.currentDate.hours()}:${values.currentDate.minutes()}`,
+        ? dateFormatReadable(
+            values.currentDate[0].year(),
+            values.currentDate[0].month(),
+            values.currentDate[0].date(),
+            values.currentDate[0].hours(),
+            values.currentDate[0].minutes()
+          )
+        : dateFormatReadable(
+            values.currentDate.year(),
+            values.currentDate.month(),
+            values.currentDate.date(),
+            values.currentDate.hours(),
+            values.currentDate.minutes()
+          ),
       place: !isOfflineEvent
         ? ""
         : JSON.stringify({
@@ -98,7 +120,13 @@ const AddNewEventModal = () => {
       comment: "",
       organizer: "kate-latushkina",
       deadlineDateTime: Array.isArray(values.currentDate)
-        ? `${values.currentDate[1].year()}-${values.currentDate[1].month()}-${values.currentDate[1].date()} ${values.currentDate[1].hours()}:${values.currentDate[1].minutes()}`
+        ? dateFormatReadable(
+            values.currentDate[1].year(),
+            values.currentDate[1].month(),
+            values.currentDate[1].date(),
+            values.currentDate[1].hours(),
+            values.currentDate[1].minutes()
+          )
         : "",
     };
     if (isOfflineEvent) {
@@ -108,11 +136,25 @@ const AddNewEventModal = () => {
         values.streetName,
         values.buildingNbr
       );
-      console.log(coordObj);
       setmapCoord([+coordObj.latitude, +coordObj.longitude]);
-      console.log(mapCoord);
     }
-    console.log(resEvent, values);
+    dispatch(actionCreator.addEvent(resEvent));
+    dispatch(actionCreator.AddNewEventModalVisability(!visible));
+  };
+  const updateMap = async () => {
+    if (
+      form.getFieldValue("town") &&
+      form.getFieldValue("streetName") &&
+      form.getFieldValue("buildingNbr")
+    ) {
+      const coordObj = await createMap(
+        form.getFieldValue("town"),
+        "улица",
+        form.getFieldValue("streetName"),
+        form.getFieldValue("buildingNbr")
+      );
+      setmapCoord([+coordObj.latitude, +coordObj.longitude]);
+    }
   };
   const handleCancel = () => {
     dispatch(actionCreator.AddNewEventModalVisability(!visible));
@@ -163,10 +205,13 @@ const AddNewEventModal = () => {
 
         <Row style={{ marginTop: "1rem" }}>
           <Col span={8} style={{ marginLeft: "2rem" }}>
-            <FormItem name="timeZone" initialValue={timeZone}>
+            <FormItem
+              name="timeZone"
+              initialValue={formatTimeZoneInitial(timeZone)}
+            >
               <Select style={{ width: 200 }}>
                 <OptGroup label="Timezones">
-                  {getTimeZones(TIME_ZONES)}
+                  {getTimeZonesValues(TIME_ZONES)}
                 </OptGroup>
               </Select>
             </FormItem>
@@ -183,7 +228,6 @@ const AddNewEventModal = () => {
                   message: "Please input Task Date!",
                 },
               ]}
-              onChange={console.log(form.currentDate)}
             >
               {isEventWithDeadline ? (
                 <RangePicker
@@ -230,13 +274,17 @@ const AddNewEventModal = () => {
             <Row>
               <Col span={12} style={{ marginTop: "1rem" }}>
                 <FormItem name="town">
-                  <Input placeholder="Town" style={{ marginBottom: "5px" }} />
+                  <Input
+                    placeholder="Town"
+                    style={{ marginBottom: "5px" }}
+                    onChange={updateMap}
+                  />
                 </FormItem>
-                <FormItem name="streetName">
+                <FormItem name="streetName" onChange={updateMap}>
                   <Input placeholder="Street" style={{ marginBottom: "5px" }} />
                 </FormItem>
                 <FormItem name="buildingNbr">
-                  <Input placeholder="№ of house" />
+                  <Input placeholder="№ of house" onChange={updateMap} />
                 </FormItem>
               </Col>
               <Col>
@@ -261,9 +309,6 @@ const AddNewEventModal = () => {
                           strokeOpacity: 0.8,
                           strokeWidth: 5,
                         }}
-                        onDragEnd={(e) =>
-                          console.log(e.get("target").geometry.getCoordinates())
-                        }
                       />
                       <GeolocationControl options={{ float: "left" }} />
                       <FullscreenControl />

@@ -7,21 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { actionCreator } from "../../store/actions";
 import "./ScheduleList.css";
 import "antd/dist/antd.css";
-function dateFormatReadable(dateTime) {
-  const m =
-    dateTime.getMonth() + 1 < 10
-      ? `0${dateTime.getMonth() + 1}`
-      : dateTime.getMonth() + 1;
-  const d =
-    dateTime.getDate() < 10 ? `0${dateTime.getDate()}` : dateTime.getDate();
-  const t =
-    dateTime.getHours() +
-    ":" +
-    (dateTime.getMinutes() < 10
-      ? `0${dateTime.getMinutes()}`
-      : dateTime.getMinutes());
-  return `${t} ${d}.${m}.${dateTime.getFullYear()}`;
-}
+
 export default function ScheduleList() {
   const dispatch = useDispatch();
   const modalWindowVisible = useSelector(
@@ -32,7 +18,6 @@ export default function ScheduleList() {
     (state) => state.hightlitedRowReducer.hightlitedRows
   );
   const visibleRows = useSelector((state) => state.optionsReducer.visibleRows);
-  let arr;
   const list = (
     <List
       itemLayout="vertical"
@@ -105,28 +90,20 @@ export default function ScheduleList() {
           />
 
           <div>
-            {
-              ((arr = [item.type, item.place, item.descriptionUrl].filter(
-                function (el) {
-                  return el;
-                }
-              )),
-              arr.map((element, idx) =>
-                element.includes("http") ? (
-                  <Tag key={idx}>
-                    <a href={element}>{element}</a>
-                  </Tag>
-                ) : (
-                  <Tag color={selectColor(element)} key={idx}>
-                    {element}
-                  </Tag>
-                )
-              ))
-            }
+            <Tag color={selectColor(item.type)}>{item.type}</Tag>
             <Tag>
               {item.currentDate} {item.currentTime}
             </Tag>
-            <Tag>{item.place.length ? item.place : "online"}</Tag>
+            <Tag>
+              {item.place.length
+                ? Object.values(JSON.parse(item.place)).join(" ")
+                : "online"}
+            </Tag>
+            <Tag>
+              <a href={item.descriptionUrl} target="_blank">
+                {item.descriptionUrl}
+              </a>
+            </Tag>
           </div>
           {item.currentDeadlineDate ? (
             <div className="optionalBlock">
