@@ -1,7 +1,11 @@
 import React from "react";
 import { List, Avatar, Tag, Button } from "antd";
 import { GithubOutlined } from "@ant-design/icons";
-import { GIT_AVATAR, GIT_LINK } from "../../constants/constants";
+import {
+  GIT_AVATAR,
+  GIT_LINK,
+  LIST_DESCRIPTION_URL_LINK_TITLE,
+} from "../../constants/constants";
 import { selectColor } from "../../utils/selectColor";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreator } from "../../store/actions";

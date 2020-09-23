@@ -59,7 +59,7 @@ const Container = () => {
         <Preloader />
         {changeViewForm()}
       </div>
-      <UserWindow />
+      <UserWindow isFeedback={isFeedback} />
       <ModalWindowEdit getFeedbackState={getFeedbackState} />
       <DonwloadButtonsContainer />
       <AddNewEventModal />

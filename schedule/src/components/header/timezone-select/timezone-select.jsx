@@ -18,14 +18,14 @@ export default function TimezoneSelect() {
     dispatch(actionCreator.saveOptions());
   };
 
-  return (
+	return (
     <Select
       value={timeZone}
-      style={{ width: isImpairedVersion ? "220" : "175", margin: "0 10px 0 0" }}
+      style={{ width: isImpairedVersion ? "220" : "175" }}
       onChange={onChange}
     >
       {TIME_ZONES.map((zone) => (
-        <Option
+        <Option 
           style={{ fontSize: `${isImpairedVersion ? "18px" : "14px"}` }}
           value={zone.name}
           key={zone.name}
@@ -33,6 +33,6 @@ export default function TimezoneSelect() {
           {zone.name}
         </Option>
       ))}
-    </Select>
-  );
+		</Select>
+	);
 }

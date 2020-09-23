@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   Row,
-  Col,
+  Space,
 } from 'antd';
 import DownloadShedulePdfButton from './download-buttons/DownloadShedulePdfButton';
 import DownloadCsvTableButton from './download-buttons/DonloadScheduleCsvButton';
@@ -9,12 +9,10 @@ import DownloadCsvTableButton from './download-buttons/DonloadScheduleCsvButton'
 export default function DonwloadButtonsContainer() {
   return (
     <Row style={{margin: "1vh 0 1vh 0"}} >
-      <Col span={3}>
+      <Space size='middle'>
         <DownloadCsvTableButton />
-      </Col>
-      <Col>
         <DownloadShedulePdfButton />
-      </Col>
+      </Space>
     </Row>
   );
 }

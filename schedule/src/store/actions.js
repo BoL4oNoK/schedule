@@ -22,6 +22,7 @@ export const actionTypes = {
   CHANGE_HIGHTLITED_ROWS: "CHANGE_HIGHTLITED_ROWS",
   CHANGE_VISIBLE_ROWS: "CHANGE_VISIBLE_ROWS",
   ADD_NEW_EVENT_MODAL_WINDOW_VISIBLE: "ADD_NEW_EVENT_MODAL_WINDOW_VISIBLE",
+  ADD_COMMENT: "ADD_COMMENT",
 };
 
 export const actionCreator = {
@@ -68,4 +69,5 @@ export const actionCreator = {
     type: actionTypes.ADD_NEW_EVENT_MODAL_WINDOW_VISIBLE,
     data,
   }),
+  addComment: (data) => ({ type: actionTypes.ADD_COMMENT, data }),
 };

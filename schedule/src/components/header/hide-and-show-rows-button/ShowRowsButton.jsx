@@ -20,7 +20,6 @@ export default function ShowRowsButton() {
     <>
       {visibleRows ? (
         <Button
-          style={{ margin: "0 10px 0 0" }}
           type={visibleRows ? "primary" : "default"}
           onClick={onHideButtonClick}
           className={isImpairedVersion ? "impairedVersion" : ""}

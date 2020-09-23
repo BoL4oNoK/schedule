@@ -36,6 +36,7 @@ const userModal = {
   URL_DESCTIPTION: "Description URL",
   LOCATION: "Location",
   ONLINE: "Online",
+  COMMENT: 'Comment',
   DATE_FORMAT: "DD-MM-YYYY HH:mm",
 };
 
@@ -134,6 +135,16 @@ const DefaultEditState = {
   id: "",
 };
 
+const IMPAIRED_SWITCH_TITLE = 'Version for the visually impaired';
+
+const LIST_DESCRIPTION_URL_LINK_TITLE = 'Description URL';
+
+const CALENDAR_VIEW_LIMITS = {
+  warningTitle: 'Window Size',
+  warningDescription: 'Sorry, this window size not available for calendar.',
+  widthLimit: 800,
+};
+
 export {
   GIT_LINK,
   urls,
@@ -151,5 +162,8 @@ export {
   HIDE_BUTTON_NAME,
   DOWNLOAD_BUTTONS_NAME,
   HEADERS_FOR_TABLE_CSV,
+  IMPAIRED_SWITCH_TITLE,
+  LIST_DESCRIPTION_URL_LINK_TITLE,
+  CALENDAR_VIEW_LIMITS,
   DefaultEditState,
 };

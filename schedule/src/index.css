@@ -1,9 +1,11 @@
 body {
   font-family: 'Montserrat', sans-serif;
+  width: 100%;
+  margin: 0 auto;
 }
 
 #root {
-  width: 100vw;
+  width: 100%;
   display: flex;
   justify-content: center;
 }

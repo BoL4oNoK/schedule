@@ -1,8 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Switch, Typography } from "antd";
+import { Switch, Tooltip } from "antd";
 import { EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { actionCreator } from '../../../store/actions';
+
+import { IMPAIRED_SWITCH_TITLE } from '../../../constants/constants';
 
 export default function ImpairedVersion() {
   const dispatch = useDispatch();
@@ -14,13 +16,16 @@ export default function ImpairedVersion() {
   }
 
 	return (
-		<div>
-			<Switch
-        checked={isImpairedVersion}
-        onChange={onChange}
-				checkedChildren={<EyeOutlined />}
-        unCheckedChildren={<EyeInvisibleOutlined />}
-			/> 	<Typography.Text>Version for the visually impaired</Typography.Text>
-		</div>
-	)
+			<Tooltip
+				title={ IMPAIRED_SWITCH_TITLE }
+				placement='right'
+			>
+				<Switch
+					checked={isImpairedVersion}
+					onChange={onChange}
+					checkedChildren={<EyeOutlined />}
+					unCheckedChildren={<EyeInvisibleOutlined />}
+				/>
+			</Tooltip>
+	);
 }
