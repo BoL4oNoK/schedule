@@ -57,7 +57,21 @@ export const columns = [
     key: 'name',
     dataIndex: 'name',
     className: 'column-name',
-    render: (name) => <Button type='text' className='table-event-name'>{ name }</Button>
+    render: (name) => {
+      return (
+        <Button 
+          type='text'
+          className='table-event-name'
+          style={{ maxWidth: 170 }}
+        >
+          <span
+            style={{ textOverflow: 'ellipsis', overflow: 'hidden', width: 150, textAlign: 'left' }}
+          >
+            { name }
+          </span>
+        </Button>
+      )
+    }
   },
   {
     title: 'Place',

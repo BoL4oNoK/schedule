@@ -1,10 +1,7 @@
-
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react'
 import { Drawer, Button, Space } from 'antd';
 import { SettingFilled } from '@ant-design/icons';
 import TaskColorCustomizer from '../task-color-customizer/task-color-customizer';
-import ShowRowsButton from '../hide-and-show-rows-button/ShowRowsButton';
 import './settings-modal.css'
 
 export default function SettingsModal() {
@@ -41,10 +38,8 @@ export default function SettingsModal() {
         className={ isImpairedVersion ? 'impairedVersion' : '' }
 				headerStyle={{ textTransform: "uppercase" }}
 			>
-				<TaskColorCustomizer isImpairedVersion={isImpairedVersion}/>
-				<ShowRowsButton isImpairedVersion={isImpairedVersion}/>
+			<TaskColorCustomizer isImpairedVersion={isImpairedVersion}/>
 			</Drawer>
-
 		</>
 	);
 

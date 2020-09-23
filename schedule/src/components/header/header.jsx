@@ -9,6 +9,7 @@ import ImpairedVersion from './impaired-version/impaired-version';
 import TimezoneSelect from './timezone-select/timezone-select';
 import ViewTypeSelect from './view-type-select/view-type-select';
 import HideRowsButton from './hide-and-show-rows-button/HideRowsButton';
+import ShowRowsButton from './hide-and-show-rows-button/ShowRowsButton';
 import './header.css'
 
 import {
@@ -37,6 +38,7 @@ export default function Header() {
 				<Col span={16}>
 					<ViewTypeSelect />
 					<TimezoneSelect />
+					<ShowRowsButton />
 					<HideRowsButton />
 				</Col>
 				<Col span={8} >

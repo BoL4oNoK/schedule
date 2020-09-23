@@ -25,6 +25,7 @@ export default function HideRowsButton() {
       {
         hightlitedRowStatus ? 
           <Button
+            style={{ margin: '0 10px 0 0' }}
             type="dashed"
             onClick={onHideButtonClick}
           >
