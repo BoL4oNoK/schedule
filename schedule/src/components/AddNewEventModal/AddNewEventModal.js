@@ -86,7 +86,9 @@ const AddNewEventModal = () => {
     }
   };
   const formatTimeZoneInitial = (timeName) => {
-    return TIME_ZONES[TIME_ZONES.findIndex((x) => x.name === timeName)].value;
+    return `${timeName}`.length > 3
+      ? TIME_ZONES[TIME_ZONES.findIndex((x) => x.name === timeName)]?.value
+      : timeName;
   };
   const formatTimeZoneKeys = (timeName) => {
     return TIME_ZONES[TIME_ZONES.findIndex((x) => x.name === timeName)].name;
@@ -125,6 +127,7 @@ const AddNewEventModal = () => {
             typeStreet: "улица",
             streetName: values.streetName,
             buildingNbr: values.buildingNbr,
+            additionalAddressInfo: values?.additionalAddressInfo,
           }),
       comment: "",
       organizer: "kate-latushkina",
@@ -294,6 +297,9 @@ const AddNewEventModal = () => {
                 </FormItem>
                 <FormItem name="buildingNbr">
                   <Input placeholder="№ of house" onChange={updateMap} />
+                </FormItem>
+                <FormItem name="additionalAddressInfo">
+                  <Input placeholder="additional Address Info" />
                 </FormItem>
               </Col>
               <Col>
