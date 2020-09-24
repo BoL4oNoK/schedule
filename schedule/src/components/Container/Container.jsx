@@ -8,6 +8,7 @@ import ScheduleList from "../list/ScheduleList";
 import UserWindow from "../UserWindow/UserWindow";
 import CalendarForSchedule from "../../components/calendar/calendar";
 import ModalWindowEdit from "./../ModalWindowEdit/ModalWindowEdit";
+import AddNewEventModal from "./../AddNewEventModal/AddNewEventModal";
 import DonwloadButtonsContainer from "../download-buttons/DownloadButtons";
 
 import { VIEWS_FOR_SCHEDULE } from "../../constants/constants";
@@ -61,6 +62,7 @@ const Container = () => {
       <UserWindow isFeedback={isFeedback} />
       <ModalWindowEdit getFeedbackState={getFeedbackState} />
       <DonwloadButtonsContainer />
+      <AddNewEventModal />
     </>
   );
 };
