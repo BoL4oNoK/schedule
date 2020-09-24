@@ -18,12 +18,6 @@ const Container = () => {
   const view = useSelector((state) => state.optionsReducer.viewStatus);
   const dispatch = useDispatch();
 
-  const [isFeedback, setIsFeedback] = useState(false);
-
-  const getFeedbackState = (e) => {
-    setIsFeedback(!isFeedback);
-  };
-
   const isImpairedVersion = useSelector(
     (state) => state.optionsReducer.impairedVersion
   );
@@ -58,8 +52,8 @@ const Container = () => {
         <Preloader />
         {changeViewForm()}
       </div>
-      <UserWindow isFeedback={isFeedback} />
-      <ModalWindowEdit getFeedbackState={getFeedbackState} />
+      <UserWindow />
+      <ModalWindowEdit />
       <DonwloadButtonsContainer />
     </>
   );

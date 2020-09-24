@@ -21,7 +21,6 @@ export const actionTypes = {
   CHANGE_ROWS_HIGTHLITED_STATUS: 'CHANGE_ROWS_HIGTHLITED_STATUS',
   CHANGE_HIGHTLITED_ROWS: 'CHANGE_HIGHTLITED_ROWS',
   CHANGE_VISIBLE_ROWS: 'CHANGE_VISIBLE_ROWS',
-  ADD_COMMENT: 'ADD_COMMENT',
 }
 
 export const actionCreator = {
@@ -43,5 +42,4 @@ export const actionCreator = {
   changeHightlitedRowStatus: (data) => ({ type: actionTypes.CHANGE_ROWS_HIGTHLITED_STATUS, data }),
   changeHightlitedRows: (data) => ({ type: actionTypes.CHANGE_HIGHTLITED_ROWS, data }),
   changeVisibleRows: (data) => ({ type: actionTypes.CHANGE_VISIBLE_ROWS, data }),
-  addComment: (data) => ({ type: actionTypes.ADD_COMMENT, data }),
 }

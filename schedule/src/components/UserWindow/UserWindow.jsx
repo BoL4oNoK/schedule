@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
-import { Modal, Space, Tag, Divider, Input } from 'antd';
+import { Modal, Space, Tag, Divider, Input, Button } from 'antd';
 import { DatePicker } from 'antd';
 import moment from 'moment';
 import 'antd/dist/antd.css';
@@ -10,6 +10,7 @@ import createMap from '../map/map';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreator } from '../../store/actions';
 import { selectColor } from '../../utils/selectColor';
+import FormForFeedback from './FormForFeedback';
 
 const {
   MODAL_TITLE,
@@ -18,25 +19,24 @@ const {
   TASK_DESCTIPTION,
   LOCATION,
   URL_DESCTIPTION,
-  COMMENT
+  SHOW_FEEDBACKS,
+  HIDE_FEEDBACKS, 
+  FEEDBACK
 } = userModal;
 
-const UserWindow = (props) => {
+const UserWindow = () => {
   const { Search } = Input;
-  const { isFeedback } = props;
   const dispatch = useDispatch();
   const visible = useSelector(state => state.modalWindowReducer.userModalWindowVisability);
   const event = useSelector(state => state.permanentEventReducer.permanentEvent);
   const [needMap, setNeedMap] = useState(false);
   const [location, setLocation] = useState(null);
+  const [feedbacksIsVisible, setFeedbacksIsVisible] = useState(false);
   const { RangePicker } = DatePicker;
   const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
-  const events = useSelector(state => state.commentReducer.comment);
-  
   function handleCancel() {
     dispatch(actionCreator.changeUserModalWindowVisible(!visible));
   };
-
   // if (event) {
   //   console.log(JSON.parse(event.place))
   // }
@@ -56,8 +56,12 @@ const UserWindow = (props) => {
     zoom: 15,
   };
 
-  function saveComment() {
-    dispatch(actionCreator.addComment());
+  function saveFeedback(text) {
+    dispatch(actionCreator.updateEvent([event.id, {...event, feedbacks: event.feedbacks ? [...event.feedbacks, text] : [text] }]));
+  }
+
+  const onShowFeedbackBtnClick = () => {
+    setFeedbacksIsVisible(!feedbacksIsVisible)
   }
 
   return ((event == null) ? '' : (
@@ -112,12 +116,20 @@ const UserWindow = (props) => {
             : <b>{ONLINE}</b>}
         </div>
         <div>
-          {(!isFeedback) ? '' : (
-            <div>
-              <Divider orientation='left'>{COMMENT}</Divider>
-              <Search placeholder="Leave a comment..." onSearch={saveComment} enterButton="Save" />
-            </div>)}
+          {event.isFeedback && <FormForFeedback saveFeedback={saveFeedback} />}
         </div>
+        <Button
+          className="user-modal-btn"
+          type={feedbacksIsVisible ? "primary" : "default"}
+          onClick={onShowFeedbackBtnClick}
+        > 
+        {feedbacksIsVisible ? HIDE_FEEDBACKS : SHOW_FEEDBACKS}
+        </Button>
+        {feedbacksIsVisible && 
+        (<div className="user-modal-feedbacks">
+            {event.feedbacks ? event.feedbacks.map(feedback => <p key={feedback.slice(0, 8)}>{feedback}</p>) : 
+            <p>No feedbacks</p>}
+        </div>)}
       </Modal>
     </>
   ));
