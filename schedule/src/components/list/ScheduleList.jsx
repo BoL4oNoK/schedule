@@ -22,6 +22,12 @@ export default function ScheduleList() {
     (state) => state.hightlitedRowReducer.hightlitedRows
   );
   const visibleRows = useSelector((state) => state.optionsReducer.visibleRows);
+
+  const getPlaceAddress = (place) => {
+    const placeObj = JSON.parse(place);
+    return `${placeObj.town}, ${placeObj.streetName}, ${placeObj.buildingNbr}`;
+  }
+
   const list = (
     <List
       itemLayout="vertical"
@@ -100,14 +106,20 @@ export default function ScheduleList() {
             </Tag>
             <Tag>
               {item.place.length
-                ? Object.values(JSON.parse(item.place)).join(" ")
+                ? getPlaceAddress(item.place)
                 : "online"}
             </Tag>
-            <Tag>
-              <a href={item.descriptionUrl} target="_blank">
-                {item.descriptionUrl}
-              </a>
-            </Tag>
+            {
+              item.descriptionUrl
+              ? (
+                <Tag>
+                  <a href={item.descriptionUrl} target="_blank">
+                    {item.descriptionUrl}
+                  </a>
+                </Tag>
+              )
+              : null
+            }
           </div>
           {item.currentDeadlineDate ? (
             <div className="optionalBlock">
