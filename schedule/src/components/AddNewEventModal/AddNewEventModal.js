@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Row,
   Col,
@@ -67,10 +67,16 @@ const AddNewEventModal = () => {
   const dispatch = useDispatch();
   const [isOfflineEvent, setIsOfflineEvent] = useState(false);
   const [isEventWithDeadline, setisEventWithDeadline] = useState(true);
+  const [render, setRender] = useState(false);
   const visible = useSelector(
     (state) => state.modalWindowReducer.AddNewEventModalVisability
   );
 
+  useEffect(() => {
+    setRender(visible);
+    form.resetFields();
+    form.setFieldsValue({ timeZone: formatTimeZoneKeys(timeZone) });
+  }, [visible]);
   const [mapCoord, setmapCoord] = useState([53.868833, 27.596686]);
   const onEventLocationChange = (e) => {
     if (e === "online") {
@@ -81,6 +87,9 @@ const AddNewEventModal = () => {
   };
   const formatTimeZoneInitial = (timeName) => {
     return TIME_ZONES[TIME_ZONES.findIndex((x) => x.name === timeName)].value;
+  };
+  const formatTimeZoneKeys = (timeName) => {
+    return TIME_ZONES[TIME_ZONES.findIndex((x) => x.name === timeName)].name;
   };
   const onEventDeadlineChange = (e) => {
     form.setFieldsValue({ currentDate: null });
@@ -93,7 +102,7 @@ const AddNewEventModal = () => {
       description: values.description,
       descriptionUrl: values.descriptionUrl,
       type: values.type,
-      timeZone: form.getFieldValue("timeZone"),
+      timeZone: formatTimeZoneInitial(form.getFieldValue("timeZone")),
       dateTime: Array.isArray(values.currentDate)
         ? dateFormatReadable(
             values.currentDate[0].year(),
