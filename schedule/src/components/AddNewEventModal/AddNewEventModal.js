@@ -178,8 +178,8 @@ const AddNewEventModal = () => {
     <Modal visible={visible} footer={null} onCancel={handleCancel}>
       <h2 className="wrapper-modal-edit__header">Add new event</h2>
       <Form form={form} onFinish={onFinish} name="basic">
-        <Row gutter={16} style={{ marginTop: "1rem" }}>
-          <Col span={6} style={{ marginLeft: "2rem" }}>
+        <Row gutter={16}>
+          <Col span={12} style={{ marginLeft: "2rem" }}>
             <FormItem
               name="name"
               rules={[
@@ -189,10 +189,13 @@ const AddNewEventModal = () => {
                 },
               ]}
             >
-              <Input placeholder="Task Name" />
+              <Input
+                placeholder="Task Name"
+                style={{ maxWidth: 200, minWidth: 110 }}
+              />
             </FormItem>
           </Col>
-          <Col span={6}>
+          <Col span={8} style={{ marginLeft: "2rem" }}>
             <FormItem
               name="type"
               rules={[
@@ -202,36 +205,38 @@ const AddNewEventModal = () => {
                 },
               ]}
             >
-              <Select style={{ width: 200 }}>
+              <Select style={{ maxWidth: 200, minWidth: 110 }}>
                 <OptGroup label="TaskTitle">{getTasks(TASKS_TYPES)}</OptGroup>
               </Select>
             </FormItem>
           </Col>
         </Row>
 
-        <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
+        <Col span={22} style={{ marginLeft: "2rem" }}>
           <FormItem name="description">
             <TextArea rows={5} placeholder="Task Description" />
           </FormItem>
         </Col>
 
-        <Row style={{ marginTop: "1rem" }}>
-          <Col span={8} style={{ marginLeft: "2rem" }}>
+        <Row>
+          <Col span={14} style={{ marginLeft: "2rem" }}>
             <FormItem
               name="timeZone"
               initialValue={formatTimeZoneInitial(timeZone)}
             >
-              <Select style={{ width: 200 }}>
+              <Select style={{ maxWidth: 200, minWidth: 110 }}>
                 <OptGroup label="Timezones">
                   {getTimeZonesValues(TIME_ZONES)}
                 </OptGroup>
               </Select>
             </FormItem>
           </Col>
-          <Checkbox onChange={onEventDeadlineChange} defaultChecked>
-            Task with deadline?
-          </Checkbox>
-          <Col span={14}>
+          <Col span={6} style={{ marginLeft: "2rem" }}>
+            <Checkbox onChange={onEventDeadlineChange} defaultChecked>
+              Task with deadline?
+            </Checkbox>
+          </Col>
+          <Col span={16}>
             <FormItem
               name="currentDate"
               rules={[
@@ -262,17 +267,17 @@ const AddNewEventModal = () => {
           </Col>
         </Row>
 
-        <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
+        <Col span={22} style={{ marginLeft: "2rem" }}>
           <FormItem name="descriptionUrl">
             <Input placeholder="Additional url" />
           </FormItem>
         </Col>
 
-        <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
+        <Col span={22} style={{ marginLeft: "2rem" }}>
           <FormItem name="place">
             <Select
               placeholder="Online/Offline"
-              style={{ width: 200 }}
+              style={{ maxWidth: 200, minWidth: 110 }}
               onChange={onEventLocationChange}
             >
               <OptGroup label="Place">
@@ -284,7 +289,7 @@ const AddNewEventModal = () => {
 
           {isOfflineEvent && (
             <Row>
-              <Col span={12} style={{ marginTop: "1rem" }}>
+              <Col span={12}>
                 <FormItem name="town">
                   <Input
                     placeholder="Town"
@@ -302,34 +307,34 @@ const AddNewEventModal = () => {
                   <Input placeholder="additional Address Info" />
                 </FormItem>
               </Col>
-              <Col>
+              <Col className="container-map">
                 <YMaps query={{ apikey: map.KEY }}>
-                  <div>
-                    <Map
-                      defaultState={{
-                        center: mapCoord,
-                        zoom: 9,
+                  <Map
+                    defaultState={{
+                      center: mapCoord,
+                      zoom: 9,
+                    }}
+                    state={{
+                      center: mapCoord,
+                      zoom: 9,
+                    }}
+                    width="100%"
+                    height="100%"
+                  >
+                    <Placemark
+                      geometry={mapCoord}
+                      options={{
+                        draggable: true,
+                        fillColor: "#DB709377",
+                        strokeColor: "#990066",
+                        strokeOpacity: 0.8,
+                        strokeWidth: 5,
                       }}
-                      state={{
-                        center: mapCoord,
-                        zoom: 9,
-                      }}
-                    >
-                      <Placemark
-                        geometry={mapCoord}
-                        options={{
-                          draggable: true,
-                          fillColor: "#DB709377",
-                          strokeColor: "#990066",
-                          strokeOpacity: 0.8,
-                          strokeWidth: 5,
-                        }}
-                      />
-                      <GeolocationControl options={{ float: "left" }} />
-                      <FullscreenControl />
-                      <ZoomControl options={{ float: "right" }} />
-                    </Map>
-                  </div>
+                    />
+                    <GeolocationControl options={{ float: "left" }} />
+                    <FullscreenControl />
+                    <ZoomControl options={{ float: "right" }} />
+                  </Map>
                 </YMaps>
               </Col>
             </Row>
