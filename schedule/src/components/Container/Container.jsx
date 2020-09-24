@@ -18,12 +18,6 @@ const Container = () => {
   const view = useSelector((state) => state.optionsReducer.viewStatus);
   const dispatch = useDispatch();
 
-  const [isFeedback, setIsFeedback] = useState(false);
-
-  const getFeedbackState = (e) => {
-    setIsFeedback(!isFeedback);
-  };
-
   const isImpairedVersion = useSelector(
     (state) => state.optionsReducer.impairedVersion
   );
@@ -48,7 +42,6 @@ const Container = () => {
     <>
       <h1>Schedule</h1>
       <Header />
-
       <div
         className={`${
           isImpairedVersion ? "impairedVersion" : ""
@@ -59,7 +52,7 @@ const Container = () => {
         {changeViewForm()}
       </div>
       <UserWindow />
-      <ModalWindowEdit getFeedbackState={getFeedbackState} />
+      <ModalWindowEdit />
       <DonwloadButtonsContainer />
     </>
   );
