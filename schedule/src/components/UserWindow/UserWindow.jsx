@@ -31,34 +31,31 @@ const UserWindow = (props) => {
   const [location, setLocation] = useState(null);
   const { RangePicker } = DatePicker;
   const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
-  const events = useSelector(state => state.commentReducer.comment);
-  
   function handleCancel() {
     dispatch(actionCreator.changeUserModalWindowVisible(!visible));
+    setNeedMap(false);
   };
 
-  // if (event) {
-  //   console.log(JSON.parse(event.place))
-  // }
-  // const town = 'Минск';
-  // const isStreet = 'улица';
-  // const street = 'Якубова';
-  // const house = '66';
   useEffect(() => {
-    if (event !== null && event.place.length !== 0) {
+    if (event && event.place.length) {
       setNeedMap(true);
+      const parsePlase = JSON.parse(event.place);
+      createMap(parsePlase.town, parsePlase.typeStreet, parsePlase.streetName, parsePlase.buildingNbr).then(location => setLocation(location));
     }
-
-    createMap().then(location => setLocation(location));
-  }, []);
+  }, [event]);
   const mapData = {
-    center: (location !== null) ? [location.latitude, location.longitude] : '',
+    center: (location) ? [location.latitude, location.longitude] : '',
     zoom: 15,
   };
 
   function saveComment() {
     dispatch(actionCreator.addComment());
   }
+  
+  const getPlaceAddress = (place) => {
+    const placeObj = JSON.parse(place);
+    return `${placeObj.town}, ${placeObj.streetName}, ${placeObj.buildingNbr}`;
+  };
 
   return ((event == null) ? '' : (
     <>
@@ -103,22 +100,26 @@ const UserWindow = (props) => {
 
         <div className='map-box'>
           <Divider orientation='left'>{LOCATION}</Divider>
-          {(needMap && location !== null) ?
-            <YMaps query={{ load: 'package.full' }}>
-              <Map defaultState={mapData} >
-                <Placemark geometry={mapData.center} properties={mapData.center} />
-              </Map>
-            </YMaps>
+          {(needMap) ?
+              <div>
+              <p>{getPlaceAddress(event.place)}</p>
+              <YMaps query={{ load: 'package.full' }}>
+                <Map defaultState={mapData} state={mapData}>
+                  <Placemark geometry={mapData.center} properties={mapData.center} />
+                </Map>
+              </YMaps>
+              
+              </div>
             : <b>{ONLINE}</b>}
         </div>
-        <div>
-          {(!isFeedback) ? '' : (
-            <div>
-              <Divider orientation='left'>{COMMENT}</Divider>
-              <Search placeholder="Leave a comment..." onSearch={saveComment} enterButton="Save" />
-            </div>)}
-        </div>
-      </Modal>
+              <div>
+                {(!isFeedback) ? '' : (
+                  <div>
+                    <Divider orientation='left'>{COMMENT}</Divider>
+                    <Search placeholder="Leave a comment..." onSearch={saveComment} enterButton="Save" />
+                  </div>)}
+              </div>
+            </Modal>
     </>
   ));
 };
