@@ -113,7 +113,7 @@ export default function ScheduleList() {
               item.descriptionUrl
               ? (
                 <Tag>
-                  <a href={item.descriptionUrl} target="_blank">
+                  <a href={item.descriptionUrl} target="_blank" rel="noopener noreferrer">
                     { LIST_DESCRIPTION_URL_LINK_TITLE }
                   </a>
                 </Tag>

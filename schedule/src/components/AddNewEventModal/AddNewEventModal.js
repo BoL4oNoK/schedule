@@ -67,13 +67,11 @@ const AddNewEventModal = () => {
   const dispatch = useDispatch();
   const [isOfflineEvent, setIsOfflineEvent] = useState(false);
   const [isEventWithDeadline, setisEventWithDeadline] = useState(true);
-  const [render, setRender] = useState(false);
   const visible = useSelector(
     (state) => state.modalWindowReducer.AddNewEventModalVisability
   );
 
   useEffect(() => {
-    setRender(visible);
     form.resetFields();
     form.setFieldsValue({ timeZone: formatTimeZoneKeys(timeZone) });
   }, [visible]);

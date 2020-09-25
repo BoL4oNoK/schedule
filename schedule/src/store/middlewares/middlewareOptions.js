@@ -23,6 +23,7 @@ const middlewareOptions = (store) => (next) => async (action) => {
           store.getState().eventsReducer.events,
           action.data
         )});
+      break;
     default:
       next(action);
       break;
