@@ -2,9 +2,6 @@
   display: flex;
   justify-content: space-between;
 }
-.ant-modal {
-  width: 60% !important;
-}
 .task h2 {
   margin: 0;
 }
@@ -24,4 +21,25 @@
 }
 .ant-form-item {
   margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .ant-modal {
+    width: 60% !important;
+  }
+}
+@media (max-width: 1024px) {
+  .task {
+    display: block;
+  }
+}
+@media (max-width: 664px) {
+  .ymaps-2-1-77-map {
+    max-width: 100%;
+  }
+}
+@media (max-width: 375px) {
+  .ymaps-2-1-77-map {
+    width: 250px !important;
+  }
 }
