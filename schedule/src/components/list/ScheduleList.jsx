@@ -99,7 +99,7 @@ export default function ScheduleList() {
             description={item.comment}
           />
 
-          <div>
+          <div className='list-main-information-container'>
             <Tag color={selectColor(item.type)}>{item.type}</Tag>
             <Tag>
               {item.currentDate} {item.currentTime}
@@ -114,7 +114,7 @@ export default function ScheduleList() {
               ? (
                 <Tag>
                   <a href={item.descriptionUrl} target="_blank">
-                    {item.descriptionUrl}
+                    { LIST_DESCRIPTION_URL_LINK_TITLE }
                   </a>
                 </Tag>
               )

@@ -42,17 +42,17 @@ export default function Header() {
         </Col>
       </Row>
       <Row>
-        <Col span={16}>
+        <Col span={16} className='header-selection-col_left'>
           <ViewTypeSelect />
           <TimezoneSelect />
           <ShowRowsButton />
           <HideRowsButton />
         </Col>
-        <Col span={8}>
+        <Col span={8} className='header-selection-col_right'>
           {view === VIEWS_FOR_SCHEDULE.table ? <ColumnVisible /> : null}
           {user === USERS.mentor ? (
             <Button
-              style={{ float: "right", margin: "0 10px" }}
+              style={{ float: "right" }}
               type="primary"
               ghost
               onClick={() =>
