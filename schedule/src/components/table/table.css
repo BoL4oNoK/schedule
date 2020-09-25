@@ -35,8 +35,14 @@
   background-color: lightgray;
 }
 
-.ant-table-cell-fix-left, .ant-table-cell-fix-right {
+.ant-table-cell-fix-left,
+.ant-table-cell-fix-right {
   background: white;
+}
+
+.row-hightlight .ant-table-cell-fix-left,
+.row-hightlight .ant-table-cell-fix-right {
+  background: inherit;
 }
 
 .anticon-delete {
