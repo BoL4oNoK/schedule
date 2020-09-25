@@ -21,11 +21,9 @@ const {
   URL_DESCTIPTION,
   SHOW_FEEDBACKS,
   HIDE_FEEDBACKS, 
-  FEEDBACK
 } = userModal;
 
 const UserWindow = () => {
-  const { Search } = Input;
   const dispatch = useDispatch();
   const visible = useSelector(state => state.modalWindowReducer.userModalWindowVisability);
   const event = useSelector(state => state.permanentEventReducer.permanentEvent);
@@ -34,6 +32,8 @@ const UserWindow = () => {
   const [feedbacksIsVisible, setFeedbacksIsVisible] = useState(false);
   const { RangePicker } = DatePicker;
   const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
+  const [curFeedbacks, setCurFeedbacks] = useState([]);
+
   function handleCancel() {
     dispatch(actionCreator.changeUserModalWindowVisible(!visible));
   };
@@ -45,19 +45,54 @@ const UserWindow = () => {
   // const street = 'Якубова';
   // const house = '66';
   useEffect(() => {
+    event && event.feedbacks ? setCurFeedbacks(event.feedbacks) : setCurFeedbacks([]);
+
     if (event !== null && event.place.length !== 0) {
       setNeedMap(true);
     }
 
     createMap().then(location => setLocation(location));
-  }, []);
+  }, [event]);
+
   const mapData = {
     center: (location !== null) ? [location.latitude, location.longitude] : '',
     zoom: 15,
   };
 
   function saveFeedback(text) {
-    dispatch(actionCreator.updateEvent([event.id, {...event, feedbacks: event.feedbacks ? [...event.feedbacks, text] : [text] }]));
+    const {
+      name,
+      description,
+      deadlineDateTime,
+      comment,
+      timeZone,
+      dateTime,
+      place,
+      type,
+      descriptionUrl,
+      organizer,
+      id,
+      isFeedback,
+      feedbacks
+    } = event;
+    const newEvent = {
+      name,
+      description,
+      deadlineDateTime,
+      comment,
+      timeZone,
+      dateTime,
+      place,
+      type,
+      descriptionUrl,
+      organizer,
+      id,
+      isFeedback,
+      feedbacks: feedbacks ? [...feedbacks, text] : [text]
+    }
+
+    dispatch(actionCreator.updateEvent([event.id, newEvent]));
+    setCurFeedbacks([...curFeedbacks, text])
   }
 
   const onShowFeedbackBtnClick = () => {
@@ -127,7 +162,7 @@ const UserWindow = () => {
         </Button>
         {feedbacksIsVisible && 
         (<div className="user-modal-feedbacks">
-            {event.feedbacks ? event.feedbacks.map(feedback => <p key={feedback.slice(0, 8)}>{feedback}</p>) : 
+            {curFeedbacks && curFeedbacks.length ? curFeedbacks.map(feedback => <p key={feedback.slice(0, 8)}>{feedback}</p>) : 
             <p>No feedbacks</p>}
         </div>)}
       </Modal>

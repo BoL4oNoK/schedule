@@ -1,0 +1,37 @@
+.wrapper-modal-edit {
+  &__header {
+    text-align: center;
+    font-size: 2.5rem;
+  }
+}
+
+.button-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+.ant-modal {
+  top: 3%;
+  min-width: 190px;
+}
+.ant-col {
+  min-width: 110px;
+}
+.container-map {
+  width: 50%;
+  min-width: 210px;
+}
+@media only screen and (max-width: 600px) {
+  .ant-form {
+    margin-left: -2rem;
+  }
+  .ant-col {
+    display: block;
+    -ms-flex: 0 0 91.66666667%;
+    flex: 0 0 91.66666667%;
+    max-width: 91.66666667%;
+  }
+  form > .ant-modal-footer {
+    margin-left: 2rem;
+  }
+}
