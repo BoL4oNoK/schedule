@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Select, Input, Button, Row } from "antd";
+import { Col, Select, Input, Button } from "antd";
 import {
   YMaps,
   Map,
@@ -12,7 +12,7 @@ import { map } from "../../constants/constants";
 import createMap from "../map/map";
 import Form, { useForm } from "antd/lib/form/Form";
 import FormItem from "antd/lib/form/FormItem";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 const { Option, OptGroup } = Select;
 
 const OfflineComponent = ({
@@ -24,10 +24,8 @@ const OfflineComponent = ({
   const permanentEvent = useSelector((state) => {
     return state.permanentEventReducer.permanentEvent;
   });
-
   const getValuesForMap = () => {
     if (permanentEvent?.place) {
-      console.log("permanentEvent: ", permanentEvent);
       const place = JSON.parse(permanentEvent.place);
       editForm.setFieldsValue({
         town: place.town,
@@ -39,6 +37,7 @@ const OfflineComponent = ({
     }
   };
   useEffect(() => {
+    editForm.resetFields();
     getValuesForMap();
   }, [permanentEvent]);
 

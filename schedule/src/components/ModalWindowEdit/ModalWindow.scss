@@ -28,7 +28,7 @@
 .container-map {
   width: 50%;
   height: auto;
-  min-width: 210px;
+  min-width: 185px;
   min-height: 100px;
 }
 @media only screen and (max-width: 600px) {
@@ -41,4 +41,38 @@
     flex: 0 0 91.66666667%;
     max-width: 91.66666667%;
   }
+}
+
+@media (min-width: 768px) {
+  .ant-modal {
+    width: 60% !important;
+  }
+}
+@media (max-width: 1024px) {
+  .task {
+    display: block;
+  }
+}
+@media (max-width: 664px) {
+  .ymaps-2-1-77-map {
+    max-width: 100%;
+  }
+}
+@media (max-width: 375px) {
+  .ymaps-2-1-77-map {
+    width: 250px !important;
+  }
+}
+.ant-btn.user-modal-btn {
+  margin: 15px auto 0;
+  display: block;
+}
+
+.user-modal-form-btn {
+  height: auto;
+}
+
+.user-modal-form {
+  display: flex;
+  align-items: stretch;
 }

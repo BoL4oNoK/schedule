@@ -1,11 +1,7 @@
 import React from "react";
 import { List, Avatar, Tag, Button } from "antd";
 import { GithubOutlined } from "@ant-design/icons";
-import {
-  GIT_AVATAR,
-  GIT_LINK,
-  LIST_DESCRIPTION_URL_LINK_TITLE,
-} from "../../constants/constants";
+import { GIT_AVATAR, GIT_LINK } from "../../constants/constants";
 import { selectColor } from "../../utils/selectColor";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreator } from "../../store/actions";
@@ -26,7 +22,7 @@ export default function ScheduleList() {
   const getPlaceAddress = (place) => {
     const placeObj = JSON.parse(place);
     return `${placeObj.town}, ${placeObj.streetName}, ${placeObj.buildingNbr}`;
-  }
+  };
 
   const list = (
     <List
@@ -105,21 +101,19 @@ export default function ScheduleList() {
               {item.currentDate} {item.currentTime}
             </Tag>
             <Tag>
-              {item.place.length
-                ? getPlaceAddress(item.place)
-                : "online"}
+              {item.place.length ? getPlaceAddress(item.place) : "online"}
             </Tag>
-            {
-              item.descriptionUrl
-              ? (
-                <Tag>
-                  <a href={item.descriptionUrl} target="_blank">
-                    {item.descriptionUrl}
-                  </a>
-                </Tag>
-              )
-              : null
-            }
+            {item.descriptionUrl ? (
+              <Tag>
+                <a
+                  href={item.descriptionUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {item.descriptionUrl}
+                </a>
+              </Tag>
+            ) : null}
           </div>
           {item.currentDeadlineDate ? (
             <div className="optionalBlock">

@@ -72,11 +72,13 @@ const AddNewEventModal = () => {
     (state) => state.modalWindowReducer.AddNewEventModalVisability
   );
 
+  const [form] = useForm();
   useEffect(() => {
     setRender(visible);
     form.resetFields();
+    setIsOfflineEvent(false);
     form.setFieldsValue({ timeZone: formatTimeZoneKeys(timeZone) });
-  }, [visible]);
+  }, [visible, render, timeZone, form]);
   const [mapCoord, setmapCoord] = useState([53.868833, 27.596686]);
   const onEventLocationChange = (e) => {
     if (e === "online") {
@@ -171,8 +173,6 @@ const AddNewEventModal = () => {
   const handleCancel = () => {
     dispatch(actionCreator.AddNewEventModalVisability(!visible));
   };
-
-  const [form] = useForm();
 
   return (
     <Modal visible={visible} footer={null} onCancel={handleCancel} forceRender>
@@ -274,9 +274,8 @@ const AddNewEventModal = () => {
         </Col>
 
         <Col span={22} style={{ marginLeft: "2rem" }}>
-          <FormItem name="place">
+          <FormItem name="place" initialValue={"online"}>
             <Select
-              placeholder="Online/Offline"
               style={{ maxWidth: 200, minWidth: 110 }}
               onChange={onEventLocationChange}
             >

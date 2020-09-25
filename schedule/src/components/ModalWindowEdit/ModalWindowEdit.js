@@ -58,8 +58,10 @@ const ModalWindowEdit = () => {
   );
 
   useEffect(() => {
-    setStateEditWindow({ ...permanentEvent, 
-      isFeedback: permanentEvent && Boolean(permanentEvent.isFeedback), });
+    setStateEditWindow({
+      ...permanentEvent,
+      isFeedback: permanentEvent && Boolean(permanentEvent.isFeedback),
+    });
     if (permanentEvent) {
       setDeadlineCheckbox(permanentEvent.deadlineDateTime ? true : false);
       const rightTime = getRightTime(permanentEvent);
@@ -161,7 +163,6 @@ const ModalWindowEdit = () => {
     dispatch(actionCreator.updateEvent([rightData.id, rightData]));
     dispatch(actionCreator.changeEditModalWindowVisible(!visible));
   };
-  console.log("isonlineL:", isOnline);
   if (permanentEvent) {
     return (
       <Modal
@@ -262,7 +263,12 @@ const ModalWindowEdit = () => {
         </Col>
 
         <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
-          <Checkbox onChange={getFeedbackState} checked={stateEditWindow.isFeedback}>Checkbox for feedback</Checkbox>
+          <Checkbox
+            onChange={getFeedbackState}
+            checked={stateEditWindow.isFeedback}
+          >
+            Checkbox for feedback
+          </Checkbox>
         </Col>
 
         <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
