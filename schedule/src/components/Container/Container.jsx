@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { actionCreator } from "../../store/actions";
 import TableForSchedule from "../table/table";
@@ -19,12 +19,6 @@ const Container = () => {
   const view = useSelector((state) => state.optionsReducer.viewStatus);
   const hightlitedRowStatus = useSelector(state => state.hightlitedRowReducer.hightlitedRowStatus);
   const dispatch = useDispatch();
-
-  const [isFeedback, setIsFeedback] = useState(false);
-
-  const getFeedbackState = (e) => {
-    setIsFeedback(!isFeedback);
-  };
 
   const isImpairedVersion = useSelector(
     (state) => state.optionsReducer.impairedVersion
@@ -66,8 +60,8 @@ const Container = () => {
         <Preloader />
         {changeViewForm()}
       </div>
-      <UserWindow isFeedback={isFeedback} />
-      <ModalWindowEdit getFeedbackState={getFeedbackState} />
+      <UserWindow />
+      <ModalWindowEdit />
       <DonwloadButtonsContainer />
       <AddNewEventModal />
     </>
