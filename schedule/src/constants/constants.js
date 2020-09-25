@@ -38,6 +38,8 @@ const userModal = {
   ONLINE: "Online",
   COMMENT: 'Comment',
   DATE_FORMAT: "DD-MM-YYYY HH:mm",
+  SHOW_FEEDBACKS: 'SHOW FEEDBACKS',
+  HIDE_FEEDBACKS: 'HIDE_FEEDBACKS'
 };
 
 const map = {

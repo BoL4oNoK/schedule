@@ -38,6 +38,7 @@ const getRightData = (state) => {
     timeZone: state.timeZone,
     name: state.name,
     id: state.id,
+    isFeedback: state.isFeedback
   };
 };
 

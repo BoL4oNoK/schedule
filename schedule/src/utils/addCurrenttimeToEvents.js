@@ -1,4 +1,3 @@
-import { changeConfirmLocale } from 'antd/lib/modal/locale';
 import { TIME_ZONES } from '../constants/constants';
 
 const addCurrentTimeToEvents = (events, appTimeZone) => events.map(event => {

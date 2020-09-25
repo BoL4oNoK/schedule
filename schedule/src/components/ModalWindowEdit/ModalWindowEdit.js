@@ -24,7 +24,7 @@ const { RangePicker } = DatePicker;
 
 // Edit modal window component
 
-const ModalWindowEdit = ({ getFeedbackState }) => {
+const ModalWindowEdit = () => {
   const dispatch = useDispatch();
   const refRangePicker = useRef();
   const permanentEvent = useSelector((state) => {
@@ -58,7 +58,8 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
   );
 
   useEffect(() => {
-    setStateEditWindow({ ...permanentEvent });
+    setStateEditWindow({ ...permanentEvent, 
+      isFeedback: permanentEvent && Boolean(permanentEvent.isFeedback), });
     if (permanentEvent) {
       setDeadlineCheckbox(permanentEvent.deadlineDateTime ? true : false);
       const rightTime = getRightTime(permanentEvent);
@@ -66,6 +67,13 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
     }
     permanentEvent?.place?.length ? setIsOnline(false) : setIsOnline(true);
   }, [permanentEvent]);
+
+  const getFeedbackState = (e) => {
+    setStateEditWindow({
+      ...stateEditWindow,
+      isFeedback: !stateEditWindow.isFeedback,
+    });
+  };
 
   const onEventLocationChange = (e) => {
     if (e === "online") {
@@ -254,7 +262,7 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
         </Col>
 
         <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
-          <Checkbox onChange={getFeedbackState}>Checkbox for feedback</Checkbox>
+          <Checkbox onChange={getFeedbackState} checked={stateEditWindow.isFeedback}>Checkbox for feedback</Checkbox>
         </Col>
 
         <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>

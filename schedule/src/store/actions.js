@@ -22,7 +22,6 @@ export const actionTypes = {
   CHANGE_HIGHTLITED_ROWS: "CHANGE_HIGHTLITED_ROWS",
   CHANGE_VISIBLE_ROWS: "CHANGE_VISIBLE_ROWS",
   ADD_NEW_EVENT_MODAL_WINDOW_VISIBLE: "ADD_NEW_EVENT_MODAL_WINDOW_VISIBLE",
-  ADD_COMMENT: "ADD_COMMENT",
 };
 
 export const actionCreator = {
@@ -43,7 +42,7 @@ export const actionCreator = {
     type: actionTypes.CHANGE_USER_MODAL_WINDOW_VISIBLE,
     data,
   }),
-  changeVersion: () => ({ type: actionTypes.CHANGE_VERSION }),
+  changeVersion: (data) => ({ type: actionTypes.CHANGE_VERSION, data }),
   changeColor: (data) => ({ type: actionTypes.CHANGE_COLOR, data }), //data - объект с данными по цветам
   changeEditModalWindowVisible: (data) => ({
     type: actionTypes.CHANGE_EDIT_MODAL_WINDOW_VISIBLE,
@@ -68,6 +67,6 @@ export const actionCreator = {
   AddNewEventModalVisability: (data) => ({
     type: actionTypes.ADD_NEW_EVENT_MODAL_WINDOW_VISIBLE,
     data,
-  }),
-  addComment: (data) => ({ type: actionTypes.ADD_COMMENT, data }),
+  })
 };
+
