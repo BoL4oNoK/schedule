@@ -17,6 +17,7 @@ const { calendar, list } = VIEWS_FOR_SCHEDULE;
 
 const Container = () => {
   const view = useSelector((state) => state.optionsReducer.viewStatus);
+  const hightlitedRowStatus = useSelector(state => state.hightlitedRowReducer.hightlitedRowStatus);
   const dispatch = useDispatch();
 
   const [isFeedback, setIsFeedback] = useState(false);
@@ -33,6 +34,12 @@ const Container = () => {
     dispatch(actionCreator.initEvents());
     dispatch(actionCreator.initOptions());
   }, []);
+
+  useEffect(() => {
+    if ( hightlitedRowStatus ) {
+      dispatch(actionCreator.changeHightlitedRowStatus(false)); 
+    } 
+  }, [view])
 
   function changeViewForm() {
     switch (view) {
