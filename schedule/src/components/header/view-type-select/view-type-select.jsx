@@ -26,7 +26,7 @@ export default function ViewTypeSelect() {
 	return (
 		<Select
 			 value={view}
-			 style={{ width: isImpairedVersion ? 135 : 120, margin: '0 10px 0 0' }}
+			 style={{ width: isImpairedVersion ? 135 : 120 }}
 			 onChange={changeView}
 		>
 			<Option value={table} style={{ fontSize: isImpairedVersion ? "18px" : "14px" }}>

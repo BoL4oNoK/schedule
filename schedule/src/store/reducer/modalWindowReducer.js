@@ -3,6 +3,7 @@ import { actionTypes } from "../actions";
 const initialState = {
   userModalWindowVisability: false,
   editModalWindowVisability: false,
+  AddNewEventModalVisability: false,
 };
 
 export default function modalWindowReducer(state = initialState, action) {
@@ -17,6 +18,12 @@ export default function modalWindowReducer(state = initialState, action) {
       return {
         ...state,
         editModalWindowVisability: action.data,
+      };
+    }
+    case actionTypes.ADD_NEW_EVENT_MODAL_WINDOW_VISIBLE: {
+      return {
+        ...state,
+        AddNewEventModalVisability: action.data,
       };
     }
     default:

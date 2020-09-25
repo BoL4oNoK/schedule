@@ -46,3 +46,22 @@
 .impairedVersion .ant-select-item-option-content {
   font-size: 18px;
 }
+
+.ant-picker-calendar tr {
+    display: flex;
+    width: 100%;
+    height: calc(100% / 6);
+}
+
+.ant-picker-calendar tr td,
+.ant-picker-date-panel .ant-picker-content th {
+    width: calc(100% / 7);
+}
+
+.ant-picker-calendar-full .ant-picker-panel .ant-picker-body th {
+    padding-right: 4px;
+}
+
+.ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date {
+    width: 100%;
+}

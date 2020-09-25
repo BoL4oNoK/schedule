@@ -19,6 +19,7 @@
     "react-color": "^2.18.1",
     "react-csv": "^2.0.3",
     "react-dom": "^16.13.1",
+    "react-hook-form": "^6.8.3",
     "react-redux": "^7.2.1",
     "react-scripts": "3.4.3",
     "react-yandex-maps": "^4.5.0",

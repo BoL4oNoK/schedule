@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
-import { Modal, Space, Tag, Divider, Input } from 'antd';
+import { Modal, Space, Tag, Divider, Input, Button } from 'antd';
 import { DatePicker } from 'antd';
 import moment from 'moment';
 import 'antd/dist/antd.css';
@@ -10,6 +10,7 @@ import createMap from '../map/map';
 import { useDispatch, useSelector } from 'react-redux';
 import { actionCreator } from '../../store/actions';
 import { selectColor } from '../../utils/selectColor';
+import FormForFeedback from './FormForFeedback';
 
 const {
   MODAL_TITLE,
@@ -18,25 +19,29 @@ const {
   TASK_DESCTIPTION,
   LOCATION,
   URL_DESCTIPTION,
-  COMMENT
+  SHOW_FEEDBACKS,
+  HIDE_FEEDBACKS, 
 } = userModal;
 
-const UserWindow = (props) => {
-  const { Search } = Input;
-  const { isFeedback } = props;
+const UserWindow = () => {
   const dispatch = useDispatch();
   const visible = useSelector(state => state.modalWindowReducer.userModalWindowVisability);
   const event = useSelector(state => state.permanentEventReducer.permanentEvent);
   const [needMap, setNeedMap] = useState(false);
   const [location, setLocation] = useState(null);
+  const [feedbacksIsVisible, setFeedbacksIsVisible] = useState(false);
   const { RangePicker } = DatePicker;
   const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
+  const [curFeedbacks, setCurFeedbacks] = useState([]);
+
   function handleCancel() {
     dispatch(actionCreator.changeUserModalWindowVisible(!visible));
     setNeedMap(false);
   };
 
   useEffect(() => {
+    event && event.feedbacks ? setCurFeedbacks(event.feedbacks) : setCurFeedbacks([]);
+
     if (event && event.place.length) {
       setNeedMap(true);
       const parsePlase = JSON.parse(event.place);
@@ -48,9 +53,45 @@ const UserWindow = (props) => {
     zoom: 15,
   };
 
-  function saveComment() {
-    dispatch(actionCreator.addComment());
+  function saveFeedback(text) {
+    const {
+      name,
+      description,
+      deadlineDateTime,
+      comment,
+      timeZone,
+      dateTime,
+      place,
+      type,
+      descriptionUrl,
+      organizer,
+      id,
+      isFeedback,
+      feedbacks
+    } = event;
+    const newEvent = {
+      name,
+      description,
+      deadlineDateTime,
+      comment,
+      timeZone,
+      dateTime,
+      place,
+      type,
+      descriptionUrl,
+      organizer,
+      id,
+      isFeedback,
+      feedbacks: feedbacks ? [...feedbacks, text] : [text]
+    };
+
+    dispatch(actionCreator.updateEvent([event.id, newEvent]));
+    setCurFeedbacks([...curFeedbacks, text]);
   }
+
+  const onShowFeedbackBtnClick = () => {
+    setFeedbacksIsVisible(!feedbacksIsVisible);
+  };
   
   const getPlaceAddress = (place) => {
     const placeObj = JSON.parse(place);
@@ -112,14 +153,22 @@ const UserWindow = (props) => {
               </div>
             : <b>{ONLINE}</b>}
         </div>
-              <div>
-                {(!isFeedback) ? '' : (
-                  <div>
-                    <Divider orientation='left'>{COMMENT}</Divider>
-                    <Search placeholder="Leave a comment..." onSearch={saveComment} enterButton="Save" />
-                  </div>)}
-              </div>
-            </Modal>
+        <div>
+          {event.isFeedback && <FormForFeedback saveFeedback={saveFeedback} />}
+        </div>
+        <Button
+          className="user-modal-btn"
+          type={feedbacksIsVisible ? 'primary' : 'default'}
+          onClick={onShowFeedbackBtnClick}
+        > 
+        {feedbacksIsVisible ? HIDE_FEEDBACKS : SHOW_FEEDBACKS}
+        </Button>
+        {feedbacksIsVisible && 
+        (<div className="user-modal-feedbacks">
+            {curFeedbacks && curFeedbacks.length ? curFeedbacks.map(feedback => <p key={feedback.slice(0, 8)}>{feedback}</p>) : 
+            <p>No feedbacks</p>}
+        </div>)}
+      </Modal>
     </>
   ));
 };

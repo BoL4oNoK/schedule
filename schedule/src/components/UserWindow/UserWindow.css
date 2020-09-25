@@ -43,3 +43,16 @@
     width: 250px !important;
   }
 }
+.ant-btn.user-modal-btn {
+  margin: 15px auto 0;
+  display: block;
+}
+
+.user-modal-form-btn {
+  height: auto;
+}
+
+.user-modal-form {
+  display: flex;
+  align-items: stretch;
+}

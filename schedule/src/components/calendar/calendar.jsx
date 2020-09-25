@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './calendar.css';
 import 'antd/dist/antd.css';
-import { Calendar } from 'antd';
+import { Calendar, Result } from 'antd';
 import CalendarElement from './calendarElement';
 import dateFormat from '../../utils/dateformat';
 import { useSelector } from 'react-redux';
+import { CALENDAR_VIEW_LIMITS } from '../../constants/constants';
+
+const {
+  warningTitle,
+  warningDescription,
+  widthLimit,
+} = CALENDAR_VIEW_LIMITS;
 
 function getListData(value, data) {
     const textDate = dateFormat(value.year(), value.month() + 1, value.date());
@@ -24,8 +31,30 @@ function dateCellRender(value, data) {
 
 export default function CalendarForSchedule() {
     let events = useSelector(state => state.eventsReducer.events) || [];
+    const [viewWith, setViewWidth] = useState(true);
 
-    return <Calendar 
-        dateCellRender={(value) => dateCellRender(value, events)}
-    />;
+    function windowResizeHandler() {
+      document.documentElement.clientWidth < widthLimit ? setViewWidth(false) : setViewWidth(true);
+    }
+
+    useEffect(() => {
+      if (document.documentElement.clientWidth < widthLimit) {
+        setViewWidth(false);
+      }
+      window.addEventListener('resize', windowResizeHandler, false);
+      return () => window.removeEventListener('resize', windowResizeHandler);
+    }, []);
+
+    return (
+      <>
+        {
+          viewWith ? <Calendar
+            dateCellRender={(value) => dateCellRender(value, events)}
+          /> : <Result
+            title={ warningTitle }
+            subTitle={ warningDescription }
+          />
+        }
+      </>
+    );
 }
