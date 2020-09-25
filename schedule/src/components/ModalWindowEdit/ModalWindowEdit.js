@@ -64,6 +64,7 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
       const rightTime = getRightTime(permanentEvent);
       setRightEventDate(rightTime);
     }
+    permanentEvent?.place?.length ? setIsOnline(false) : setIsOnline(true);
   }, [permanentEvent]);
 
   const onEventLocationChange = (e) => {
@@ -152,7 +153,7 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
     dispatch(actionCreator.updateEvent([rightData.id, rightData]));
     dispatch(actionCreator.changeEditModalWindowVisible(!visible));
   };
-
+  console.log("isonlineL:", isOnline);
   if (permanentEvent) {
     return (
       <Modal
@@ -160,6 +161,7 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
         onCancel={handleCancel}
         onOk={onModalSubmit}
         className={isImpairedVersion ? "impairedVersion" : ""}
+        forceRender
       >
         <h2
           className="wrapper-modal-edit__header"
@@ -267,7 +269,7 @@ const ModalWindowEdit = ({ getFeedbackState }) => {
             </OptGroup>
           </Select>
 
-          {isOnline === true ? (
+          {isOnline ? (
             ""
           ) : (
             <OfflineComponent

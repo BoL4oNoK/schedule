@@ -175,7 +175,7 @@ const AddNewEventModal = () => {
   const [form] = useForm();
 
   return (
-    <Modal visible={visible} footer={null} onCancel={handleCancel}>
+    <Modal visible={visible} footer={null} onCancel={handleCancel} forceRender>
       <h2 className="wrapper-modal-edit__header">Add new event</h2>
       <Form form={form} onFinish={onFinish} name="basic">
         <Row gutter={16}>
@@ -288,7 +288,7 @@ const AddNewEventModal = () => {
           </FormItem>
 
           {isOfflineEvent && (
-            <Row>
+            <Row span={22}>
               <Col span={12}>
                 <FormItem name="town">
                   <Input
