@@ -175,11 +175,21 @@ const AddNewEventModal = () => {
   };
 
   return (
-    <Modal visible={visible} footer={null} onCancel={handleCancel} forceRender>
-      <h2 className="wrapper-modal-edit__header">Add new event</h2>
+    <Modal
+      className="modal-addNewEvent"
+      visible={visible}
+      footer={null}
+      onCancel={handleCancel}
+      forceRender
+    >
+      <h2 className="wrapper-modal-add__header">Add new event</h2>
       <Form form={form} onFinish={onFinish} name="basic">
         <Row gutter={16}>
-          <Col span={12} style={{ marginLeft: "2rem" }}>
+          <Col
+            span={12}
+            style={{ marginLeft: "2rem" }}
+            className="modal-addNewEvent-col"
+          >
             <FormItem
               name="name"
               rules={[
@@ -195,7 +205,11 @@ const AddNewEventModal = () => {
               />
             </FormItem>
           </Col>
-          <Col span={8} style={{ marginLeft: "2rem" }}>
+          <Col
+            span={8}
+            style={{ marginLeft: "2rem" }}
+            className="modal-addNewEvent-col"
+          >
             <FormItem
               name="type"
               rules={[
@@ -212,14 +226,22 @@ const AddNewEventModal = () => {
           </Col>
         </Row>
 
-        <Col span={22} style={{ marginLeft: "2rem" }}>
+        <Col
+          span={22}
+          style={{ marginLeft: "2rem" }}
+          className="modal-addNewEvent-col"
+        >
           <FormItem name="description">
             <TextArea rows={5} placeholder="Task Description" />
           </FormItem>
         </Col>
 
         <Row>
-          <Col span={14} style={{ marginLeft: "2rem" }}>
+          <Col
+            span={14}
+            style={{ marginLeft: "2rem" }}
+            className="modal-addNewEvent-col"
+          >
             <FormItem
               name="timeZone"
               initialValue={formatTimeZoneInitial(timeZone)}
@@ -231,12 +253,16 @@ const AddNewEventModal = () => {
               </Select>
             </FormItem>
           </Col>
-          <Col span={6} style={{ marginLeft: "2rem" }}>
+          <Col
+            span={6}
+            style={{ marginLeft: "2rem" }}
+            className="modal-addNewEvent-col"
+          >
             <Checkbox onChange={onEventDeadlineChange} defaultChecked>
               Task with deadline?
             </Checkbox>
           </Col>
-          <Col span={16}>
+          <Col span={16} className="modal-addNewEvent-col">
             <FormItem
               name="currentDate"
               rules={[
@@ -267,13 +293,21 @@ const AddNewEventModal = () => {
           </Col>
         </Row>
 
-        <Col span={22} style={{ marginLeft: "2rem" }}>
+        <Col
+          span={22}
+          style={{ marginLeft: "2rem" }}
+          className="modal-addNewEvent-col"
+        >
           <FormItem name="descriptionUrl">
             <Input placeholder="Additional url" />
           </FormItem>
         </Col>
 
-        <Col span={22} style={{ marginLeft: "2rem" }}>
+        <Col
+          span={22}
+          style={{ marginLeft: "2rem" }}
+          className="modal-addNewEvent-col"
+        >
           <FormItem name="place" initialValue={"online"}>
             <Select
               style={{ maxWidth: 200, minWidth: 110 }}
@@ -288,7 +322,7 @@ const AddNewEventModal = () => {
 
           {isOfflineEvent && (
             <Row span={22}>
-              <Col span={12}>
+              <Col span={12} className="modal-addNewEvent-col">
                 <FormItem name="town">
                   <Input
                     placeholder="Town"
@@ -339,7 +373,7 @@ const AddNewEventModal = () => {
             </Row>
           )}
         </Col>
-        <FormItem className="ant-modal-footer">
+        <FormItem className="ant-modal-footer modal-addNewEvent-footer">
           <Button key="back" onClick={handleCancel}>
             Cancel
           </Button>
