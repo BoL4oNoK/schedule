@@ -11,6 +11,34 @@
   right: 1rem;
 }
 
-.impairedVersion label, .impairedVersion textarea {
+.impairedVersion label,
+.impairedVersion textarea {
   font-size: 18px;
+}
+.ant-form {
+  width: 100%;
+}
+.ant-modal {
+  top: 3%;
+  min-width: 190px;
+}
+.ant-col {
+  min-width: 110px;
+}
+.container-map {
+  width: 50%;
+  height: auto;
+  min-width: 185px;
+  min-height: 100px;
+}
+@media only screen and (max-width: 600px) {
+  .ant-form {
+    margin-left: -2rem;
+  }
+  .ant-col {
+    display: block;
+    -ms-flex: 0 0 91.66666667%;
+    flex: 0 0 91.66666667%;
+    max-width: 91.66666667%;
+  }
 }

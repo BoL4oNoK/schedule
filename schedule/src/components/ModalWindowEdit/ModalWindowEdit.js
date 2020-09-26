@@ -58,13 +58,16 @@ const ModalWindowEdit = () => {
   );
 
   useEffect(() => {
-    setStateEditWindow({ ...permanentEvent, 
-      isFeedback: permanentEvent && Boolean(permanentEvent.isFeedback), });
+    setStateEditWindow({
+      ...permanentEvent,
+      isFeedback: permanentEvent && Boolean(permanentEvent.isFeedback),
+    });
     if (permanentEvent) {
       setDeadlineCheckbox(permanentEvent.deadlineDateTime ? true : false);
       const rightTime = getRightTime(permanentEvent);
       setRightEventDate(rightTime);
     }
+    permanentEvent?.place?.length ? setIsOnline(false) : setIsOnline(true);
   }, [permanentEvent]);
 
   const getFeedbackState = (e) => {
@@ -160,7 +163,6 @@ const ModalWindowEdit = () => {
     dispatch(actionCreator.updateEvent([rightData.id, rightData]));
     dispatch(actionCreator.changeEditModalWindowVisible(!visible));
   };
-
   if (permanentEvent) {
     return (
       <Modal
@@ -168,6 +170,7 @@ const ModalWindowEdit = () => {
         onCancel={handleCancel}
         onOk={onModalSubmit}
         className={isImpairedVersion ? "impairedVersion" : ""}
+        forceRender
       >
         <h2
           className="wrapper-modal-edit__header"
@@ -260,7 +263,12 @@ const ModalWindowEdit = () => {
         </Col>
 
         <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
-          <Checkbox onChange={getFeedbackState} checked={stateEditWindow.isFeedback}>Checkbox for feedback</Checkbox>
+          <Checkbox
+            onChange={getFeedbackState}
+            checked={stateEditWindow.isFeedback}
+          >
+            Checkbox for feedback
+          </Checkbox>
         </Col>
 
         <Col span={22} style={{ margin: "1rem 0 0 2rem" }}>
@@ -275,7 +283,7 @@ const ModalWindowEdit = () => {
             </OptGroup>
           </Select>
 
-          {isOnline === true ? (
+          {isOnline ? (
             ""
           ) : (
             <OfflineComponent

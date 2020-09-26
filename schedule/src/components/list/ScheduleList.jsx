@@ -26,7 +26,7 @@ export default function ScheduleList() {
   const getPlaceAddress = (place) => {
     const placeObj = JSON.parse(place);
     return `${placeObj.town}, ${placeObj.streetName}, ${placeObj.buildingNbr}`;
-  }
+  };
 
   const list = (
     <List
@@ -99,27 +99,25 @@ export default function ScheduleList() {
             description={item.comment}
           />
 
-          <div className='list-main-information-container'>
+          <div className="list-main-information-container">
             <Tag color={selectColor(item.type)}>{item.type}</Tag>
             <Tag>
               {item.currentDate} {item.currentTime}
             </Tag>
             <Tag>
-              {item.place.length
-                ? getPlaceAddress(item.place)
-                : "online"}
+              {item.place.length ? getPlaceAddress(item.place) : "online"}
             </Tag>
-            {
-              item.descriptionUrl
-              ? (
-                <Tag>
-                  <a href={item.descriptionUrl} target="_blank" rel="noopener noreferrer">
-                    { LIST_DESCRIPTION_URL_LINK_TITLE }
-                  </a>
-                </Tag>
-              )
-              : null
-            }
+            {item.descriptionUrl ? (
+              <Tag>
+                <a
+                  href={item.descriptionUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {LIST_DESCRIPTION_URL_LINK_TITLE}
+                </a>
+              </Tag>
+            ) : null}
           </div>
           {item.currentDeadlineDate ? (
             <div className="optionalBlock">
