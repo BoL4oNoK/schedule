@@ -67,14 +67,12 @@ const AddNewEventModal = () => {
   const dispatch = useDispatch();
   const [isOfflineEvent, setIsOfflineEvent] = useState(false);
   const [isEventWithDeadline, setisEventWithDeadline] = useState(true);
-  const [render, setRender] = useState(false);
   const visible = useSelector(
     (state) => state.modalWindowReducer.AddNewEventModalVisability
   );
 
   const [form] = useForm();
   useEffect(() => {
-    setRender(visible);
     form.resetFields();
     setIsOfflineEvent(false);
     form.setFieldsValue({ timeZone: formatTimeZoneKeys(timeZone) });
@@ -183,7 +181,12 @@ const AddNewEventModal = () => {
       forceRender
     >
       <h2 className="wrapper-modal-add__header">Add new event</h2>
-      <Form form={form} onFinish={onFinish} name="basic">
+      <Form
+        className="form-modal-addNewEvent"
+        form={form}
+        onFinish={onFinish}
+        name="basic"
+      >
         <Row gutter={16}>
           <Col
             span={12}
@@ -225,7 +228,6 @@ const AddNewEventModal = () => {
             </FormItem>
           </Col>
         </Row>
-
         <Col
           span={22}
           style={{ marginLeft: "2rem" }}
@@ -235,7 +237,6 @@ const AddNewEventModal = () => {
             <TextArea rows={5} placeholder="Task Description" />
           </FormItem>
         </Col>
-
         <Row>
           <Col
             span={14}
@@ -292,7 +293,6 @@ const AddNewEventModal = () => {
             </FormItem>
           </Col>
         </Row>
-
         <Col
           span={22}
           style={{ marginLeft: "2rem" }}
@@ -302,7 +302,6 @@ const AddNewEventModal = () => {
             <Input placeholder="Additional url" />
           </FormItem>
         </Col>
-
         <Col
           span={22}
           style={{ marginLeft: "2rem" }}
