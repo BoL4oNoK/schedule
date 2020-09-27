@@ -22,10 +22,18 @@ function getTimeZones(TIME_ZONES) {
   });
 }
 
-const getRightData = (state) => {
+const getRightData = (state, isOnline) => {
   return {
     description: state.description,
-    place: state.place,
+    place: isOnline
+      ? ""
+      : JSON.stringify({
+          town: state.town,
+          typeStreet: "улица",
+          streetName: state.streetName,
+          buildingNbr: state.buildingNbr,
+          additionalAddressInfo: state?.additionalAddressInfo,
+        }),
     dateTime: state.dateTime,
     organizer: state.organizer,
     comment: state.comment,
@@ -38,7 +46,7 @@ const getRightData = (state) => {
     timeZone: state.timeZone,
     name: state.name,
     id: state.id,
-    isFeedback: state.isFeedback
+    isFeedback: state.isFeedback,
   };
 };
 

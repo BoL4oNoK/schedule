@@ -40,12 +40,6 @@ const ModalWindowEdit = () => {
 
   const [deadLineCheckbox, setDeadlineCheckbox] = useState(false);
   const [isOnline, setIsOnline] = useState(true);
-  const [address, setAddress] = useState({
-    town: "",
-    typeOfStreet: "",
-    street: "",
-    house: "",
-  });
 
   const [rightEventDate, setRightEventDate] = useState({
     dateTime: "2020-09-15 00:00",
@@ -138,28 +132,14 @@ const ModalWindowEdit = () => {
   };
 
   const onOfflineInputTypeEvent = (e) => {
-    setAddress({
-      ...address,
+    setStateEditWindow({
+      ...stateEditWindow,
       [e.target.getAttribute("attr")]: e.target.value,
     });
   };
 
-  const onOfflineSelectTypeEvent = (e) => {
-    setAddress({
-      ...address,
-      typeOfStreet: e,
-    });
-  };
-
-  const onOfflineSubmit = () => {
-    setStateEditWindow({
-      ...stateEditWindow,
-      place: JSON.stringify(address),
-    });
-  };
-
   const onModalSubmit = () => {
-    const rightData = getRightData(stateEditWindow);
+    const rightData = getRightData(stateEditWindow, isOnline);
     dispatch(actionCreator.updateEvent([rightData.id, rightData]));
     dispatch(actionCreator.changeEditModalWindowVisible(!visible));
   };
@@ -169,7 +149,9 @@ const ModalWindowEdit = () => {
         visible={visible}
         onCancel={handleCancel}
         onOk={onModalSubmit}
-        className={isImpairedVersion ? "impairedVersion modal-edit" : "modal-edit"}
+        className={
+          isImpairedVersion ? "impairedVersion modal-edit" : "modal-edit"
+        }
         forceRender
       >
         <h2
@@ -301,8 +283,6 @@ const ModalWindowEdit = () => {
             <OfflineComponent
               MENTOR_MODAL={MENTOR_MODAL}
               onOfflineInputTypeEvent={onOfflineInputTypeEvent}
-              onOfflineSelectTypeEvent={onOfflineSelectTypeEvent}
-              onOfflineSubmit={onOfflineSubmit}
             />
           )}
         </Col>
