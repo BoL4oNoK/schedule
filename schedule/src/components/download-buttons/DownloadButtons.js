@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import {
   Row,
   Space,
@@ -7,9 +8,14 @@ import DownloadShedulePdfButton from './download-buttons/DownloadShedulePdfButto
 import DownloadCsvTableButton from './download-buttons/DonloadScheduleCsvButton';
 
 export default function DonwloadButtonsContainer() {
+  const isImpairedVersion = useSelector(state => state.optionsReducer.impairedVersion);
+
   return (
     <Row style={{margin: "1vh 0 1vh 0"}} >
-      <Space size='middle'>
+      <Space
+        size='middle'
+        className={`${isImpairedVersion ? 'impairedVersion' : ''}`}
+      >
         <DownloadCsvTableButton />
         <DownloadShedulePdfButton />
       </Space>

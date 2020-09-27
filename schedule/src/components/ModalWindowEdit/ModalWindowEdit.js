@@ -169,7 +169,7 @@ const ModalWindowEdit = () => {
         visible={visible}
         onCancel={handleCancel}
         onOk={onModalSubmit}
-        className={isImpairedVersion ? "impairedVersion" : ""}
+        className={isImpairedVersion ? "impairedVersion modal-edit" : "modal-edit"}
         forceRender
       >
         <h2
