@@ -31,6 +31,59 @@
   min-width: 185px;
   min-height: 100px;
 }
+
+@media only screen and (max-width: 1250px) {
+
+  .edit-date-block{
+    &-timezone{
+      min-width: 90% !important;
+      margin-top: 5px;
+    }
+    &-date{
+      min-width: 90% !important;
+      margin-top: 5px;
+    }
+    &-deadline{
+      margin-left: 2rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+
+  .edit-offline{
+    flex-wrap: wrap !important;
+
+    &-description{
+      min-width: 90%;
+    }
+
+    &-map{
+     margin: 1rem 0 0 1rem !important;
+    }
+  }
+  
+}
+
+@media only screen and (max-width: 800px) {
+
+  .edit-task-event{
+
+    &-name{
+      min-width: 90% !important;
+    }
+    &-type{
+      min-width: 90% !important;
+      margin-top: 1rem;
+      margin-left: 2rem;
+    }
+  }
+
+  .wrapper-modal-edit__header{
+    font-size: 2rem;
+  } 
+}
+
 @media only screen and (max-width: 600px) {
   .modal-edit .ant-form {
     margin-left: -2rem;
@@ -40,5 +93,15 @@
     -ms-flex: 0 0 91.66666667%;
     flex: 0 0 91.66666667%;
     max-width: 91.66666667%;
+  }
+  .edit-offline{
+
+    &-description{
+      margin-left: 2rem;
+    }
+
+    &-map{
+      margin: 1rem 0 0 2rem !important;
+    }
   }
 }

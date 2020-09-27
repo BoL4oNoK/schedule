@@ -55,7 +55,6 @@ export default function TableForSchedule() {
         } else if (event.target.parentNode.classList.contains('anticon-delete') || event.target.closest('span.anticon-delete')) {
           const selectedEvent = (record.customEvent) ? events.find(el => el.id === record.id) : record;
           confirmModal(selectedEvent.name, () => {
-            console.log('> delete event: ', selectedEvent.id);
             dispatch(actionCreator.deleteEvent(selectedEvent.id));
           });
         }
