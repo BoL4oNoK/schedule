@@ -5,7 +5,7 @@
   }
 }
 
-.button-close {
+.modal-edit .button-close {
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -22,20 +22,20 @@
   top: 3%;
   min-width: 190px;
 }
-.ant-col {
+.modal-edit .ant-col {
   min-width: 110px;
 }
-.container-map {
+.modal-edit .container-map {
   width: 50%;
   height: auto;
   min-width: 185px;
   min-height: 100px;
 }
 @media only screen and (max-width: 600px) {
-  .ant-form {
+  .modal-edit .ant-form {
     margin-left: -2rem;
   }
-  .ant-col {
+  .modal-edit .ant-col {
     display: block;
     -ms-flex: 0 0 91.66666667%;
     flex: 0 0 91.66666667%;

@@ -18,6 +18,14 @@
   height: 5px;
 }
 
+.table-description_column {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
 .ant-table-body::-webkit-scrollbar-track {
   background: #f1f1f1;
 }
@@ -85,4 +93,8 @@
 .impairedVersion .anticon-edit,
 .impairedVersion .anticon-delete {
   font-size: 26px;
+}
+
+.impairedVersion .ant-table-wrapper .ant-pagination {
+  font-size: 24px;
 }
