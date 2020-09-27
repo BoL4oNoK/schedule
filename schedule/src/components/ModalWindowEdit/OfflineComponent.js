@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Col, Select, Input, Button } from "antd";
+import { Col, Input } from "antd";
 import {
   YMaps,
   Map,
@@ -13,14 +13,8 @@ import createMap from "../map/map";
 import Form, { useForm } from "antd/lib/form/Form";
 import FormItem from "antd/lib/form/FormItem";
 import { useSelector } from "react-redux";
-const { Option, OptGroup } = Select;
 
-const OfflineComponent = ({
-  MENTOR_MODAL,
-  onOfflineInputTypeEvent,
-  onOfflineSelectTypeEvent,
-  onOfflineSubmit,
-}) => {
+const OfflineComponent = ({ onOfflineInputTypeEvent, isOnline }) => {
   const permanentEvent = useSelector((state) => {
     return state.permanentEventReducer.permanentEvent;
   });
@@ -32,6 +26,7 @@ const OfflineComponent = ({
         typeStreet: place.typeStreet,
         streetName: place.streetName,
         buildingNbr: place.buildingNbr,
+        additionalAddressInfo: place?.additionalAddressInfo,
       });
       updateMap();
     }
@@ -75,40 +70,29 @@ const OfflineComponent = ({
               onChange={onOfflineInputTypeEvent}
             />
           </FormItem>
-          <Select
-            defaultValue="Type of street"
-            style={{ width: 200, marginBottom: "5px" }}
-            onChange={onOfflineSelectTypeEvent}
-          >
-            <OptGroup label="Type">
-              <Option value="проспект">{MENTOR_MODAL.streetType.avenue}</Option>
-              <Option value="улица">{MENTOR_MODAL.streetType.street}</Option>
-              <Option value="переулок">{MENTOR_MODAL.streetType.lane}</Option>
-            </OptGroup>
-          </Select>
           <FormItem name="streetName" onChange={updateMap}>
             <Input
               placeholder="Street"
               value={permanentEvent.place}
               style={{ marginBottom: "5px" }}
-              attr="street"
+              attr="streetName"
               onChange={onOfflineInputTypeEvent}
             />
           </FormItem>
           <FormItem name="buildingNbr" onChange={updateMap}>
             <Input
               placeholder="№ of house"
-              attr="house"
+              attr="buildingNbr"
               onChange={onOfflineInputTypeEvent}
             />
           </FormItem>
-          <Button
-            type="primary"
-            onClick={onOfflineSubmit}
-            style={{ marginTop: "5px" }}
-          >
-            Set Address
-          </Button>
+          <FormItem name="additionalAddressInfo">
+            <Input
+              placeholder="additional Address Info"
+              attr="additionalAddressInfo"
+              onChange={onOfflineInputTypeEvent}
+            />
+          </FormItem>
         </Col>
         <Col span={12} className="container-map">
           <YMaps query={{ apikey: map.KEY }}>
