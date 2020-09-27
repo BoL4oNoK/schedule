@@ -92,6 +92,11 @@ export const columns = [
     key: 'description',
     dataIndex: 'description',
     className: 'column-description',
+    render: (description) => (
+      <span className='table-description_column'>
+        { description }
+      </span>
+    )
   },
   {
     title: 'Description URL',

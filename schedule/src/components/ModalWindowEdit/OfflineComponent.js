@@ -65,8 +65,13 @@ const OfflineComponent = ({
         name="basic"
         style={{ display: "flex", flexWrap: "nowrap" }}
         onLoad={getValuesForMap}
+        className="edit-offline"
       >
-        <Col span={12} style={{ marginTop: "1rem" }}>
+        <Col
+          span={12}
+          style={{ marginTop: "1rem" }}
+          className="edit-offline-description"
+        >
           <FormItem name="town" onChange={updateMap}>
             <Input
               placeholder="Town"
@@ -110,7 +115,11 @@ const OfflineComponent = ({
             Set Address
           </Button>
         </Col>
-        <Col span={12} className="container-map">
+        <Col
+          span={12}
+          style={{ margin: "1rem 0 0 1rem" }}
+          className="container-map edit-offline-map"
+        >
           <YMaps query={{ apikey: map.KEY }}>
             <Map
               defaultState={{

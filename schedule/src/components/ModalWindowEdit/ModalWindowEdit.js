@@ -169,7 +169,7 @@ const ModalWindowEdit = () => {
         visible={visible}
         onCancel={handleCancel}
         onOk={onModalSubmit}
-        className={isImpairedVersion ? "impairedVersion" : ""}
+        className={isImpairedVersion ? "impairedVersion modal-edit" : "modal-edit"}
         forceRender
       >
         <h2
@@ -179,8 +179,16 @@ const ModalWindowEdit = () => {
           Edit event mode
         </h2>
 
-        <Row gutter={16} style={{ marginTop: "1rem" }}>
-          <Col span={6} style={{ marginLeft: "2rem" }}>
+        <Row
+          gutter={16}
+          style={{ marginTop: "1rem" }}
+          className="edit-task-event"
+        >
+          <Col
+            span={6}
+            style={{ marginLeft: "2rem" }}
+            className="edit-task-event-name"
+          >
             <Input
               placeholder="Task Name"
               attr="name"
@@ -188,7 +196,7 @@ const ModalWindowEdit = () => {
               onChange={onEventChange}
             />
           </Col>
-          <Col span={6}>
+          <Col span={6} className="edit-task-event-type">
             <Select
               style={{ width: 200 }}
               value={stateEditWindow.type}
@@ -209,8 +217,12 @@ const ModalWindowEdit = () => {
           />
         </Col>
 
-        <Row style={{ marginTop: "1rem" }}>
-          <Col span={6} style={{ marginLeft: "2rem" }}>
+        <Row style={{ marginTop: "1rem" }} className="edit-date-block">
+          <Col
+            span={6}
+            style={{ marginLeft: "2rem" }}
+            className="edit-date-block-timezone"
+          >
             <Select
               style={{ width: 200 }}
               value={stateEditWindow.timeZone}
@@ -219,7 +231,7 @@ const ModalWindowEdit = () => {
               <OptGroup label="Timezones">{getTimeZones(TIME_ZONES)}</OptGroup>
             </Select>
           </Col>
-          <Col span={12}>
+          <Col span={12} className="edit-date-block-date">
             <RangePicker
               ref={refRangePicker}
               style={{ marginLeft: "2rem" }}
@@ -242,7 +254,7 @@ const ModalWindowEdit = () => {
               ]}
             />
           </Col>
-          <Col span={4}>
+          <Col span={4} className="edit-date-block-deadline">
             <Checkbox
               onChange={onDeadlineCheckboxChange}
               style={{ marginTop: "5px" }}

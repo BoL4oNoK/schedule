@@ -109,7 +109,12 @@ const UserWindow = () => {
   const getPlaceAddress = (place) => {
     if (!place) return null;
     const placeObj = JSON.parse(place);
-    return `${placeObj.town}, ${placeObj.streetName}, ${placeObj.buildingNbr}`;
+    const placeAddressArr = [];
+    if (placeObj.town) placeAddressArr.push(placeObj.town);
+    if (placeObj.streetName) placeAddressArr.push(placeObj.streetName);
+    if (placeObj.buildingNbr) placeAddressArr.push(placeObj.buildingNbr);
+    if (placeObj.additionalAddressInfo) placeAddressArr.push(placeObj.additionalAddressInfo);
+    return placeAddressArr.join(', ').trim();
   };
 
   return event == null ? (
