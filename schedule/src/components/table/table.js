@@ -8,6 +8,22 @@ import confirmModal from '../confirmModal/confirmModal';
 
 import { Table } from "antd";
 
+function createTypesFilters(events) {
+  if (!events) return [];
+  let masOfTypes = [];
+  events.map(el => el.type).forEach(el => {
+    if (!masOfTypes.includes(el)) {
+      masOfTypes.push(el)
+    }
+  });
+  return masOfTypes.map((el) => {
+    return {
+      text: el,
+      value: el
+    };
+  });
+}
+
 export default function TableForSchedule() {
   const dispatch = useDispatch();
   const events = useSelector((state) => state.eventsReducer.events);
@@ -31,10 +47,9 @@ export default function TableForSchedule() {
   if ( userView === USERS.mentor ) {
     rightColumns.push(mentorColumn) 
   }
-  
-  const types = events.map((el) => el.type);
-  console.log(rightColumns, types);
 
+  rightColumns.find((col) => col.key === 'type' ).filters = createTypesFilters(events);
+  
   function tableOnRow(record, rowIndex) {
     return {
       onClick: (event) => {
