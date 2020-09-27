@@ -109,7 +109,11 @@ const UserWindow = () => {
   const getPlaceAddress = (place) => {
     if (!place) return null;
     const placeObj = JSON.parse(place);
-    return `${placeObj.town}, ${placeObj.streetName}, ${placeObj.buildingNbr}`;
+    return `${placeObj.town}, ${placeObj.streetName}, ${placeObj.buildingNbr}${
+      placeObj?.additionalAddressInfo
+        ? ", " + placeObj?.additionalAddressInfo
+        : ""
+    }`;
   };
 
   return event == null ? (
