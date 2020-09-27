@@ -1,0 +1,51 @@
+.color-select-container {
+	display: flex;
+	justify-content: space-between;
+	margin: 10px 0;
+}
+
+.task-type-text {
+	font-size: 12px;
+}
+
+.swatch {
+	margin-left: 10px;
+	background-color: #fff;
+	border: 1px solid #d9d9d9;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.popover {
+	position: absolute;
+	z-index: 2;
+	right: 25px;
+}
+
+.cover {
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+}
+
+.color {
+	width: 70px;
+	height: 26px;
+	margin: 2px;
+	border-radius: 2px;
+}
+
+.taskExample {
+	height: 35px;
+	line-height: 30px;
+	text-align: center;
+	border: 1px solid #d9d9d9;
+	border-radius: 2px;
+	font-size: 16px;
+}
+
+.impairedVersion {
+  font-size: 18px;
+}

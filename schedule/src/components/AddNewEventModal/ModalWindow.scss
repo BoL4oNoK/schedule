@@ -1,0 +1,46 @@
+.wrapper-modal-add {
+  &__header {
+    text-align: center;
+    font-size: 2.5rem;
+  }
+}
+
+.button-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+.modal-addNewEvent {
+  top: 3%;
+  min-width: 190px;
+}
+.modal-addNewEvent-col,
+.ant-modal-content .ant-col {
+  min-width: 110px;
+}
+.container-map {
+  width: 50%;
+  min-width: 185px;
+}
+@media only screen and (max-width: 600px) {
+  .form-modal-addNewEvent {
+    margin-left: -2rem;
+  }
+  .wrapper-modal-add__header {
+    font-size: 1.7rem;
+  }
+  .modal-addNewEvent-col,
+  .ant-modal-content .ant-col {
+    display: block;
+    -ms-flex: 0 0 91.66666667%;
+    flex: 0 0 91.66666667%;
+    max-width: 91.66666667%;
+  }
+  form > .modal-addNewEvent-footer {
+    margin-left: 2rem;
+  }
+}
+.ant-picker-panel-container,
+.ant-picker-range-wrapper {
+  width: auto !important;
+}

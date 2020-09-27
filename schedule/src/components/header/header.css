@@ -1,0 +1,35 @@
+.impairedVersion, .impairedVersion .ant-select, .impairedVersion .ant-btn, .impairedVersion .ant-switch-inner {
+  font-size: 18px;
+}
+
+.ant-row {
+  padding: 5px 0;
+}
+
+.impairedVersion .ant-row {
+  padding: 10px 0;
+}
+
+.header-selection-col_left,
+.header-selection-col_right {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.header-selection-col_right {
+  flex-direction: row-reverse;
+}
+
+.header-selection-col_right .ant-select,
+.header-selection-col_right .ant-btn {
+  margin: 3px 0 3px 10px;
+  height: 32px;
+}
+
+.header-selection-col_left .ant-select, 
+.header-selection-col_left .ant-btn {
+  margin: 3px 10px 3px 0;
+  height: 32px;
+}
+
+

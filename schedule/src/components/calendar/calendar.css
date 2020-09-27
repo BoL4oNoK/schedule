@@ -1,0 +1,67 @@
+.events {
+    padding: 0;
+}
+
+.events__item {
+    list-style-type: none;
+}
+
+.ant-picker-calendar-date-content::-webkit-scrollbar {
+    width: 5px;
+}
+
+.ant-picker-calendar-date-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.ant-picker-calendar-date-content::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 15px;
+}
+
+.ant-picker-calendar-date-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.ant-badge {
+    width: 100%;
+}
+
+.ant-badge-status-dot {
+    top: -6px;
+    width: 5px;
+    height: 5px;
+}
+
+.ant-badge-status-text {
+    display: inline-block;
+    width: 85%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.impairedVersion .ant-badge-status-text, .impairedVersion .ant-picker-calendar,
+.impairedVersion .ant-radio-group .ant-radio-button-wrapper,
+.impairedVersion .ant-select-item-option-content {
+  font-size: 18px;
+}
+
+.ant-picker-calendar tr {
+    display: flex;
+    width: 100%;
+    height: calc(100% / 6);
+}
+
+.ant-picker-calendar tr td,
+.ant-picker-date-panel .ant-picker-content th {
+    width: calc(100% / 7);
+}
+
+.ant-picker-calendar-full .ant-picker-panel .ant-picker-body th {
+    padding-right: 4px;
+}
+
+.ant-picker-calendar-full .ant-picker-panel .ant-picker-calendar-date {
+    width: 100%;
+}

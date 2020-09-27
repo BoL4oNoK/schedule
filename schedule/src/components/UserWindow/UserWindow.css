@@ -1,0 +1,58 @@
+.task {
+  display: flex;
+  justify-content: space-between;
+}
+.task h2 {
+  margin: 0;
+}
+.map-box {
+  margin-top: 20px;
+}
+.ant-divider-horizontal.ant-divider-with-text {
+  font-size: 17px;
+}
+
+.impairedVersion, .impairedVersion .ant-divider-horizontal.ant-divider-with-text, .impairedVersion .ant-modal-title {
+  font-size: 20px;
+}
+
+.impairedVersion a, .impairedVersion b, .impairedVersion p, .impairedVersion input {
+  font-size: 18px;
+}
+.ant-form-item {
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .ant-modal {
+    width: 60% !important;
+  }
+}
+@media (max-width: 1024px) {
+  .task {
+    display: block;
+  }
+}
+@media (max-width: 664px) {
+  .ymaps-2-1-77-map {
+    max-width: 100%;
+  }
+}
+@media (max-width: 375px) {
+  .ymaps-2-1-77-map {
+    width: 250px !important;
+  }
+}
+.ant-btn.user-modal-btn {
+  margin: 15px auto 0;
+  display: block;
+}
+
+.user-modal-form-btn {
+  height: auto;
+}
+
+.user-modal-form {
+  display: flex;
+  align-items: stretch;
+}
