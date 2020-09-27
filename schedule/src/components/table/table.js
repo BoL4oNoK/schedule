@@ -48,7 +48,9 @@ export default function TableForSchedule() {
     rightColumns.push(mentorColumn) 
   }
 
-  rightColumns.find((col) => col.key === 'type' ).filters = createTypesFilters(events);
+  if ( rightColumns.find((col) => col.key === 'type') ) {
+    rightColumns.find((col) => col.key === 'type').filters = createTypesFilters(events);
+  }
   
   function tableOnRow(record, rowIndex) {
     return {
