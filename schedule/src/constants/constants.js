@@ -36,10 +36,10 @@ const userModal = {
   URL_DESCTIPTION: "Description URL",
   LOCATION: "Location",
   ONLINE: "Online",
-  COMMENT: 'Comment',
+  COMMENT: "Comment",
   DATE_FORMAT: "DD-MM-YYYY HH:mm",
-  SHOW_FEEDBACKS: 'SHOW FEEDBACKS',
-  HIDE_FEEDBACKS: 'HIDE_FEEDBACKS'
+  SHOW_FEEDBACKS: "SHOW FEEDBACKS",
+  HIDE_FEEDBACKS: "HIDE_FEEDBACKS",
 };
 
 const map = {
@@ -135,15 +135,20 @@ const DefaultEditState = {
   timeZone: "",
   name: "",
   id: "",
+  town: "",
+  typeStreet: "улица",
+  streetName: "",
+  buildingNbr: "",
+  additionalAddressInfo: "",
 };
 
-const IMPAIRED_SWITCH_TITLE = 'Version for the visually impaired';
+const IMPAIRED_SWITCH_TITLE = "Version for the visually impaired";
 
-const LIST_DESCRIPTION_URL_LINK_TITLE = 'Description URL';
+const LIST_DESCRIPTION_URL_LINK_TITLE = "Description URL";
 
 const CALENDAR_VIEW_LIMITS = {
-  warningTitle: 'Window Size',
-  warningDescription: 'Sorry, this window size not available for calendar.',
+  warningTitle: "Window Size",
+  warningDescription: "Sorry, this window size not available for calendar.",
   widthLimit: 800,
 };
 
