@@ -27,7 +27,7 @@ const Container = () => {
   useEffect(() => {
     dispatch(actionCreator.initEvents());
     dispatch(actionCreator.initOptions());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if ( hightlitedRowStatus ) {
