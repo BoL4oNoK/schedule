@@ -31,6 +31,9 @@ export default function TableForSchedule() {
   if ( userView === USERS.mentor ) {
     rightColumns.push(mentorColumn) 
   }
+  
+  const types = events.map((el) => el.type);
+  console.log(rightColumns, types);
 
   function tableOnRow(record, rowIndex) {
     return {
