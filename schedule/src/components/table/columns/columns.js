@@ -9,7 +9,6 @@ import {
   EditTwoTone,
   DeleteTwoTone,
 } from '@ant-design/icons';
-import { filtersForType } from './filters'; 
 import { GIT_LINK, COLUMNS_TEXT } from '../../../constants/constants';
 import { selectColor } from '../../../utils/selectColor';
 
@@ -39,7 +38,6 @@ export const columns = [
     dataIndex: 'type',
     key: 'type',
     className: 'column-type',
-    filters: filtersForType,
     onFilter: (value, record) => {
       return record.type.indexOf(value) === 0;
     },
